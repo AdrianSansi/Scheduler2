@@ -76,7 +76,8 @@ namespace WinScheduler2
             if (DailyRadioButton.Checked == true)
             {
                 WeeklyRadioButton.Checked = false;
-
+                DailyEveryRadioButton.Enabled = true;
+                DailyOnceRadioButton.Enabled = true;
             }
             else
             {
@@ -89,11 +90,28 @@ namespace WinScheduler2
             if (WeeklyRadioButton.Checked == true)
             {
                 DailyRadioButton.Checked = false;
+                WeeksUpDown.Enabled = true;
+                MondayBox.Enabled = true;
+                TuesdayBox.Enabled = true;
+                WednesdayBox.Enabled = true;
+                ThursdayBox.Enabled = true;
+                FridayBox.Enabled = true;
+                SaturdayBox.Enabled = true;
+                SundayBox.Enabled = true;
+                DailyEveryRadioButton.Enabled = true;
+                DailyOnceRadioButton.Enabled = true;
 
             }
             else
             {
-
+                WeeksUpDown.Enabled = false;
+                MondayBox.Enabled = false;
+                TuesdayBox.Enabled = false;
+                WednesdayBox.Enabled = false;
+                ThursdayBox.Enabled = false; 
+                FridayBox.Enabled = false;
+                SaturdayBox.Enabled = false;
+                SundayBox.Enabled = false;
             }
         }
 
@@ -115,6 +133,12 @@ namespace WinScheduler2
         {
             OutputBox.Text = schedule.timeDate.ToString();
         }
+
+
+
+
+
+
     }
 
 }
