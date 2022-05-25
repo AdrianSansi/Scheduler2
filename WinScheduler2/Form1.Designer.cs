@@ -244,6 +244,7 @@
             this.SundayBox.TabIndex = 9;
             this.SundayBox.Text = "Sunday";
             this.SundayBox.UseVisualStyleBackColor = true;
+            this.SundayBox.CheckedChanged += new System.EventHandler(this.SundayBox_CheckedChanged);
             // 
             // SaturdayBox
             // 
@@ -255,6 +256,7 @@
             this.SaturdayBox.TabIndex = 8;
             this.SaturdayBox.Text = "Saturday";
             this.SaturdayBox.UseVisualStyleBackColor = true;
+            this.SaturdayBox.CheckedChanged += new System.EventHandler(this.SaturdayBox_CheckedChanged);
             // 
             // FridayBox
             // 
@@ -266,6 +268,7 @@
             this.FridayBox.TabIndex = 7;
             this.FridayBox.Text = "Friday";
             this.FridayBox.UseVisualStyleBackColor = true;
+            this.FridayBox.CheckedChanged += new System.EventHandler(this.FridayBox_CheckedChanged);
             // 
             // ThursdayBox
             // 
@@ -277,6 +280,7 @@
             this.ThursdayBox.TabIndex = 6;
             this.ThursdayBox.Text = "Thursday";
             this.ThursdayBox.UseVisualStyleBackColor = true;
+            this.ThursdayBox.CheckedChanged += new System.EventHandler(this.ThursdayBox_CheckedChanged);
             // 
             // WednesdayBox
             // 
@@ -288,6 +292,7 @@
             this.WednesdayBox.TabIndex = 5;
             this.WednesdayBox.Text = "Wednesday";
             this.WednesdayBox.UseVisualStyleBackColor = true;
+            this.WednesdayBox.CheckedChanged += new System.EventHandler(this.WednesdayBox_CheckedChanged);
             // 
             // TuesdayBox
             // 
@@ -299,6 +304,7 @@
             this.TuesdayBox.TabIndex = 4;
             this.TuesdayBox.Text = "Tuesday";
             this.TuesdayBox.UseVisualStyleBackColor = true;
+            this.TuesdayBox.CheckedChanged += new System.EventHandler(this.TuesdayBox_CheckedChanged);
             // 
             // MondayBox
             // 
@@ -310,6 +316,7 @@
             this.MondayBox.TabIndex = 3;
             this.MondayBox.Text = "Monday";
             this.MondayBox.UseVisualStyleBackColor = true;
+            this.MondayBox.CheckedChanged += new System.EventHandler(this.MondayBox_CheckedChanged);
             // 
             // label7
             // 

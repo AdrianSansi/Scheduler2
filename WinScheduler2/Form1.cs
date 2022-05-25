@@ -136,6 +136,88 @@ namespace WinScheduler2
         }
 
 
+        private void MondayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if(MondayBox.Checked == true)
+            {
+                schedule.monday = true;
+            }
+            else
+            {
+                schedule.monday = false;
+            }
+        }
+        private void TuesdayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (TuesdayBox.Checked == true)
+            {
+                schedule.tuesday = true;
+            }
+            else
+            {
+                schedule.tuesday = false;
+            }
+        }
+        private void WednesdayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (WednesdayBox.Checked == true)
+            {
+                schedule.wednesday = true;
+            }
+            else
+            {
+                schedule.wednesday = false;
+            }
+        }
+        private void ThursdayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ThursdayBox.Checked == true)
+            {
+                schedule.thursday = true;
+            }
+            else
+            {
+                schedule.thursday = false;
+            }
+        }
+        private void FridayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (FridayBox.Checked == true)
+            {
+                schedule.friday = true;
+            }
+            else
+            {
+                schedule.friday = false;
+            }
+        }
+        private void SaturdayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SaturdayBox.Checked == true)
+            {
+                schedule.saturday = true;
+            }
+            else
+            {
+                schedule.saturday = false;
+            }
+        }
+        private void SundayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SundayBox.Checked == true)
+            {
+                schedule.sunday= true;
+            }
+            else
+            {
+                schedule.sunday= false;
+            }
+        }
+
+
+
+
+
         private void DailyOnce_CheckedChanged(object sender, EventArgs e)
         {
             if (DailyRadioButton.Checked == true)
