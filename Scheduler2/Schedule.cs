@@ -81,9 +81,10 @@ namespace Scheduler2
                 if (nextDay() == 0) timeDate.AddDays(7);
                 else timeDate.AddDays(nextDay());                
             }
-            
-            //Si al sumar el periodo cambia de día, comenzar con el siguiente día de la semana checked a la hora de inicio del día
-            
+            else
+            {
+                //Si al sumar el periodo cambia de día, comenzar con el siguiente día de la semana checked a la hora de inicio del día
+            }
         }
         //
         // Retorna el número del siguiente día, si no encuentra porque no hay días marcados, retorna -1.
