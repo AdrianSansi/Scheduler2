@@ -40,8 +40,6 @@
             this.OnceTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.RecurringRadioButton = new System.Windows.Forms.RadioButton();
-            this.OnceRadioButton = new System.Windows.Forms.RadioButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -59,8 +57,10 @@
             this.EveryPeriod = new System.Windows.Forms.DomainUpDown();
             this.EveryUpDown = new System.Windows.Forms.NumericUpDown();
             this.OnceTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.DailyEveryRadioButton = new System.Windows.Forms.RadioButton();
-            this.DailyOnceRadioButton = new System.Windows.Forms.RadioButton();
+            this.OnceCheckBox = new System.Windows.Forms.CheckBox();
+            this.RecurringCheckBox = new System.Windows.Forms.CheckBox();
+            this.DailyOnce = new System.Windows.Forms.CheckBox();
+            this.DailyEvery = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -120,14 +120,14 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.RecurringCheckBox);
+            this.groupBox2.Controls.Add(this.OnceCheckBox);
             this.groupBox2.Controls.Add(this.WeeklyRadioButton);
             this.groupBox2.Controls.Add(this.DailyRadioButton);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.OnceTextBox);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.RecurringRadioButton);
-            this.groupBox2.Controls.Add(this.OnceRadioButton);
             this.groupBox2.Location = new System.Drawing.Point(21, 83);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(767, 99);
@@ -143,7 +143,6 @@
             this.WeeklyRadioButton.Name = "WeeklyRadioButton";
             this.WeeklyRadioButton.Size = new System.Drawing.Size(63, 19);
             this.WeeklyRadioButton.TabIndex = 7;
-            this.WeeklyRadioButton.TabStop = true;
             this.WeeklyRadioButton.Text = "Weekly";
             this.WeeklyRadioButton.UseVisualStyleBackColor = true;
             this.WeeklyRadioButton.CheckedChanged += new System.EventHandler(this.WeeklyRadioButton_CheckedChanged);
@@ -156,7 +155,6 @@
             this.DailyRadioButton.Name = "DailyRadioButton";
             this.DailyRadioButton.Size = new System.Drawing.Size(51, 19);
             this.DailyRadioButton.TabIndex = 6;
-            this.DailyRadioButton.TabStop = true;
             this.DailyRadioButton.Text = "Daily";
             this.DailyRadioButton.UseVisualStyleBackColor = true;
             this.DailyRadioButton.CheckedChanged += new System.EventHandler(this.DailyRadioButton_CheckedChanged);
@@ -196,32 +194,6 @@
             this.label2.Size = new System.Drawing.Size(31, 15);
             this.label2.TabIndex = 2;
             this.label2.Text = "Type";
-            // 
-            // RecurringRadioButton
-            // 
-            this.RecurringRadioButton.AutoSize = true;
-            this.RecurringRadioButton.Enabled = false;
-            this.RecurringRadioButton.Location = new System.Drawing.Point(74, 62);
-            this.RecurringRadioButton.Name = "RecurringRadioButton";
-            this.RecurringRadioButton.Size = new System.Drawing.Size(76, 19);
-            this.RecurringRadioButton.TabIndex = 1;
-            this.RecurringRadioButton.TabStop = true;
-            this.RecurringRadioButton.Text = "Recurring";
-            this.RecurringRadioButton.UseVisualStyleBackColor = true;
-            this.RecurringRadioButton.CheckedChanged += new System.EventHandler(this.RecurringRadioButton_CheckedChanged);
-            // 
-            // OnceRadioButton
-            // 
-            this.OnceRadioButton.AutoSize = true;
-            this.OnceRadioButton.Enabled = false;
-            this.OnceRadioButton.Location = new System.Drawing.Point(74, 37);
-            this.OnceRadioButton.Name = "OnceRadioButton";
-            this.OnceRadioButton.Size = new System.Drawing.Size(53, 19);
-            this.OnceRadioButton.TabIndex = 0;
-            this.OnceRadioButton.TabStop = true;
-            this.OnceRadioButton.Text = "Once";
-            this.OnceRadioButton.UseVisualStyleBackColor = true;
-            this.OnceRadioButton.CheckedChanged += new System.EventHandler(this.OnceRadioButton_CheckedChanged);
             // 
             // groupBox3
             // 
@@ -377,11 +349,11 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.DailyEvery);
+            this.groupBox5.Controls.Add(this.DailyOnce);
             this.groupBox5.Controls.Add(this.EveryPeriod);
             this.groupBox5.Controls.Add(this.EveryUpDown);
             this.groupBox5.Controls.Add(this.OnceTimePicker);
-            this.groupBox5.Controls.Add(this.DailyEveryRadioButton);
-            this.groupBox5.Controls.Add(this.DailyOnceRadioButton);
             this.groupBox5.Location = new System.Drawing.Point(21, 291);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(767, 129);
@@ -420,29 +392,49 @@
             this.OnceTimePicker.TabIndex = 2;
             this.OnceTimePicker.Value = new System.DateTime(2022, 5, 23, 0, 0, 0, 0);
             // 
-            // DailyEveryRadioButton
+            // OnceCheckBox
             // 
-            this.DailyEveryRadioButton.AutoSize = true;
-            this.DailyEveryRadioButton.Enabled = false;
-            this.DailyEveryRadioButton.Location = new System.Drawing.Point(13, 61);
-            this.DailyEveryRadioButton.Name = "DailyEveryRadioButton";
-            this.DailyEveryRadioButton.Size = new System.Drawing.Size(87, 19);
-            this.DailyEveryRadioButton.TabIndex = 1;
-            this.DailyEveryRadioButton.TabStop = true;
-            this.DailyEveryRadioButton.Text = "Ocurs every";
-            this.DailyEveryRadioButton.UseVisualStyleBackColor = true;
+            this.OnceCheckBox.AutoSize = true;
+            this.OnceCheckBox.Location = new System.Drawing.Point(74, 31);
+            this.OnceCheckBox.Name = "OnceCheckBox";
+            this.OnceCheckBox.Size = new System.Drawing.Size(54, 19);
+            this.OnceCheckBox.TabIndex = 8;
+            this.OnceCheckBox.Text = "Once";
+            this.OnceCheckBox.UseVisualStyleBackColor = true;
+            this.OnceCheckBox.CheckedChanged += new System.EventHandler(this.OnceCheckBox_CheckedChanged);
             // 
-            // DailyOnceRadioButton
+            // RecurringCheckBox
             // 
-            this.DailyOnceRadioButton.AutoSize = true;
-            this.DailyOnceRadioButton.Enabled = false;
-            this.DailyOnceRadioButton.Location = new System.Drawing.Point(13, 28);
-            this.DailyOnceRadioButton.Name = "DailyOnceRadioButton";
-            this.DailyOnceRadioButton.Size = new System.Drawing.Size(98, 19);
-            this.DailyOnceRadioButton.TabIndex = 0;
-            this.DailyOnceRadioButton.TabStop = true;
-            this.DailyOnceRadioButton.Text = "Ocurs once at";
-            this.DailyOnceRadioButton.UseVisualStyleBackColor = true;
+            this.RecurringCheckBox.AutoSize = true;
+            this.RecurringCheckBox.Location = new System.Drawing.Point(74, 66);
+            this.RecurringCheckBox.Name = "RecurringCheckBox";
+            this.RecurringCheckBox.Size = new System.Drawing.Size(77, 19);
+            this.RecurringCheckBox.TabIndex = 9;
+            this.RecurringCheckBox.Text = "Recurring";
+            this.RecurringCheckBox.UseVisualStyleBackColor = true;
+            this.RecurringCheckBox.CheckedChanged += new System.EventHandler(this.RecurringCheckBox_CheckedChanged);
+            // 
+            // DailyOnce
+            // 
+            this.DailyOnce.AutoSize = true;
+            this.DailyOnce.Location = new System.Drawing.Point(19, 30);
+            this.DailyOnce.Name = "DailyOnce";
+            this.DailyOnce.Size = new System.Drawing.Size(99, 19);
+            this.DailyOnce.TabIndex = 5;
+            this.DailyOnce.Text = "Ocurs once at";
+            this.DailyOnce.UseVisualStyleBackColor = true;
+            this.DailyOnce.CheckedChanged += new System.EventHandler(this.DailyOnce_CheckedChanged);
+            // 
+            // DailyEvery
+            // 
+            this.DailyEvery.AutoSize = true;
+            this.DailyEvery.Location = new System.Drawing.Point(18, 61);
+            this.DailyEvery.Name = "DailyEvery";
+            this.DailyEvery.Size = new System.Drawing.Size(88, 19);
+            this.DailyEvery.TabIndex = 6;
+            this.DailyEvery.Text = "Ocurs every";
+            this.DailyEvery.UseVisualStyleBackColor = true;
+            this.DailyEvery.CheckedChanged += new System.EventHandler(this.DailyEvery_CheckedChanged);
             // 
             // Form1
             // 
@@ -479,8 +471,6 @@
         private Label label1;
         private TextBox OutputBox;
         private GroupBox groupBox2;
-        private RadioButton RecurringRadioButton;
-        private RadioButton OnceRadioButton;
         private Label label4;
         private TextBox OnceTextBox;
         private Label label3;
@@ -502,10 +492,12 @@
         private NumericUpDown WeeksUpDown;
         private Label label6;
         private GroupBox groupBox5;
-        private RadioButton DailyEveryRadioButton;
-        private RadioButton DailyOnceRadioButton;
         private DateTimePicker OnceTimePicker;
         private DomainUpDown EveryPeriod;
         private NumericUpDown EveryUpDown;
+        private CheckBox OnceCheckBox;
+        private CheckBox RecurringCheckBox;
+        private CheckBox DailyEvery;
+        private CheckBox DailyOnce;
     }
 }

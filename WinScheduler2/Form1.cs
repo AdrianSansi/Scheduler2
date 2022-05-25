@@ -29,25 +29,25 @@ namespace WinScheduler2
             try
             {
                 schedule.currentDate = DateTime.Parse(InputBox.Text);
-                OnceRadioButton.Enabled = true;
-                RecurringRadioButton.Enabled = true;
+                OnceCheckBox.Enabled = true;
+                RecurringCheckBox.Enabled = true;
                 
             }
             catch (Exception FormatException)
             {
-                OnceRadioButton.Checked = false;
-                RecurringRadioButton.Checked = false;
-                OnceRadioButton.Enabled = false;
-                RecurringRadioButton.Enabled = false;
+                OnceCheckBox.Checked = false;
+                RecurringCheckBox.Checked = false;
+                OnceCheckBox.Enabled = false;
+                RecurringCheckBox.Enabled = false;
             }
 
         }
 
-        private void RecurringRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void RecurringCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (RecurringRadioButton.Checked == true)
+            if (RecurringCheckBox.Checked == true)
             {
-                OnceRadioButton.Checked = false;
+                OnceCheckBox.Checked = false;
                 DailyRadioButton.Enabled = true;
                 WeeklyRadioButton.Enabled = true;
             }
@@ -58,12 +58,14 @@ namespace WinScheduler2
             }
         }
 
-        private void OnceRadioButton_CheckedChanged(object sender, EventArgs e)
+        private void OnceCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (OnceRadioButton.Checked == true)
+            if (OnceCheckBox.Checked == true)
             {
-                RecurringRadioButton.Checked = false;
+                RecurringCheckBox.Checked = false;
                 OnceTextBox.Enabled = true;
+                DailyRadioButton.Checked = false;
+                WeeklyRadioButton.Checked = false;
             }
             else
             {
@@ -75,9 +77,8 @@ namespace WinScheduler2
         {
             if (DailyRadioButton.Checked == true)
             {
-                WeeklyRadioButton.Checked = false;
-                DailyEveryRadioButton.Enabled = true;
-                DailyOnceRadioButton.Enabled = true;
+                DailyEvery.Enabled = true;
+                DailyOnce.Enabled = true;
             }
             else
             {
@@ -89,7 +90,7 @@ namespace WinScheduler2
         {
             if (WeeklyRadioButton.Checked == true)
             {
-                DailyRadioButton.Checked = false;
+
                 WeeksUpDown.Enabled = true;
                 MondayBox.Enabled = true;
                 TuesdayBox.Enabled = true;
@@ -98,8 +99,8 @@ namespace WinScheduler2
                 FridayBox.Enabled = true;
                 SaturdayBox.Enabled = true;
                 SundayBox.Enabled = true;
-                DailyEveryRadioButton.Enabled = true;
-                DailyOnceRadioButton.Enabled = true;
+                DailyEvery.Enabled = true;
+                DailyOnce.Enabled = true;
 
             }
             else
@@ -108,7 +109,7 @@ namespace WinScheduler2
                 MondayBox.Enabled = false;
                 TuesdayBox.Enabled = false;
                 WednesdayBox.Enabled = false;
-                ThursdayBox.Enabled = false; 
+                ThursdayBox.Enabled = false;
                 FridayBox.Enabled = false;
                 SaturdayBox.Enabled = false;
                 SundayBox.Enabled = false;
@@ -135,10 +136,31 @@ namespace WinScheduler2
         }
 
 
+        private void DailyOnce_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DailyRadioButton.Checked == true)
+            {
+                
+            }
+            else
+            {
 
+            }
+        }
 
+        private void DailyEvery_CheckedChanged(object sender, EventArgs e)
+        {
+            if (DailyRadioButton.Checked == true)
+            {
 
+            }
+            else
+            {
 
+            }
+        }
+
+      
     }
 
 }
