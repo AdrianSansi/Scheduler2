@@ -27,9 +27,9 @@ namespace Scheduler2
 
         List<int> weekDays = new List<int>();
 
-        public int weekPeriod { get; set; } = 0;
+        public int weekPeriod { get; set; } = 1;
         public int hourPeriod { get; set; } = 0;
-
+        public int numberOfDates = 0;
 
 
         public Schedule(DateTime date)
@@ -77,15 +77,25 @@ namespace Scheduler2
 
         public void nextDate()
         {
-            DateTime candidate = calculateDate();
-            if(candidate < endDate)
+            if (numberOfDates == 0)
             {
-                timeDate = candidate;
-            }
-            else
+                numberOfDates++;
+                timeDate = timeDate + startTime.TimeOfDay;
+            } else
             {
+                DateTime candidate = calculateDate();
+                if (candidate < endDate)
+                {
+                    timeDate = candidate;
+                    numberOfDates++;
+                }
+                else
+                {
 
+                }
             }
+            
+            
         }
 
         
@@ -101,6 +111,7 @@ namespace Scheduler2
             {
                 return nextHour(timeDate);
             }
+
         }
         //
         // Retorna la diferencia entre el siguiente día y el actual.
@@ -125,7 +136,7 @@ namespace Scheduler2
                     }
                     else
                     {
-                        return 7 + weekDay - (int)timeDate.DayOfWeek;
+                        return 7*weekPeriod + weekDay - (int)timeDate.DayOfWeek;
                     }
                 }
             }
@@ -153,7 +164,7 @@ namespace Scheduler2
                     }
                     else
                     {
-                        return 7 + weekDay - (int)current.DayOfWeek;
+                        return 7*weekPeriod + weekDay - (int)current.DayOfWeek;
                     }
                 }
             }

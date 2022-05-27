@@ -164,6 +164,11 @@ namespace WinScheduler2
             }
         }
 
+        private void WeeksUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            schedule.weekPeriod = (int)WeeksUpDown.Value;
+        }
+
 
         private void MondayBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -303,7 +308,7 @@ namespace WinScheduler2
         {
             try
             {
-                schedule.timeDate = DateTime.Parse(StartDate.Text).AddDays(-1);
+                schedule.timeDate = DateTime.Parse(StartDate.Text);
                 EndDate.Enabled = true;
 
             }
@@ -319,9 +324,9 @@ namespace WinScheduler2
             try
             {
                 schedule.endDate = DateTime.Parse(EndDate.Text)+schedule.endTime.TimeOfDay;
-                schedule.timeDate = schedule.timeDate+schedule.endTime.TimeOfDay;
+                schedule.timeDate = schedule.timeDate;
                 
-                if (DateTime.Parse(StartDate.Text) < schedule.timeDate) NextButton.Enabled = false;
+                if (DateTime.Parse(EndDate.Text) < schedule.timeDate+schedule.startTime.TimeOfDay) NextButton.Enabled = false;
                 else
                 {
                     NextButton.Enabled = true;
