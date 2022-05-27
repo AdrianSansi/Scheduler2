@@ -17,7 +17,7 @@ namespace WinScheduler2
 
         public Form1()
         {
-            schedule = new Schedule(); schedule.timeDate = DateTime.MinValue;
+            schedule = new Schedule(); schedule.timeDate = DateTime.Today;
             cYear = 0; cMonth = 0; cDay = 0; period = 1; numPeriod = 0;
             cHour = 0; cMinute = 0; cSecond = 0;
             endDate = DateTime.MinValue;
@@ -79,6 +79,21 @@ namespace WinScheduler2
             {
                 DailyEvery.Enabled = true;
                 DailyOnce.Enabled = true;
+                MondayBox.Enabled = false;
+                TuesdayBox.Enabled = false;
+                WednesdayBox.Enabled = false;
+                ThursdayBox.Enabled = false;
+                FridayBox.Enabled = false;
+                SaturdayBox.Enabled = false;
+                SundayBox.Enabled = false;
+                MondayBox.Checked = true;
+                TuesdayBox.Checked = true;
+                WednesdayBox.Checked = true;
+                ThursdayBox.Checked = true;
+                FridayBox.Checked = true;
+                SaturdayBox.Checked = true;
+                SundayBox.Checked = true;
+
             }
             else
             {
@@ -132,7 +147,15 @@ namespace WinScheduler2
 
         private void NextButton_Click(object sender, EventArgs e)
         {
-            OutputBox.Text = schedule.timeDate.ToString();
+            if(OnceTimePicker.Enabled == true)
+            {
+                schedule.calculateDate();
+                OutputBox.Text = schedule.timeDate.ToString();
+            }
+            else
+            {
+                OutputBox.Text = schedule.timeDate.ToString();
+            }
         }
 
 
@@ -220,28 +243,52 @@ namespace WinScheduler2
 
         private void DailyOnce_CheckedChanged(object sender, EventArgs e)
         {
-            if (DailyRadioButton.Checked == true)
+            if (DailyOnce.Checked == true)
             {
-                
+                OnceTimePicker.Enabled = true;
+                DailyEvery.Checked = false;
             }
             else
             {
-
+                OnceTimePicker.Enabled= false;
             }
         }
 
         private void DailyEvery_CheckedChanged(object sender, EventArgs e)
         {
-            if (DailyRadioButton.Checked == true)
+            if (DailyEvery.Checked == true)
             {
-
+                DailyOnce.Checked = false;
+                EveryUpDown.Enabled = true;
             }
             else
             {
-
+                EveryUpDown.Enabled = false;
             }
         }
 
+        private void OnceTimePickler_ValueChanged(object sender, EventArgs e) 
+        {
+            schedule.startTime = OnceTimePicker.Value;
+            schedule.endTime = OnceTimePicker.Value;
+        }
+
+        private void OnceTimePicker_EnabledChanged(object sender, EventArgs e)
+        {
+            if(OnceTimePicker.Enabled == true)
+            {
+                NextButton.Enabled = true;
+            }
+            else
+            {
+                NextButton.Enabled= false;
+            }
+        }
+
+        private void EveryUpDown_ValueChanged(Object sender, EventArgs e)
+        {
+            schedule.hourPeriod = (int)EveryUpDown.Value;
+        }
       
     }
 

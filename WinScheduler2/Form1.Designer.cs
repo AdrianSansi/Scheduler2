@@ -34,6 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.OutputBox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.RecurringCheckBox = new System.Windows.Forms.CheckBox();
+            this.OnceCheckBox = new System.Windows.Forms.CheckBox();
             this.WeeklyRadioButton = new System.Windows.Forms.RadioButton();
             this.DailyRadioButton = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,13 +56,11 @@
             this.WeeksUpDown = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.DailyEvery = new System.Windows.Forms.CheckBox();
+            this.DailyOnce = new System.Windows.Forms.CheckBox();
             this.EveryPeriod = new System.Windows.Forms.DomainUpDown();
             this.EveryUpDown = new System.Windows.Forms.NumericUpDown();
             this.OnceTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.OnceCheckBox = new System.Windows.Forms.CheckBox();
-            this.RecurringCheckBox = new System.Windows.Forms.CheckBox();
-            this.DailyOnce = new System.Windows.Forms.CheckBox();
-            this.DailyEvery = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -134,6 +134,28 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Configuration";
+            // 
+            // RecurringCheckBox
+            // 
+            this.RecurringCheckBox.AutoSize = true;
+            this.RecurringCheckBox.Location = new System.Drawing.Point(74, 66);
+            this.RecurringCheckBox.Name = "RecurringCheckBox";
+            this.RecurringCheckBox.Size = new System.Drawing.Size(77, 19);
+            this.RecurringCheckBox.TabIndex = 9;
+            this.RecurringCheckBox.Text = "Recurring";
+            this.RecurringCheckBox.UseVisualStyleBackColor = true;
+            this.RecurringCheckBox.CheckedChanged += new System.EventHandler(this.RecurringCheckBox_CheckedChanged);
+            // 
+            // OnceCheckBox
+            // 
+            this.OnceCheckBox.AutoSize = true;
+            this.OnceCheckBox.Location = new System.Drawing.Point(74, 31);
+            this.OnceCheckBox.Name = "OnceCheckBox";
+            this.OnceCheckBox.Size = new System.Drawing.Size(54, 19);
+            this.OnceCheckBox.TabIndex = 8;
+            this.OnceCheckBox.Text = "Once";
+            this.OnceCheckBox.UseVisualStyleBackColor = true;
+            this.OnceCheckBox.CheckedChanged += new System.EventHandler(this.OnceCheckBox_CheckedChanged);
             // 
             // WeeklyRadioButton
             // 
@@ -368,6 +390,28 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Daily Frequency";
             // 
+            // DailyEvery
+            // 
+            this.DailyEvery.AutoSize = true;
+            this.DailyEvery.Location = new System.Drawing.Point(18, 61);
+            this.DailyEvery.Name = "DailyEvery";
+            this.DailyEvery.Size = new System.Drawing.Size(88, 19);
+            this.DailyEvery.TabIndex = 6;
+            this.DailyEvery.Text = "Ocurs every";
+            this.DailyEvery.UseVisualStyleBackColor = true;
+            this.DailyEvery.CheckedChanged += new System.EventHandler(this.DailyEvery_CheckedChanged);
+            // 
+            // DailyOnce
+            // 
+            this.DailyOnce.AutoSize = true;
+            this.DailyOnce.Location = new System.Drawing.Point(19, 30);
+            this.DailyOnce.Name = "DailyOnce";
+            this.DailyOnce.Size = new System.Drawing.Size(99, 19);
+            this.DailyOnce.TabIndex = 5;
+            this.DailyOnce.Text = "Ocurs once at";
+            this.DailyOnce.UseVisualStyleBackColor = true;
+            this.DailyOnce.CheckedChanged += new System.EventHandler(this.DailyOnce_CheckedChanged);
+            // 
             // EveryPeriod
             // 
             this.EveryPeriod.Enabled = false;
@@ -387,61 +431,21 @@
             this.EveryUpDown.Name = "EveryUpDown";
             this.EveryUpDown.Size = new System.Drawing.Size(102, 23);
             this.EveryUpDown.TabIndex = 3;
+            this.EveryUpDown.ValueChanged += new System.EventHandler(EveryUpDown_ValueChanged);
             // 
             // OnceTimePicker
             // 
             this.OnceTimePicker.Enabled = false;
             this.OnceTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
             this.OnceTimePicker.Location = new System.Drawing.Point(233, 24);
+            this.OnceTimePicker.MaxDate = new System.DateTime(1753, 1, 1, 23, 59, 59, 0);
             this.OnceTimePicker.Name = "OnceTimePicker";
             this.OnceTimePicker.ShowUpDown = true;
             this.OnceTimePicker.Size = new System.Drawing.Size(200, 23);
             this.OnceTimePicker.TabIndex = 2;
-            this.OnceTimePicker.Value = new System.DateTime(2022, 5, 23, 0, 0, 0, 0);
-            // 
-            // OnceCheckBox
-            // 
-            this.OnceCheckBox.AutoSize = true;
-            this.OnceCheckBox.Location = new System.Drawing.Point(74, 31);
-            this.OnceCheckBox.Name = "OnceCheckBox";
-            this.OnceCheckBox.Size = new System.Drawing.Size(54, 19);
-            this.OnceCheckBox.TabIndex = 8;
-            this.OnceCheckBox.Text = "Once";
-            this.OnceCheckBox.UseVisualStyleBackColor = true;
-            this.OnceCheckBox.CheckedChanged += new System.EventHandler(this.OnceCheckBox_CheckedChanged);
-            // 
-            // RecurringCheckBox
-            // 
-            this.RecurringCheckBox.AutoSize = true;
-            this.RecurringCheckBox.Location = new System.Drawing.Point(74, 66);
-            this.RecurringCheckBox.Name = "RecurringCheckBox";
-            this.RecurringCheckBox.Size = new System.Drawing.Size(77, 19);
-            this.RecurringCheckBox.TabIndex = 9;
-            this.RecurringCheckBox.Text = "Recurring";
-            this.RecurringCheckBox.UseVisualStyleBackColor = true;
-            this.RecurringCheckBox.CheckedChanged += new System.EventHandler(this.RecurringCheckBox_CheckedChanged);
-            // 
-            // DailyOnce
-            // 
-            this.DailyOnce.AutoSize = true;
-            this.DailyOnce.Location = new System.Drawing.Point(19, 30);
-            this.DailyOnce.Name = "DailyOnce";
-            this.DailyOnce.Size = new System.Drawing.Size(99, 19);
-            this.DailyOnce.TabIndex = 5;
-            this.DailyOnce.Text = "Ocurs once at";
-            this.DailyOnce.UseVisualStyleBackColor = true;
-            this.DailyOnce.CheckedChanged += new System.EventHandler(this.DailyOnce_CheckedChanged);
-            // 
-            // DailyEvery
-            // 
-            this.DailyEvery.AutoSize = true;
-            this.DailyEvery.Location = new System.Drawing.Point(18, 61);
-            this.DailyEvery.Name = "DailyEvery";
-            this.DailyEvery.Size = new System.Drawing.Size(88, 19);
-            this.DailyEvery.TabIndex = 6;
-            this.DailyEvery.Text = "Ocurs every";
-            this.DailyEvery.UseVisualStyleBackColor = true;
-            this.DailyEvery.CheckedChanged += new System.EventHandler(this.DailyEvery_CheckedChanged);
+            this.OnceTimePicker.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.OnceTimePicker.ValueChanged += new System.EventHandler(OnceTimePickler_ValueChanged);
+            this.OnceTimePicker.EnabledChanged += new System.EventHandler(OnceTimePicker_EnabledChanged);
             // 
             // Form1
             // 

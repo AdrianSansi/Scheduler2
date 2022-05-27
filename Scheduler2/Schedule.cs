@@ -37,8 +37,8 @@ namespace Scheduler2
             currentDate = DateTime.Today;
         }
         public Schedule()
-        {           
-
+        {
+            
         }
    
         public void sumOnePeriod(string period, int numPeriod)
@@ -74,16 +74,20 @@ namespace Scheduler2
             if(saturday) weekDays.Add(6);
             
         }
+
+        
         public void calculateDate()
         {
-            if (DateTime.Compare(startTime, endTime)==0) //Si ocurre una vez al día, pasar al siguiente día marcado 
-            { 
-                if (nextDay() == 0) timeDate.AddDays(7);
-                else timeDate.AddDays(nextDay());                
+            createListOfDays();
+
+            if (DateTime.Compare(startTime, endTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
+            {
+                if (nextDay() == 0) timeDate = timeDate.AddDays(7);
+                else timeDate = timeDate.AddDays(nextDay());
             }
             else
             {
-                //Si al sumar el periodo cambia de día, comenzar con el siguiente día de la semana checked a la hora de inicio del día
+                nextHour(timeDate);
             }
         }
         //
@@ -93,23 +97,50 @@ namespace Scheduler2
         {
             int weekDay = (int)timeDate.DayOfWeek;
             int auxDay = weekDay;
-            int index = weekDays.IndexOf(weekDay);
+            int index;
             weekDay = (weekDay+1)%7;
             while (auxDay != weekDay)
             {
-                if (index == -1)
+                index = weekDays.IndexOf(weekDay);
+                if (index == -1) //El siguiente día no está marcado
                 {
-                    index = weekDays.IndexOf(weekDay);
-                    weekDay++;
+                    weekDay = (weekDay + 1) % 7; //Paso al siguiente
                 }
-                else
+                else //Si está marcado el siguiente, devuelvo ese menos la diferencia con el actual para sumarla luego
                 {
-                    return (weekDays[index++]- (int)timeDate.DayOfWeek)%7;
+                    if ((weekDay- (int)timeDate.DayOfWeek) > 0){
+                        return weekDay - (int)timeDate.DayOfWeek;
+                    }
+                    else
+                    {
+                        return 7 + weekDay - (int)timeDate.DayOfWeek;
+                    }
                 }
             }
-            return -1;
+            return 0;
             
         }
+
+        public void nextHour(DateTime current)
+        {
+            int day = timeDate.Day;
+            current.AddHours(hourPeriod);
+            if(day != current.Day | current.TimeOfDay>endTime.TimeOfDay)
+            {
+                timeDate = timeDate - timeDate.TimeOfDay;
+                timeDate = timeDate + startTime.TimeOfDay;                
+
+                if (nextDay() == 0) timeDate.AddDays(7);
+                else timeDate.AddDays(nextDay());
+            }
+            else
+            {
+                timeDate = current;
+            }
+            
+        }
+
+        
 
         
 
