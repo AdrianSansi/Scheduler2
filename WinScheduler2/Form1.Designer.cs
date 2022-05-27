@@ -476,6 +476,7 @@
             this.EveryPeriod.Enabled = false;
             this.EveryPeriod.Items.Add("Hours");
             this.EveryPeriod.Items.Add("Minutes");
+            this.EveryPeriod.Items.Add("Seconds");
             this.EveryPeriod.Location = new System.Drawing.Point(393, 57);
             this.EveryPeriod.Name = "EveryPeriod";
             this.EveryPeriod.ReadOnly = true;

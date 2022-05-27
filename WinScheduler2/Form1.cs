@@ -298,7 +298,7 @@ namespace WinScheduler2
 
         private void EveryUpDown_ValueChanged(Object sender, EventArgs e)
         {
-            schedule.hourPeriod = (int)EveryUpDown.Value;
+            schedule.timePeriod = (int)EveryUpDown.Value;
             StartTimePicker.Enabled = true;
             EndTimePicker.Enabled = true;
             StartDate.Enabled = true;

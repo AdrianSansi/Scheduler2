@@ -17,52 +17,22 @@ namespace Scheduler2
         public DateTime endTime { get; set; } = new DateTime();
         public DateTime startTime { get; set; } = new DateTime();   
 
-        public bool monday { get; set; } = false;
-        public bool tuesday { get; set; } = false;
-        public bool wednesday { get; set; } = false;
-        public bool thursday { get; set; } = false;
-        public bool friday { get; set; } = false;
-        public bool saturday { get; set; } = false;
+        public bool monday { get; set; } = false; public bool tuesday { get; set; } = false; public bool wednesday { get; set; } = false;
+        public bool thursday { get; set; } = false; public bool friday { get; set; } = false; public bool saturday { get; set; } = false;
         public bool sunday { get; set; } = false;   
 
         List<int> weekDays = new List<int>();
 
         public int weekPeriod { get; set; } = 1;
-        public int hourPeriod { get; set; } = 0;
+        public int timePeriod { get; set; } = 0;
         public int numberOfDates = 0;
 
 
-        public Schedule(DateTime date)
-        {
-            currentDate = DateTime.Today;
-        }
         public Schedule()
         {
             
         }
-   
-        public void sumOnePeriod(string period, int numPeriod)
-        {
-            switch (period)
-            {
-                case "hour":
-                    timeDate.AddHours(numPeriod);
-                    break;
-                case "day":
-                    timeDate = timeDate.AddDays(numPeriod);
-                    break;
-                case "week":
-                    timeDate=timeDate.AddDays(numPeriod*7);
-                    break;
-                case "month":
-                    timeDate = timeDate.AddMonths(numPeriod);
-                    break;
-                default:
-                    timeDate = timeDate.AddYears(numPeriod);
-                    break;
-            }
-        }
-
+  
         public void createListOfDays()
         {
             if (sunday) weekDays.Add(0);
@@ -143,39 +113,12 @@ namespace Scheduler2
             return 0;
             
         }
-        public int nextDay(DateTime current)
-        {
-            int weekDay = (int)current.DayOfWeek;
-            int auxDay = weekDay;
-            int index;
-            weekDay = (weekDay + 1) % 7;
-            while (auxDay != weekDay)
-            {
-                index = weekDays.IndexOf(weekDay);
-                if (index == -1) //El siguiente día no está marcado
-                {
-                    weekDay = (weekDay + 1) % 7; //Paso al siguiente
-                }
-                else //Si está marcado el siguiente, devuelvo ese menos la diferencia con el actual para sumarla luego
-                {
-                    if ((weekDay - (int)current.DayOfWeek) > 0)
-                    {
-                        return weekDay - (int)current.DayOfWeek;
-                    }
-                    else
-                    {
-                        return 7*weekPeriod + weekDay - (int)current.DayOfWeek;
-                    }
-                }
-            }
-            return 0;
-
-        }
+       
 
         public DateTime nextHour(DateTime current)
         {
             int day = current.Day;
-            current = current.AddHours(hourPeriod);
+            current = current.AddHours(timePeriod);
             if(current.Day != day | current.TimeOfDay>endTime.TimeOfDay)
             {
                 current = current - current.TimeOfDay;
