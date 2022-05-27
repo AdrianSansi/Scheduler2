@@ -61,6 +61,11 @@
             this.EveryPeriod = new System.Windows.Forms.DomainUpDown();
             this.EveryUpDown = new System.Windows.Forms.NumericUpDown();
             this.OnceTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.StartDate = new System.Windows.Forms.TextBox();
+            this.EndDate = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -68,6 +73,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.WeeksUpDown)).BeginInit();
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EveryUpDown)).BeginInit();
+            this.groupBox6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -431,7 +437,7 @@
             this.EveryUpDown.Name = "EveryUpDown";
             this.EveryUpDown.Size = new System.Drawing.Size(102, 23);
             this.EveryUpDown.TabIndex = 3;
-            this.EveryUpDown.ValueChanged += new System.EventHandler(EveryUpDown_ValueChanged);
+            this.EveryUpDown.ValueChanged += new System.EventHandler(this.EveryUpDown_ValueChanged);
             // 
             // OnceTimePicker
             // 
@@ -444,14 +450,65 @@
             this.OnceTimePicker.Size = new System.Drawing.Size(200, 23);
             this.OnceTimePicker.TabIndex = 2;
             this.OnceTimePicker.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.OnceTimePicker.ValueChanged += new System.EventHandler(OnceTimePickler_ValueChanged);
-            this.OnceTimePicker.EnabledChanged += new System.EventHandler(OnceTimePicker_EnabledChanged);
+            this.OnceTimePicker.ValueChanged += new System.EventHandler(this.OnceTimePickler_ValueChanged);
+            this.OnceTimePicker.EnabledChanged += new System.EventHandler(this.OnceTimePicker_EnabledChanged);
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.label9);
+            this.groupBox6.Controls.Add(this.label8);
+            this.groupBox6.Controls.Add(this.EndDate);
+            this.groupBox6.Controls.Add(this.StartDate);
+            this.groupBox6.Location = new System.Drawing.Point(21, 445);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Size = new System.Drawing.Size(767, 61);
+            this.groupBox6.TabIndex = 6;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Limits";
+            
+            // 
+            // StartDate
+            // 
+            this.StartDate.Enabled = false;
+            this.StartDate.Location = new System.Drawing.Point(106, 22);
+            this.StartDate.Name = "StartDate";
+            this.StartDate.Size = new System.Drawing.Size(219, 23);
+            this.StartDate.TabIndex = 0;
+            this.StartDate.TextChanged += new System.EventHandler(this.StartDate_TextChanged);
+            // 
+            // EndDate
+            // 
+            this.EndDate.Enabled = false;
+            this.EndDate.Location = new System.Drawing.Point(512, 22);
+            this.EndDate.Name = "EndDate";
+            this.EndDate.Size = new System.Drawing.Size(249, 23);
+            this.EndDate.TabIndex = 1;
+            this.EndDate.TextChanged += new System.EventHandler(this.EndDate_TextChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(6, 25);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(57, 15);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Start date";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(403, 25);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 15);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "End date";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 664);
+            this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -471,6 +528,8 @@
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EveryUpDown)).EndInit();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -510,5 +569,10 @@
         private CheckBox RecurringCheckBox;
         private CheckBox DailyEvery;
         private CheckBox DailyOnce;
+        private GroupBox groupBox6;
+        private Label label9;
+        private Label label8;
+        private TextBox EndDate;
+        private TextBox StartDate;
     }
 }

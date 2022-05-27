@@ -50,6 +50,7 @@ namespace WinScheduler2
                 OnceCheckBox.Checked = false;
                 DailyRadioButton.Enabled = true;
                 WeeklyRadioButton.Enabled = true;
+                                
             }
             else
             {
@@ -147,9 +148,9 @@ namespace WinScheduler2
 
         private void NextButton_Click(object sender, EventArgs e)
         {
-            if(OnceTimePicker.Enabled == true)
+            if(DailyOnce.Checked == true)
             {
-                schedule.calculateDate();
+                schedule.nextDate();
                 OutputBox.Text = schedule.timeDate.ToString();
             }
             else
@@ -277,11 +278,11 @@ namespace WinScheduler2
         {
             if(OnceTimePicker.Enabled == true)
             {
-                NextButton.Enabled = true;
+                StartDate.Enabled = true;
             }
             else
             {
-                NextButton.Enabled= false;
+                
             }
         }
 
@@ -289,7 +290,40 @@ namespace WinScheduler2
         {
             schedule.hourPeriod = (int)EveryUpDown.Value;
         }
-      
+
+       private void StartDate_TextChanged(Object sender, EventArgs e)
+        {
+            try
+            {
+                schedule.timeDate = DateTime.Parse(StartDate.Text);
+                EndDate.Enabled = true;
+
+            }
+            catch (Exception FormatException)
+            {
+                NextButton.Enabled = false;
+                EndDate.Enabled = false;
+            }
+        }
+
+        private void EndDate_TextChanged(Object sender, EventArgs e)
+        {
+            try
+            {
+                schedule.endDate = DateTime.Parse(EndDate.Text);
+                if (schedule.endDate < schedule.timeDate) NextButton.Enabled = false;
+                else
+                {
+                    schedule.timeDate = schedule.timeDate.Date + schedule.startTime.TimeOfDay;
+                    NextButton.Enabled = true;
+                }
+
+            }
+            catch (Exception FormatException)
+            {
+                NextButton.Enabled = false;
+            }
+        }
     }
 
 }

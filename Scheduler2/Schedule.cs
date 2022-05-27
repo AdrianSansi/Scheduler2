@@ -75,19 +75,32 @@ namespace Scheduler2
             
         }
 
+        public void nextDate()
+        {
+            DateTime candidate = calculateDate();
+            if(candidate < endDate)
+            {
+                timeDate = candidate;
+            }
+            else
+            {
+
+            }
+        }
+
         
-        public void calculateDate()
+        public DateTime calculateDate()
         {
             createListOfDays();
 
             if (DateTime.Compare(startTime, endTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
             {
-                if (nextDay() == 0) timeDate = timeDate.AddDays(7);
-                else timeDate = timeDate.AddDays(nextDay());
+                if (nextDay() == 0) return timeDate.AddDays(7);
+                else return timeDate.AddDays(nextDay());
             }
             else
             {
-                nextHour(timeDate);
+                return DateTime.Today; //ToDo nextHour(timeDate)
             }
         }
         //
