@@ -62,10 +62,14 @@
             this.EveryUpDown = new System.Windows.Forms.NumericUpDown();
             this.OnceTimePicker = new System.Windows.Forms.DateTimePicker();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.StartDate = new System.Windows.Forms.TextBox();
-            this.EndDate = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.EndDate = new System.Windows.Forms.TextBox();
+            this.StartDate = new System.Windows.Forms.TextBox();
+            this.StartTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.EndTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -384,6 +388,10 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.label11);
+            this.groupBox5.Controls.Add(this.label10);
+            this.groupBox5.Controls.Add(this.EndTimePicker);
+            this.groupBox5.Controls.Add(this.StartTimePicker);
             this.groupBox5.Controls.Add(this.DailyEvery);
             this.groupBox5.Controls.Add(this.DailyOnce);
             this.groupBox5.Controls.Add(this.EveryPeriod);
@@ -391,7 +399,7 @@
             this.groupBox5.Controls.Add(this.OnceTimePicker);
             this.groupBox5.Location = new System.Drawing.Point(21, 291);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(767, 129);
+            this.groupBox5.Size = new System.Drawing.Size(767, 138);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Daily Frequency";
@@ -465,25 +473,15 @@
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Limits";
-            
             // 
-            // StartDate
+            // label9
             // 
-            this.StartDate.Enabled = false;
-            this.StartDate.Location = new System.Drawing.Point(106, 22);
-            this.StartDate.Name = "StartDate";
-            this.StartDate.Size = new System.Drawing.Size(219, 23);
-            this.StartDate.TabIndex = 0;
-            this.StartDate.TextChanged += new System.EventHandler(this.StartDate_TextChanged);
-            // 
-            // EndDate
-            // 
-            this.EndDate.Enabled = false;
-            this.EndDate.Location = new System.Drawing.Point(512, 22);
-            this.EndDate.Name = "EndDate";
-            this.EndDate.Size = new System.Drawing.Size(249, 23);
-            this.EndDate.TabIndex = 1;
-            this.EndDate.TextChanged += new System.EventHandler(this.EndDate_TextChanged);
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(403, 25);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(53, 15);
+            this.label9.TabIndex = 3;
+            this.label9.Text = "End date";
             // 
             // label8
             // 
@@ -494,14 +492,68 @@
             this.label8.TabIndex = 2;
             this.label8.Text = "Start date";
             // 
-            // label9
+            // EndDate
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(403, 25);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(53, 15);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "End date";
+            this.EndDate.Enabled = false;
+            this.EndDate.Location = new System.Drawing.Point(512, 22);
+            this.EndDate.Name = "EndDate";
+            this.EndDate.Size = new System.Drawing.Size(249, 23);
+            this.EndDate.TabIndex = 1;
+            this.EndDate.TextChanged += new System.EventHandler(this.EndDate_TextChanged);
+            // 
+            // StartDate
+            // 
+            this.StartDate.Enabled = false;
+            this.StartDate.Location = new System.Drawing.Point(106, 22);
+            this.StartDate.Name = "StartDate";
+            this.StartDate.Size = new System.Drawing.Size(219, 23);
+            this.StartDate.TabIndex = 0;
+            this.StartDate.TextChanged += new System.EventHandler(this.StartDate_TextChanged);
+            // 
+            // StartTimePicker
+            // 
+            this.StartTimePicker.Enabled = false;
+            this.StartTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.StartTimePicker.Location = new System.Drawing.Point(90, 95);
+            this.StartTimePicker.MaxDate = new System.DateTime(1753, 1, 1, 23, 59, 0, 0);
+            this.StartTimePicker.Name = "StartTimePicker";
+            this.StartTimePicker.ShowUpDown = true;
+            this.StartTimePicker.Size = new System.Drawing.Size(114, 23);
+            this.StartTimePicker.TabIndex = 7;
+            this.StartTimePicker.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.StartTimePicker.ValueChanged += new System.EventHandler(this.StartTimePicker_ValueChanged);
+            // 
+            // EndTimePicker
+            // 
+            this.EndTimePicker.Enabled = false;
+            this.EndTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.EndTimePicker.Location = new System.Drawing.Point(300, 95);
+            this.EndTimePicker.MaxDate = new System.DateTime(1753, 1, 1, 23, 59, 0, 0);
+            this.EndTimePicker.Name = "EndTimePicker";
+            this.EndTimePicker.ShowUpDown = true;
+            this.EndTimePicker.Size = new System.Drawing.Size(106, 23);
+            this.EndTimePicker.TabIndex = 8;
+            this.EndTimePicker.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.EndTimePicker.ValueChanged += new System.EventHandler(this.EndTimePicker_ValueChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(16, 103);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(61, 15);
+            this.label10.TabIndex = 9;
+            this.label10.Text = "Starting at";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(247, 101);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(40, 15);
+            this.label11.TabIndex = 10;
+            this.label11.Text = "End at";
+            
             // 
             // Form1
             // 
@@ -574,5 +626,9 @@
         private Label label8;
         private TextBox EndDate;
         private TextBox StartDate;
+        private Label label11;
+        private Label label10;
+        private DateTimePicker EndTimePicker;
+        private DateTimePicker StartTimePicker;
     }
 }

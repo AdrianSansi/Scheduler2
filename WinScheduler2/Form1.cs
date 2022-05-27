@@ -153,6 +153,11 @@ namespace WinScheduler2
                 schedule.nextDate();
                 OutputBox.Text = schedule.timeDate.ToString();
             }
+            else if(DailyEvery.Checked == true )
+            {
+                schedule.nextDate();
+                OutputBox.Text = schedule.timeDate.ToString();
+            }
             else
             {
                 OutputBox.Text = schedule.timeDate.ToString();
@@ -289,13 +294,16 @@ namespace WinScheduler2
         private void EveryUpDown_ValueChanged(Object sender, EventArgs e)
         {
             schedule.hourPeriod = (int)EveryUpDown.Value;
+            StartTimePicker.Enabled = true;
+            EndTimePicker.Enabled = true;
+            StartDate.Enabled = true;
         }
 
        private void StartDate_TextChanged(Object sender, EventArgs e)
         {
             try
             {
-                schedule.timeDate = DateTime.Parse(StartDate.Text);
+                schedule.timeDate = DateTime.Parse(StartDate.Text).AddDays(-1);
                 EndDate.Enabled = true;
 
             }
@@ -310,11 +318,12 @@ namespace WinScheduler2
         {
             try
             {
-                schedule.endDate = DateTime.Parse(EndDate.Text);
-                if (schedule.endDate < schedule.timeDate) NextButton.Enabled = false;
+                schedule.endDate = DateTime.Parse(EndDate.Text)+schedule.endTime.TimeOfDay;
+                schedule.timeDate = schedule.timeDate+schedule.endTime.TimeOfDay;
+                
+                if (DateTime.Parse(StartDate.Text) < schedule.timeDate) NextButton.Enabled = false;
                 else
                 {
-                    schedule.timeDate = schedule.timeDate.Date + schedule.startTime.TimeOfDay;
                     NextButton.Enabled = true;
                 }
 
@@ -323,6 +332,16 @@ namespace WinScheduler2
             {
                 NextButton.Enabled = false;
             }
+        }
+
+        private void StartTimePicker_ValueChanged(Object sender, EventArgs e)
+        {
+            schedule.startTime = StartTimePicker.Value;
+            EndTimePicker.MinDate = StartTimePicker.Value;
+        }
+        private void EndTimePicker_ValueChanged(Object sender, EventArgs e)
+        {
+            schedule.endTime = EndTimePicker.Value;
         }
     }
 
