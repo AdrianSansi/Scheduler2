@@ -13,7 +13,7 @@ namespace Scheduler2
         public DateTime timeDate { get; set; } = new DateTime();
         public DateTime endDate { get; set; } = new DateTime();
         
-        public DateTime hourTime { get; set; } = new DateTime();
+        
         public DateTime endTime { get; set; } = new DateTime();
         public DateTime startTime { get; set; } = new DateTime();   
 
@@ -95,16 +95,15 @@ namespace Scheduler2
 
             if (DateTime.Compare(startTime, endTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
             {
-                if (nextDay() == 0) return timeDate.AddDays(7);
-                else return timeDate.AddDays(nextDay());
+                return timeDate.AddDays(nextDay());
             }
             else
             {
-                return DateTime.Today; //ToDo nextHour(timeDate)
+                return nextHour(timeDate);
             }
         }
         //
-        // Retorna el número del siguiente día, si no encuentra porque no hay días marcados, retorna -1.
+        // Retorna la diferencia entre el siguiente día y el actual.
         //
         public int nextDay()
         {
@@ -133,22 +132,49 @@ namespace Scheduler2
             return 0;
             
         }
-
-        public void nextHour(DateTime current)
+        public int nextDay(DateTime current)
         {
-            int day = timeDate.Day;
-            current.AddHours(hourPeriod);
-            if(day != current.Day | current.TimeOfDay>endTime.TimeOfDay)
+            int weekDay = (int)current.DayOfWeek;
+            int auxDay = weekDay;
+            int index;
+            weekDay = (weekDay + 1) % 7;
+            while (auxDay != weekDay)
             {
-                timeDate = timeDate - timeDate.TimeOfDay;
-                timeDate = timeDate + startTime.TimeOfDay;                
+                index = weekDays.IndexOf(weekDay);
+                if (index == -1) //El siguiente día no está marcado
+                {
+                    weekDay = (weekDay + 1) % 7; //Paso al siguiente
+                }
+                else //Si está marcado el siguiente, devuelvo ese menos la diferencia con el actual para sumarla luego
+                {
+                    if ((weekDay - (int)current.DayOfWeek) > 0)
+                    {
+                        return weekDay - (int)current.DayOfWeek;
+                    }
+                    else
+                    {
+                        return 7 + weekDay - (int)current.DayOfWeek;
+                    }
+                }
+            }
+            return 0;
 
-                if (nextDay() == 0) timeDate.AddDays(7);
-                else timeDate.AddDays(nextDay());
+        }
+
+        public DateTime nextHour(DateTime current)
+        {
+            int day = current.Day;
+            current = current.AddHours(hourPeriod);
+            if(current.Day != day | current.TimeOfDay>endTime.TimeOfDay)
+            {
+                current = current - current.TimeOfDay;
+                current = current + startTime.TimeOfDay;                
+
+                return current.AddDays(nextDay());
             }
             else
             {
-                timeDate = current;
+                return current;
             }
             
         }
