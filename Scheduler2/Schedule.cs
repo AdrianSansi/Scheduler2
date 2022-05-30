@@ -26,8 +26,9 @@ namespace Scheduler2
         public int weekPeriod { get; set; } = 1;
         public int timePeriod { get; set; } = 0;
         public int periodType { get; set; } = 0; // 1 equals minutes, 2 equals seconds and default equals hours
-        public int numberOfDates = 0;
-
+        public int format { get; set; } = 1; // 2 if days are selected, 1 if not
+        public int numberOfDates { get; set; } = 0;
+        public int dayPeriod { get; set; } = 0;
 
         public Schedule()
         {
@@ -69,27 +70,55 @@ namespace Scheduler2
             
         }
 
+        public int justSumDays()
+        {
+            return dayPeriod;
+        }
         
+
         public DateTime calculateDate()
         {
-            createListOfDays();
-
-            if (DateTime.Compare(startTime, endTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
+            if(format == 2)
             {
-                return timeDate.AddDays(nextDay());
+                createListOfDays();
+
+                if (DateTime.Compare(startTime, endTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
+                {
+                    return timeDate.AddDays(nextDay());
+                }
+                else
+                {
+                    switch (periodType)
+                    {
+                        case 1:
+                            return nextMinute(timeDate);
+                        case 2:
+                            return nextSecond(timeDate);
+                        default:
+                            return nextHour(timeDate);
+                    }
+                }
             }
             else
             {
-                switch (periodType)
+                if (DateTime.Compare(startTime, endTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
                 {
-                    case 1:
-                        return nextMinute(timeDate);
-                    case 2:
-                        return nextSecond(timeDate);
-                    default:
-                        return nextHour(timeDate);
+                    return timeDate.AddDays(nextDay());
+                }
+                else
+                {
+                    switch (periodType)
+                    {
+                        case 1:
+                            return nextMinute(timeDate);
+                        case 2:
+                            return nextSecond(timeDate);
+                        default:
+                            return nextHour(timeDate);
+                    }
                 }
             }
+            
 
         }
         //
@@ -97,29 +126,37 @@ namespace Scheduler2
         //
         public int nextDay()
         {
-            int weekDay = (int)timeDate.DayOfWeek;
-            int auxDay = weekDay;
-            int index;
-            weekDay = (weekDay+1)%7;
-            while (auxDay != weekDay)
+            if (format == 2)
             {
-                index = weekDays.IndexOf(weekDay);
-                if (index == -1) //El siguiente día no está marcado
+                int weekDay = (int)timeDate.DayOfWeek;
+                int auxDay = weekDay;
+                int index;
+                weekDay = (weekDay + 1) % 7;
+                while (auxDay != weekDay)
                 {
-                    weekDay = (weekDay + 1) % 7; //Paso al siguiente
-                }
-                else //Si está marcado el siguiente, devuelvo ese menos la diferencia con el actual para sumarla luego
-                {
-                    if ((weekDay- (int)timeDate.DayOfWeek) > 0){
-                        return weekDay - (int)timeDate.DayOfWeek;
-                    }
-                    else
+                    index = weekDays.IndexOf(weekDay);
+                    if (index == -1) //El siguiente día no está marcado
                     {
-                        return 7*weekPeriod + weekDay - (int)timeDate.DayOfWeek;
+                        weekDay = (weekDay + 1) % 7; //Paso al siguiente
+                    }
+                    else //Si está marcado el siguiente, devuelvo ese menos la diferencia con el actual para sumarla luego
+                    {
+                        if ((weekDay - (int)timeDate.DayOfWeek) > 0)
+                        {
+                            return weekDay - (int)timeDate.DayOfWeek;
+                        }
+                        else
+                        {
+                            return 7 * weekPeriod + weekDay - (int)timeDate.DayOfWeek;
+                        }
                     }
                 }
+                return 0;
+            } else
+            {
+                return justSumDays();
             }
-            return 0;
+            
             
         }
        

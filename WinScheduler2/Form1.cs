@@ -29,6 +29,7 @@ namespace WinScheduler2
             try
             {
                 schedule.currentDate = DateTime.Parse(InputBox.Text);
+                schedule.startTime = DateTime.Parse(InputBox.Text);
                 OnceCheckBox.Enabled = true;
                 RecurringCheckBox.Enabled = true;
                 

@@ -20,6 +20,7 @@ namespace Testing
             schedule.startTime = new DateTime(1900,1,1,10,30,0);
             schedule.endTime = new DateTime(1900,1,1,14,30,0);
             schedule.weekPeriod = 2;
+            schedule.format = 2;
 
             DateTime expectedValue = new DateTime(2022, 5, 1, 10, 30, 0);
             schedule.nextDate();
@@ -40,6 +41,7 @@ namespace Testing
             schedule.startTime = new DateTime(1900, 1, 1, 10, 30, 0);
             schedule.endTime = new DateTime(1900, 1, 1, 14, 30, 0);
             schedule.weekPeriod = 2;
+            schedule.format = 2;
 
             DateTime expectedValue = new DateTime(2022, 5, 2, 12, 30, 0);
             int i = 0;
@@ -65,6 +67,7 @@ namespace Testing
             schedule.startTime = new DateTime(1900, 1, 1, 10, 30, 0);
             schedule.endTime = new DateTime(1900, 1, 1, 10, 30, 0);
             schedule.weekPeriod = 2;
+            schedule.format = 2;
 
             DateTime expectedValue = new DateTime(2022, 5, 18, 10, 30, 0);
             int i = 0;
@@ -90,6 +93,7 @@ namespace Testing
             schedule.startTime = new DateTime(1900, 1, 1, 10, 30, 0);
             schedule.endTime = new DateTime(1900, 1, 1, 10, 30, 0);
             schedule.weekPeriod = 2;
+            schedule.format = 2;
 
             DateTime expectedValue = new DateTime(2022, 5, 1, 10, 30, 0);
             int i = 0;
@@ -115,6 +119,7 @@ namespace Testing
             schedule.startTime = new DateTime(1900, 1, 1, 11, 30, 0);
             schedule.endTime = new DateTime(1900, 1, 1, 10, 30, 0);
             schedule.weekPeriod = 2;
+            schedule.format = 2;
 
             DateTime expectedValue = new DateTime(2022, 5, 18, 11, 30, 0);
             int i = 0;
@@ -142,6 +147,7 @@ namespace Testing
             schedule.startTime = new DateTime(1900, 1, 1, 10, 00, 0);
             schedule.endTime = new DateTime(1900, 1, 1, 10, 30, 0);
             schedule.weekPeriod = 1;
+            schedule.format = 2;
 
             DateTime expectedValue = new DateTime(2022,5,30,10,5,0);
             int i = 0;
@@ -167,6 +173,7 @@ namespace Testing
             schedule.startTime = new DateTime(1900, 1, 1, 10, 00, 0);
             schedule.endTime = new DateTime(1900, 1, 1, 10, 30, 0);
             schedule.weekPeriod = 1;
+            schedule.format = 2;
 
             DateTime expectedValue = new DateTime(2022, 5, 31, 10, 00, 0);
             int i = 0;
@@ -192,6 +199,7 @@ namespace Testing
             schedule.startTime = new DateTime(1900, 1, 1, 10, 00, 0);
             schedule.endTime = new DateTime(1900, 1, 1, 11, 00, 0);
             schedule.weekPeriod = 1;
+            schedule.format = 2;
 
             DateTime expectedValue = new DateTime(2022, 5, 31, 10, 00, 0);
             int i = 0;
@@ -217,6 +225,7 @@ namespace Testing
             schedule.startTime = new DateTime(1900, 1, 1, 10, 00, 0);
             schedule.endTime = new DateTime(1900, 1, 1, 10, 30, 0);
             schedule.weekPeriod = 1;
+            schedule.format = 2;
 
             DateTime expectedValue = new DateTime(2022, 5, 31, 10, 00, 0);
 
@@ -239,6 +248,7 @@ namespace Testing
             schedule.startTime = new DateTime(1900, 1, 1, 10, 00, 0);
             schedule.endTime = new DateTime(1900, 1, 1, 10, 00, 0);
             schedule.weekPeriod = 1;
+            schedule.format = 2;
 
             DateTime expectedValue = new DateTime(2022, 5, 31, 10, 00, 0);
 
@@ -262,6 +272,7 @@ namespace Testing
             schedule.startTime = new DateTime(1900, 1, 1, 10, 00, 50);
             schedule.endTime = new DateTime(1900, 1, 1, 10, 01, 0);
             schedule.weekPeriod = 1;
+            schedule.format = 2;
 
             DateTime expectedValue = new DateTime(2022, 5, 31, 10, 00, 57);
             int i = 0;
