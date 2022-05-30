@@ -271,10 +271,30 @@ namespace WinScheduler2
             {
                 DailyOnce.Checked = false;
                 EveryUpDown.Enabled = true;
+                EveryPeriod.Enabled = true;
             }
             else
             {
                 EveryUpDown.Enabled = false;
+                EveryPeriod.Enabled = false;
+            }
+        }
+
+        private void EveryPeriod_ItemChanged(object sender, EventArgs e)
+        {
+            switch (EveryPeriod.SelectedItem)
+            {
+                case "Minutes":
+                    schedule.periodType = 1;
+                    EveryUpDown.Maximum = 24 * 60-1;
+                    break;
+                case "Seconds":
+                    schedule.periodType= 2;
+                    EveryUpDown.Maximum = 24 * 60+60-1;
+                    break;
+                default:
+                    schedule.periodType= 0;
+                    break;
             }
         }
 
@@ -323,10 +343,11 @@ namespace WinScheduler2
         {
             try
             {
-                schedule.endDate = DateTime.Parse(EndDate.Text)+schedule.endTime.TimeOfDay;
+                schedule.endDate = DateTime.Parse(EndDate.Text);
+                schedule.endDate = schedule.endDate;
                 schedule.timeDate = schedule.timeDate;
                 
-                if (DateTime.Parse(EndDate.Text) < schedule.timeDate+schedule.startTime.TimeOfDay) NextButton.Enabled = false;
+                if (schedule.endDate.AddDays(1) < schedule.timeDate+schedule.startTime.TimeOfDay) NextButton.Enabled = false;
                 else
                 {
                     NextButton.Enabled = true;

@@ -483,13 +483,14 @@
             this.EveryPeriod.Size = new System.Drawing.Size(159, 23);
             this.EveryPeriod.TabIndex = 4;
             this.EveryPeriod.Text = "Hours";
+            this.EveryPeriod.SelectedItemChanged += new System.EventHandler(this.EveryPeriod_ItemChanged);
             // 
             // EveryUpDown
             // 
             this.EveryUpDown.Enabled = false;
             this.EveryUpDown.Location = new System.Drawing.Point(233, 57);
             this.EveryUpDown.Maximum = new decimal(new int[] {
-            24,
+            23,
             0,
             0,
             0});
