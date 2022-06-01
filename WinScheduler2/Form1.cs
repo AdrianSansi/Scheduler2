@@ -3,23 +3,15 @@ namespace WinScheduler2
 {
     public partial class Form1 : Form
     {
-        int cYear;
-        int cMonth;
-        int cDay;
-        int cHour;
-        int cMinute;
-        int cSecond;
-        int period;
+        
         Schedule schedule;
-        int numPeriod;
         DateTime endDate;
 
 
         public Form1()
         {
             schedule = new Schedule(DateTime.Today); 
-            cYear = 0; cMonth = 0; cDay = 0; period = 1; numPeriod = 0;
-            cHour = 0; cMinute = 0; cSecond = 0;
+            
             endDate = DateTime.MinValue;
             InitializeComponent();
         }
@@ -95,6 +87,9 @@ namespace WinScheduler2
                 FridayBox.Checked = true;
                 SaturdayBox.Checked = true;
                 SundayBox.Checked = true;
+                schedule.format = 1;
+                DayPeriod.Enabled = true;
+                DayPeriodType.Enabled = true;
 
             }
             else
@@ -312,6 +307,8 @@ namespace WinScheduler2
             if(OnceTimePicker.Enabled == true)
             {
                 StartDate.Enabled = true;
+                EndDate.Enabled = true;
+                NextButton.Enabled = true;
             }
             else
             {
@@ -325,6 +322,8 @@ namespace WinScheduler2
             StartTimePicker.Enabled = true;
             EndTimePicker.Enabled = true;
             StartDate.Enabled = true;
+            EndDate.Enabled = true;
+            NextButton.Enabled = true;
         }
 
        private void StartDate_TextChanged(Object sender, EventArgs e)
@@ -350,14 +349,15 @@ namespace WinScheduler2
                 schedule.endDate = schedule.endDate;
                 schedule.timeDate = schedule.timeDate;
 
-                if (schedule.endDate.AddDays(1) < schedule.timeDate + schedule.startTime.TimeOfDay)
+                if (schedule.endDate + schedule.endDate.TimeOfDay < schedule.timeDate + schedule.startTime.TimeOfDay)
                 {
                     NextButton.Enabled = false;
-                    OutputBox.Text = 'Start date can not be later than end date!';
+                    OutputBox.Text = "Start date can not be later than end date!";
                 }
                 else
                 {
                     NextButton.Enabled = true;
+                    OutputBox.Text = "";
                 }
 
             }
@@ -375,6 +375,28 @@ namespace WinScheduler2
         private void EndTimePicker_ValueChanged(Object sender, EventArgs e)
         {
             schedule.endTime = EndTimePicker.Value;
+        }
+
+        private void DayPeriod_ValueChanged(Object sender, EventArgs e)
+        {
+            schedule.dayPeriod = (int)DayPeriod.Value;
+        }
+       private void DayPeriodType_ItemChanged(Object sender, EventArgs e)
+        {
+            switch (DayPeriodType.SelectedItem)
+            {
+                case "Days":
+                    schedule.dayPeriodType = 1;
+                    break;
+                case "Weeks":
+                    schedule.dayPeriodType = 2;
+                    break;
+                case "Months":
+                    schedule.dayPeriodType = 3;
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

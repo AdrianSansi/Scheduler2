@@ -70,6 +70,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.EndDate = new System.Windows.Forms.TextBox();
             this.StartDate = new System.Windows.Forms.TextBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.DayPeriod = new System.Windows.Forms.NumericUpDown();
+            this.DayPeriodType = new System.Windows.Forms.DomainUpDown();
+            this.label12 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -78,6 +82,8 @@
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.EveryUpDown)).BeginInit();
             this.groupBox6.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DayPeriod)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -231,9 +237,9 @@
             // 
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.OutputBox);
-            this.groupBox3.Location = new System.Drawing.Point(21, 512);
+            this.groupBox3.Location = new System.Drawing.Point(21, 554);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(767, 123);
+            this.groupBox3.Size = new System.Drawing.Size(767, 81);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Output";
@@ -400,7 +406,7 @@
             this.groupBox5.Controls.Add(this.OnceTimePicker);
             this.groupBox5.Location = new System.Drawing.Point(21, 291);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(767, 138);
+            this.groupBox5.Size = new System.Drawing.Size(767, 134);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Daily Frequency";
@@ -519,7 +525,7 @@
             this.groupBox6.Controls.Add(this.label8);
             this.groupBox6.Controls.Add(this.EndDate);
             this.groupBox6.Controls.Add(this.StartDate);
-            this.groupBox6.Location = new System.Drawing.Point(21, 445);
+            this.groupBox6.Location = new System.Drawing.Point(21, 487);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(767, 61);
             this.groupBox6.TabIndex = 6;
@@ -562,11 +568,67 @@
             this.StartDate.TabIndex = 0;
             this.StartDate.TextChanged += new System.EventHandler(this.StartDate_TextChanged);
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.DayPeriod);
+            this.groupBox7.Controls.Add(this.DayPeriodType);
+            this.groupBox7.Controls.Add(this.label12);
+            this.groupBox7.Location = new System.Drawing.Point(21, 429);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(767, 57);
+            this.groupBox7.TabIndex = 7;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "PeriodConfiguration";
+            
+            // 
+            // DayPeriod
+            // 
+            this.DayPeriod.Enabled = false;
+            this.DayPeriod.Location = new System.Drawing.Point(115, 27);
+            this.DayPeriod.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.DayPeriod.Name = "DayPeriod";
+            this.DayPeriod.Size = new System.Drawing.Size(143, 23);
+            this.DayPeriod.TabIndex = 2;
+            this.DayPeriod.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.DayPeriod.ValueChanged += new System.EventHandler(this.DayPeriod_ValueChanged);
+            // 
+            // DayPeriodType
+            // 
+            this.DayPeriodType.Enabled = false;
+            this.DayPeriodType.Items.Add("Days");
+            this.DayPeriodType.Items.Add("Weeks");
+            this.DayPeriodType.Items.Add("Months");
+            this.DayPeriodType.Location = new System.Drawing.Point(300, 26);
+            this.DayPeriodType.Name = "DayPeriodType";
+            this.DayPeriodType.Size = new System.Drawing.Size(154, 23);
+            this.DayPeriodType.TabIndex = 1;
+            this.DayPeriodType.Text = "Days";
+            this.DayPeriodType.SelectedItemChanged += new System.EventHandler(this.DayPeriodType_ItemChanged);
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(16, 28);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(69, 15);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Ocurs every";
+            
+            
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 664);
+            this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -589,6 +651,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.EveryUpDown)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DayPeriod)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -637,5 +702,9 @@
         private Label label10;
         private DateTimePicker EndTimePicker;
         private DateTimePicker StartTimePicker;
+        private GroupBox groupBox7;
+        private Label label12;
+        private NumericUpDown DayPeriod;
+        private DomainUpDown DayPeriodType;
     }
 }

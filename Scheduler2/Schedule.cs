@@ -28,7 +28,7 @@ namespace Scheduler2
         public int periodType { get; set; } = 0; // 1 equals minutes, 2 equals seconds and default equals hours
         public int format { get; set; } = 1; // 2 if days are selected, 1 if not
         public int numberOfDates { get; set; } = 0;
-        public int dayPeriod { get; set; } = 0;
+        public int dayPeriod { get; set; } = 1;
         public int dayPeriodType { get; set; } = 1; //1 if days, 2 if weeks, 3 if months 
 
         public Schedule(DateTime current)
