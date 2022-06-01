@@ -17,7 +17,7 @@ namespace WinScheduler2
 
         public Form1()
         {
-            schedule = new Schedule(); schedule.timeDate = DateTime.Today;
+            schedule = new Schedule(DateTime.Today); 
             cYear = 0; cMonth = 0; cDay = 0; period = 1; numPeriod = 0;
             cHour = 0; cMinute = 0; cSecond = 0;
             endDate = DateTime.MinValue;
@@ -347,8 +347,12 @@ namespace WinScheduler2
                 schedule.endDate = DateTime.Parse(EndDate.Text);
                 schedule.endDate = schedule.endDate;
                 schedule.timeDate = schedule.timeDate;
-                
-                if (schedule.endDate.AddDays(1) < schedule.timeDate+schedule.startTime.TimeOfDay) NextButton.Enabled = false;
+
+                if (schedule.endDate.AddDays(1) < schedule.timeDate + schedule.startTime.TimeOfDay)
+                {
+                    NextButton.Enabled = false;
+                    OutputBox.Text = 'Start date can not be later than end date!';
+                }
                 else
                 {
                     NextButton.Enabled = true;

@@ -14,8 +14,8 @@ namespace Scheduler2
         public DateTime endDate { get; set; } = new DateTime();
         
         
-        public DateTime endTime { get; set; } = new DateTime();
-        public DateTime startTime { get; set; } = new DateTime();   
+        public DateTime endTime { get; set; } = new DateTime(1900, 1, 1, 0, 0, 0);
+        public DateTime startTime { get; set; } = new DateTime(1900, 1, 1, 0, 0, 0);   
 
         public bool monday { get; set; } = false; public bool tuesday { get; set; } = false; public bool wednesday { get; set; } = false;
         public bool thursday { get; set; } = false; public bool friday { get; set; } = false; public bool saturday { get; set; } = false;
@@ -29,10 +29,15 @@ namespace Scheduler2
         public int format { get; set; } = 1; // 2 if days are selected, 1 if not
         public int numberOfDates { get; set; } = 0;
         public int dayPeriod { get; set; } = 0;
+        public int dayPeriodType { get; set; } = 1; //1 if days, 2 if weeks, 3 if months 
 
-        public Schedule()
+        public Schedule(DateTime current)
         {
+            this.currentDate = current;
+            this.timeDate = current;
+            this.endDate = DateTime.MaxValue.AddDays(-1);
             
+
         }
   
         public void createListOfDays()
@@ -51,12 +56,13 @@ namespace Scheduler2
         {
             if (numberOfDates == 0)
             {
-                numberOfDates++;
+                numberOfDates++; 
+                
                 timeDate = timeDate + startTime.TimeOfDay;
             } else
             {
                 DateTime candidate = calculateDate();
-                if (candidate < endDate.AddDays(1))
+                if (candidate <=  endDate.AddDays(1))
                 {
                     timeDate = candidate;
                     numberOfDates++;
@@ -70,9 +76,20 @@ namespace Scheduler2
             
         }
 
-        public int justSumDays()
+       public DateTime nextDayF1(DateTime current)
         {
-            return dayPeriod;
+            switch (dayPeriodType)
+            {
+                case 1:
+                    return current.AddDays(dayPeriod);
+                case 2:
+                    return current.AddDays(7*dayPeriod);
+                case 3:
+                    return current.AddMonths(dayPeriod);
+                default:
+                    return current.AddDays(dayPeriod);
+
+            }
         }
         
 
@@ -84,7 +101,7 @@ namespace Scheduler2
 
                 if (DateTime.Compare(startTime, endTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
                 {
-                    return timeDate.AddDays(nextDay());
+                    return timeDate.AddDays(nextDayF2());
                 }
                 else
                 {
@@ -103,18 +120,18 @@ namespace Scheduler2
             {
                 if (DateTime.Compare(startTime, endTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
                 {
-                    return timeDate.AddDays(nextDay());
+                    return nextDayF1(timeDate);
                 }
                 else
                 {
                     switch (periodType)
                     {
                         case 1:
-                            return nextMinute(timeDate);
+                            return nextMinuteF1(timeDate);
                         case 2:
-                            return nextSecond(timeDate);
+                            return nextSecondF1(timeDate);
                         default:
-                            return nextHour(timeDate);
+                            return nextHourF1(timeDate);
                     }
                 }
             }
@@ -124,39 +141,32 @@ namespace Scheduler2
         //
         // Retorna la diferencia entre el siguiente día y el actual.
         //
-        public int nextDay()
+        public int nextDayF2()
         {
-            if (format == 2)
+            int weekDay = (int)timeDate.DayOfWeek;
+            int auxDay = weekDay;
+            int index;
+            weekDay = (weekDay + 1) % 7;
+            while (auxDay != weekDay)
             {
-                int weekDay = (int)timeDate.DayOfWeek;
-                int auxDay = weekDay;
-                int index;
-                weekDay = (weekDay + 1) % 7;
-                while (auxDay != weekDay)
+                index = weekDays.IndexOf(weekDay);
+                if (index == -1) //El siguiente día no está marcado
                 {
-                    index = weekDays.IndexOf(weekDay);
-                    if (index == -1) //El siguiente día no está marcado
+                    weekDay = (weekDay + 1) % 7; //Paso al siguiente
+                }
+                else //Si está marcado el siguiente, devuelvo ese menos la diferencia con el actual para sumarla luego
+                {
+                    if ((weekDay - (int)timeDate.DayOfWeek) > 0)
                     {
-                        weekDay = (weekDay + 1) % 7; //Paso al siguiente
+                        return weekDay - (int)timeDate.DayOfWeek;
                     }
-                    else //Si está marcado el siguiente, devuelvo ese menos la diferencia con el actual para sumarla luego
+                    else
                     {
-                        if ((weekDay - (int)timeDate.DayOfWeek) > 0)
-                        {
-                            return weekDay - (int)timeDate.DayOfWeek;
-                        }
-                        else
-                        {
-                            return 7 * weekPeriod + weekDay - (int)timeDate.DayOfWeek;
-                        }
+                        return 7 * weekPeriod + weekDay - (int)timeDate.DayOfWeek;
                     }
                 }
-                return 0;
-            } else
-            {
-                return justSumDays();
             }
-            
+            return 0;
             
         }
        
@@ -169,7 +179,7 @@ namespace Scheduler2
             {
                 current = current - current.TimeOfDay;
                 current = current + startTime.TimeOfDay;
-                return current.AddDays(nextDay());
+                return current.AddDays(nextDayF2());
             }
             else
             {
@@ -187,7 +197,7 @@ namespace Scheduler2
                 current = current - current.TimeOfDay;
                 current = current + startTime.TimeOfDay;
 
-                return current.AddDays(nextDay());
+                return current.AddDays(nextDayF2());
             }
             else
             {
@@ -204,13 +214,70 @@ namespace Scheduler2
                 current = current - current.TimeOfDay;
                 current = current + startTime.TimeOfDay;
 
-                return current.AddDays(nextDay());
+                return current.AddDays(nextDayF2());
             }
             else
             {
                 return current;
             }
         }
+
+        public DateTime nextHourF1(DateTime current)
+        {
+            int day = current.Day;
+            current = current.AddHours(timePeriod);
+            if (current.Day != day | current.TimeOfDay > endTime.TimeOfDay)
+            {
+                current = current - current.TimeOfDay;
+                current = current + startTime.TimeOfDay;
+                return nextDayF1(current);
+            }
+            else
+            {
+                return current;
+            }
+
+        }
+
+        public DateTime nextMinuteF1(DateTime current)
+        {
+            int day = current.Day;
+            current = current.AddMinutes(timePeriod);
+            if (current.Day != day | current.TimeOfDay > endTime.TimeOfDay)
+            {
+                current = current - current.TimeOfDay;
+                current = current + startTime.TimeOfDay;
+                return nextDayF1(current);
+            }
+            else
+            {
+                return current;
+            }
+
+        }
+
+        public DateTime nextSecondF1(DateTime current)
+        {
+            int day = current.Day;
+            current = current.AddSeconds(timePeriod);
+            if (current.Day != day | current.TimeOfDay > endTime.TimeOfDay)
+            {
+                current = current - current.TimeOfDay;
+                current = current + startTime.TimeOfDay;
+                return nextDayF1(current);
+            }
+            else
+            {
+                return current;
+            }
+
+        }
+
+
+
+
+
+
 
 
 

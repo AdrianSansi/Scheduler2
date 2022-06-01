@@ -11,8 +11,8 @@ namespace Testing
         [Fact]
         public void Test1()
         {
-            Schedule schedule = new Schedule();
-            schedule.timeDate = new DateTime(2022,5,1);
+            DateTime timeDate = new DateTime(2022, 5, 1);
+            Schedule schedule = new Schedule(timeDate);
             schedule.endDate = new DateTime(2022,5,31);
             schedule.monday = true; schedule.tuesday = false; schedule.wednesday = true; schedule.thursday = false;
             schedule.friday = true; schedule.saturday = true; schedule.sunday = true;
@@ -32,8 +32,8 @@ namespace Testing
         [Fact]
         public void Test2()
         {
-            Schedule schedule = new Schedule();
-            schedule.timeDate = new DateTime(2022, 5, 1);
+            DateTime timeDate = new DateTime(2022, 5, 1);
+            Schedule schedule = new Schedule(timeDate);
             schedule.endDate = new DateTime(2022, 5, 31);
             schedule.monday = true; schedule.tuesday = false; schedule.wednesday = true; schedule.thursday = false;
             schedule.friday = true; schedule.saturday = true; schedule.sunday = true;
@@ -58,8 +58,8 @@ namespace Testing
         [Fact]
         public void Test3()
         {
-            Schedule schedule = new Schedule();
-            schedule.timeDate = new DateTime(2022, 5, 1);
+            DateTime timeDate = new DateTime(2022, 5, 1);
+            Schedule schedule = new Schedule(timeDate);
             schedule.endDate = new DateTime(2022, 5, 31);
             schedule.monday = true; schedule.tuesday = false; schedule.wednesday = true; schedule.thursday = false;
             schedule.friday = true; schedule.saturday = true; schedule.sunday = true;
@@ -84,8 +84,8 @@ namespace Testing
         [Fact]
         public void Test4()
         {
-            Schedule schedule = new Schedule();
-            schedule.timeDate = new DateTime(2022, 5, 1);
+            DateTime timeDate = new DateTime(2022, 5, 1);
+            Schedule schedule = new Schedule(timeDate);
             schedule.endDate = new DateTime(2022, 5, 31);
             schedule.monday = false; schedule.tuesday = false; schedule.wednesday = false; schedule.thursday = false;
             schedule.friday = false; schedule.saturday = false; schedule.sunday = false;
@@ -110,8 +110,8 @@ namespace Testing
         [Fact]
         public void TestStartTimeBiggerThanEndTime()
         {
-            Schedule schedule = new Schedule();
-            schedule.timeDate = new DateTime(2022, 5, 1);
+            DateTime timeDate = new DateTime(2022, 5, 1);
+            Schedule schedule = new Schedule(timeDate);
             schedule.endDate = new DateTime(2022, 5, 31);
             schedule.monday = true; schedule.tuesday = false; schedule.wednesday = true; schedule.thursday = false;
             schedule.friday = true; schedule.saturday = true; schedule.sunday = true;
@@ -137,8 +137,8 @@ namespace Testing
         [Fact]
         public void TestNextMinute()
         {
-            Schedule schedule = new Schedule();
-            schedule.timeDate = new DateTime(2022, 5, 30);
+            DateTime timeDate = new DateTime(2022, 5, 30);
+            Schedule schedule = new Schedule(timeDate);
             schedule.endDate = new DateTime(2022, 5, 31);
             schedule.monday = true; schedule.tuesday = true; schedule.wednesday = true; schedule.thursday = true;
             schedule.friday = true; schedule.saturday = true; schedule.sunday = true;
@@ -162,9 +162,10 @@ namespace Testing
         }
         [Fact]
         public void TestNextMinute2()
-        {
-            Schedule schedule = new Schedule();
-            schedule.timeDate = new DateTime(2022, 5, 30);
+        { 
+            DateTime timeDate = new DateTime(2022, 5, 30);
+            Schedule schedule = new Schedule(timeDate);
+            
             schedule.endDate = new DateTime(2022, 5, 31);
             schedule.monday = true; schedule.tuesday = true; schedule.wednesday = true; schedule.thursday = true;
             schedule.friday = true; schedule.saturday = true; schedule.sunday = true;
@@ -189,8 +190,9 @@ namespace Testing
         [Fact]
         public void TestNextHour()
         {
-            Schedule schedule = new Schedule();
-            schedule.timeDate = new DateTime(2022, 5, 30);
+            DateTime timeDate = new DateTime(2022, 5, 30);
+            Schedule schedule = new Schedule(timeDate);
+            
             schedule.endDate = new DateTime(2022, 5, 31);
             schedule.monday = true; schedule.tuesday = true; schedule.wednesday = true; schedule.thursday = true;
             schedule.friday = true; schedule.saturday = true; schedule.sunday = true;
@@ -215,8 +217,9 @@ namespace Testing
         [Fact]
         public void TestNextMinute3()
         {
-            Schedule schedule = new Schedule();
-            schedule.timeDate = new DateTime(2022, 5, 30,10,30,0);
+            DateTime timeDate = new DateTime(2022, 5, 30, 10, 30, 0);
+            Schedule schedule = new Schedule(timeDate);
+            
             schedule.endDate = new DateTime(2022, 5, 31);
             schedule.monday = true; schedule.tuesday = true; schedule.wednesday = true; schedule.thursday = true;
             schedule.friday = true; schedule.saturday = true; schedule.sunday = true;
@@ -238,8 +241,8 @@ namespace Testing
         [Fact]
         public void TestNextHour2()
         {
-            Schedule schedule = new Schedule();
-            schedule.timeDate = new DateTime(2022, 5, 30, 10, 00, 0);
+            DateTime timeDate = new DateTime(2022, 5, 30, 10, 00, 0);
+            Schedule schedule = new Schedule(timeDate);
             schedule.endDate = new DateTime(2022, 5, 31);
             schedule.monday = true; schedule.tuesday = true; schedule.wednesday = true; schedule.thursday = true;
             schedule.friday = true; schedule.saturday = true; schedule.sunday = true;
@@ -262,8 +265,8 @@ namespace Testing
         [Fact]
         public void TestNextSecond()
         {
-            Schedule schedule = new Schedule();
-            schedule.timeDate = new DateTime(2022, 5, 30);
+            DateTime timeDate = new DateTime(2022, 5, 30);
+            Schedule schedule = new Schedule(timeDate);
             schedule.endDate = new DateTime(2022, 5, 31);
             schedule.monday = true; schedule.tuesday = true; schedule.wednesday = true; schedule.thursday = true;
             schedule.friday = true; schedule.saturday = true; schedule.sunday = true;
@@ -283,6 +286,97 @@ namespace Testing
             }
             DateTime actualValue = schedule.timeDate;
             actualValue.Should().Be(expectedValue);
+
+        }
+        [Fact]
+        public void TestFormat1_1()
+        {
+            DateTime timeDate = new DateTime(2022, 6, 1);
+            Schedule schedule = new Schedule(timeDate);
+            schedule.format = 1;
+            schedule.dayPeriodType = 1;
+            schedule.dayPeriod = 2;
+            DateTime expectedValue = new DateTime(2022,6,7);
+
+            int i = 0;
+            while (i < 4)
+            {
+                schedule.nextDate();
+                i++;
+            }
+            DateTime actualValue = schedule.timeDate;
+            actualValue.Should().Be(expectedValue);
+
+
+        }
+        [Fact]
+        public void TestFormat1_2()
+        {
+            DateTime timeDate = new DateTime(2022, 6, 1);
+            Schedule schedule = new Schedule(timeDate);
+            schedule.format = 1;
+            schedule.dayPeriodType = 2;
+            schedule.dayPeriod = 1;
+            DateTime expectedValue = new DateTime(2022, 6, 15);
+
+            int i = 0;
+            while (i < 3)
+            {
+                schedule.nextDate();
+                i++;
+            }
+            DateTime actualValue = schedule.timeDate;
+            actualValue.Should().Be(expectedValue);
+
+
+        }
+
+        [Fact]
+        public void TestFormat1_3()
+        {
+            DateTime timeDate = new DateTime(2022, 6, 1);
+            Schedule schedule = new Schedule(timeDate);
+            schedule.format = 1;
+            schedule.dayPeriodType = 2;
+            schedule.dayPeriod = 1;
+            schedule.timePeriod = 2;
+            schedule.periodType = 0;
+            schedule.endTime = new DateTime(1900,1,1,2,0,0);
+            DateTime expectedValue = new DateTime(2022, 6, 15);
+
+            int i = 0;
+            while (i < 5)
+            {
+                schedule.nextDate();
+                i++;
+            }
+            DateTime actualValue = schedule.timeDate;
+            actualValue.Should().Be(expectedValue);
+
+
+        }
+        [Fact]
+        public void TestFormat1_4()
+        {
+            DateTime timeDate = new DateTime(2022, 6, 1);
+            Schedule schedule = new Schedule(timeDate);
+            schedule.format = 1;
+            schedule.dayPeriodType = 3;
+            schedule.dayPeriod = 3;
+            schedule.timePeriod = 30;
+            schedule.periodType = 2;
+            schedule.endTime = new DateTime(1900, 1, 1, 0, 1 , 0);
+            DateTime expectedValue = new DateTime(2022, 9, 1,0,0,30);
+
+            int i = 0;
+            while (i < 5)
+            {
+                schedule.nextDate();
+                i++;
+            }
+            DateTime actualValue = schedule.timeDate;
+            actualValue.Should().Be(expectedValue);
+
 
         }
     }
