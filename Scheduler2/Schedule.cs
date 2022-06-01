@@ -74,7 +74,7 @@ namespace Scheduler2
             }
             
             
-        }
+        } 
 
        public DateTime nextDayF1(DateTime current)
         {
