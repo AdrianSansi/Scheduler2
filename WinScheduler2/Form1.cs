@@ -118,6 +118,7 @@ namespace WinScheduler2
                 SundayBox.Enabled = true;
                 DailyEvery.Enabled = true;
                 DailyOnce.Enabled = true;
+                schedule.format = 2;
 
             }
             else
@@ -130,6 +131,7 @@ namespace WinScheduler2
                 FridayBox.Enabled = false;
                 SaturdayBox.Enabled = false;
                 SundayBox.Enabled = false;
+                schedule.format = 1;
             }
         }
 
