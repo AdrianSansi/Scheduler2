@@ -25,8 +25,9 @@ namespace Scheduler2
 
         public int weekPeriod { get; set; } = 1;
         public int timePeriod { get; set; } = 0;
-        public int periodType { get; set; } = 0; // 1 equals minutes, 2 equals seconds and default equals hours
+        public PeriodType PeriodType { get; set; } = PeriodType.Hours; 
         public int format { get; set; } = 1; // 2 if days are selected, 1 if not
+        //public Format Format{ get; set;} = Format.daily
         public int numberOfDates { get; set; } = 0;
         public int dayPeriod { get; set; } = 1;
         public int dayPeriodType { get; set; } = 1; //1 if days, 2 if weeks, 3 if months 
@@ -107,9 +108,9 @@ namespace Scheduler2
                 {
                     switch (periodType)
                     {
-                        case 1:
+                        case PeriodType.Minutes:
                             return nextMinute(timeDate);
-                        case 2:
+                        case PeriodType.Seconds:
                             return nextSecond(timeDate);
                         default:
                             return nextHour(timeDate);
@@ -126,9 +127,9 @@ namespace Scheduler2
                 {
                     switch (periodType)
                     {
-                        case 1:
+                        case PeriodType.Minutes:
                             return nextMinuteF1(timeDate);
-                        case 2:
+                        case PeriodType.Seconds:
                             return nextSecondF1(timeDate);
                         default:
                             return nextHourF1(timeDate);

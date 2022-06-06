@@ -135,14 +135,14 @@ namespace Testing
         }
 
         [Fact]
-        public void TestNextMinute()
+        public void Test_next_minute()
         {
             DateTime timeDate = new DateTime(2022, 5, 30);
             Schedule schedule = new Schedule(timeDate);
             schedule.endDate = new DateTime(2022, 5, 31);
             schedule.monday = true; schedule.tuesday = true; schedule.wednesday = true; schedule.thursday = true;
             schedule.friday = true; schedule.saturday = true; schedule.sunday = true;
-            schedule.periodType = 1; //minutes
+            schedule.periodType = PeriodType.Minutes;
             schedule.timePeriod = 5; // every 5 minutes
             schedule.startTime = new DateTime(1900, 1, 1, 10, 00, 0);
             schedule.endTime = new DateTime(1900, 1, 1, 10, 30, 0);
