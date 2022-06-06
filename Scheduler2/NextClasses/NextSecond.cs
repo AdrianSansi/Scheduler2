@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Scheduler2
 {
     internal class NextSecond
     {
-        public DateTime WeeklyFormat(DateTime Current, Settings Settings)
+        public static DateTime WeeklyFormat(DateTime Current, Settings Settings)
         {
             int day = Current.Day;
             Current = Current.AddSeconds(Settings.TimePeriod);
@@ -25,7 +20,7 @@ namespace Scheduler2
             }
         }
 
-        public DateTime DailyFormat(DateTime Current, Settings Settings)
+        public static DateTime DailyFormat(DateTime Current, Settings Settings)
         {
             int day = Current.Day;
             Current = Current.AddSeconds(Settings.TimePeriod);

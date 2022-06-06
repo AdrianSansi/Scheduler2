@@ -31,18 +31,18 @@ namespace Scheduler2
 
         public void NextDate(Settings Settings)
         {
-            if (numberOfDates == 0)
+            if (NumberOfDates == 0)
             {
-                numberOfDates++; 
-                
-                timeDate = timeDate + startTime.TimeOfDay;
+                NumberOfDates++; 
+                //Lo correcto sería añadir un método para validar el día actual, si es válido hago esto y si no, NextDay
+                Settings.TimeDate = Settings.TimeDate + Settings.StartTime.TimeOfDay;
             } else
             {
-                DateTime candidate = calculateDate();
-                if (candidate <=  endDate.AddDays(1))
+                DateTime candidate = CalculateDate(Settings);
+                if (candidate <=  Settings.EndDate.AddDays(1)) //Cambiar EndDate para que sea la fecha introducida y la hora final
                 {
-                    timeDate = candidate;
-                    numberOfDates++;
+                    Settings.TimeDate = candidate;
+                    NumberOfDates++;
                 }
                 else
                 {
@@ -58,49 +58,50 @@ namespace Scheduler2
 
         public DateTime CalculateDate(Settings Settings)
         {
-            if(format == 2)
+            switch (Settings.Format)
             {
-                createListOfDays();
+                case Format.Weekly:
+                    CreateListOfDays(Settings);
 
-                if (DateTime.Compare(startTime, endTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
-                {
-                    return timeDate.AddDays(nextDayF2());
-                }
-                else
-                {
-                    switch (periodType)
+                    if (DateTime.Compare(Settings.StartTime, Settings.EndTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
                     {
-                        case PeriodType.Minutes:
-                            return nextMinute(timeDate);
-                        case PeriodType.Seconds:
-                            return nextSecond(timeDate);
-                        default:
-                            return nextHour(timeDate);
+                        return Settings.TimeDate.AddDays(NextDay.WeeklyFormat(Settings));
                     }
-                }
-            }
-            else
-            {
-                if (DateTime.Compare(startTime, endTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
-                {
-                    return nextDayF1(timeDate);
-                }
-                else
-                {
-                    switch (periodType)
+                    else
                     {
-                        case PeriodType.Minutes:
-                            return nextMinuteF1(timeDate);
-                        case PeriodType.Seconds:
-                            return nextSecondF1(timeDate);
-                        default:
-                            return nextHourF1(timeDate);
+                        switch (Settings.PeriodType)
+                        {
+                            case PeriodType.Minutes:
+                                return NextMinute.WeeklyFormat(Settings.TimeDate, Settings);
+                            case PeriodType.Seconds:
+                                return NextSecond.WeeklyFormat(Settings.TimeDate, Settings);
+                            default:
+                                return NextHour.WeeklyFormat(Settings.TimeDate, Settings);
+                        }
                     }
-                }
+                    break;
+                default:
+                    if (DateTime.Compare(Settings.StartTime, Settings.EndTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
+                    {
+                        return NextDay.DailyFormat(Settings.TimeDate, Settings);
+                    }
+                    else
+                    {
+                        switch (Settings.PeriodType)
+                        {
+                            case PeriodType.Minutes:
+                                return NextMinute.DailyFormat(Settings.TimeDate, Settings);
+                            case PeriodType.Seconds:
+                                return NextSecond.DailyFormat(Settings.TimeDate, Settings);
+                            default:
+                                return NextHour.DailyFormat(Settings.TimeDate, Settings);
+                        }
+                    }
             }
-            
-
         }
+
+
+        //-------------------------------------------------------------------------------------------------------------
 
         public DateTime NextDayDailyFormat(DateTime current, Settings Settings)
         {
@@ -150,22 +151,7 @@ namespace Scheduler2
         }
        
 
-        public DateTime NextHour(DateTime current, Settings Settings)
-        {
-            int day = current.Day;
-            current = current.AddHours(timePeriod);
-            if(current.Day != day | current.TimeOfDay>endTime.TimeOfDay)
-            {
-                current = current - current.TimeOfDay;
-                current = current + startTime.TimeOfDay;
-                return current.AddDays(nextDayF2());
-            }
-            else
-            {
-                return current;
-            }
-            
-        }
+        
 
         public DateTime nextHourF1(DateTime current, Settings Settings)
         {

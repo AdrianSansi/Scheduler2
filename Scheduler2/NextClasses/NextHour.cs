@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Scheduler2
+﻿namespace Scheduler2
 {
-    internal class NextMinute
+    public class NextHour
     {
-        public DateTime WeeklyFormat(DateTime Current, Settings Settings)
+        public static DateTime WeeklyFormat(DateTime Current, Settings Settings)
         {
             int day = Current.Day;
-            Current = Current.AddMinutes(Settings.TimePeriod);
+            Current = Current.AddHours(Settings.TimePeriod);
             if (Current.Day != day | Current.TimeOfDay > Settings.EndTime.TimeOfDay)
             {
                 Current = Current - Current.TimeOfDay;
                 Current = Current + Settings.StartTime.TimeOfDay;
-
                 return Current.AddDays(NextDay.WeeklyFormat(Settings));
             }
             else
@@ -25,10 +18,10 @@ namespace Scheduler2
             }
         }
 
-        public DateTime DailyFormat(DateTime Current, Settings Settings)
+        public static DateTime DailyFormat(DateTime Current, Settings Settings)
         {
             int day = Current.Day;
-            Current = Current.AddMinutes(Settings.TimePeriod);
+            Current = Current.AddHours(Settings.TimePeriod);
             if (Current.Day != day | Current.TimeOfDay > Settings.EndTime.TimeOfDay)
             {
                 Current = Current - Current.TimeOfDay;
@@ -39,7 +32,6 @@ namespace Scheduler2
             {
                 return Current;
             }
-
         }
     }
 }
