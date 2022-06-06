@@ -7,53 +7,29 @@ using System.Threading.Tasks;
 namespace Scheduler2
 {
     public class Schedule
-    {
-        public DateTime currentDate { get; set; } = new DateTime();
-
-        public DateTime timeDate { get; set; } = new DateTime();
-        public DateTime endDate { get; set; } = new DateTime();
-        
-        
-        public DateTime endTime { get; set; } = new DateTime(1900, 1, 1, 0, 0, 0);
-        public DateTime startTime { get; set; } = new DateTime(1900, 1, 1, 0, 0, 0);   
-
-        public bool monday { get; set; } = false; public bool tuesday { get; set; } = false; public bool wednesday { get; set; } = false;
-        public bool thursday { get; set; } = false; public bool friday { get; set; } = false; public bool saturday { get; set; } = false;
-        public bool sunday { get; set; } = false;   
-
-        List<int> weekDays = new List<int>();
-
-        public int weekPeriod { get; set; } = 1;
-        public int timePeriod { get; set; } = 0;
-        public PeriodType PeriodType { get; set; } = PeriodType.Hours; 
-        public int format { get; set; } = 1; // 2 if days are selected, 1 if not
-        //public Format Format{ get; set;} = Format.daily
-        public int numberOfDates { get; set; } = 0;
-        public int dayPeriod { get; set; } = 1;
-        public int dayPeriodType { get; set; } = 1; //1 if days, 2 if weeks, 3 if months 
-
-        public Schedule(DateTime current)
-        {
-            this.currentDate = current;
-            this.timeDate = current;
-            this.endDate = DateTime.MaxValue.AddDays(-1);
-            
+    {    
+        public int NumberOfDates { get; set; } = 0;
+         
+        public Schedule(Settings Settings)
+        {                      
 
         }
   
-        public void createListOfDays()
+        public void CreateListOfDays(Settings Settings)
         {
-            if (sunday) weekDays.Add(0);
-            if (monday) weekDays.Add(1);
-            if(tuesday) weekDays.Add(2);
-            if(wednesday) weekDays.Add(3);
-            if(thursday) weekDays.Add(4);
-            if(friday) weekDays.Add(5);
-            if(saturday) weekDays.Add(6);
-            
+            Settings.WeekSettings.WeekDays.Clear();
+                        
+            if (Settings.WeekSettings.Sunday) Settings.WeekSettings.WeekDays.Add(1);
+            if (Settings.WeekSettings.Sunday) Settings.WeekSettings.WeekDays.Add(2);
+            if (Settings.WeekSettings.Sunday) Settings.WeekSettings.WeekDays.Add(3);
+            if (Settings.WeekSettings.Sunday) Settings.WeekSettings.WeekDays.Add(4);
+            if (Settings.WeekSettings.Sunday) Settings.WeekSettings.WeekDays.Add(5);
+            if (Settings.WeekSettings.Sunday) Settings.WeekSettings.WeekDays.Add(6);
+            if (Settings.WeekSettings.Sunday) Settings.WeekSettings.WeekDays.Add(7);
+
         }
 
-        public void nextDate()
+        public void NextDate()
         {
             if (numberOfDates == 0)
             {
@@ -77,7 +53,7 @@ namespace Scheduler2
             
         } 
 
-       public DateTime nextDayF1(DateTime current)
+       public DateTime NextDayDailyFormat(DateTime current)
         {
             switch (dayPeriodType)
             {
@@ -94,7 +70,7 @@ namespace Scheduler2
         }
         
 
-        public DateTime calculateDate()
+        public DateTime CalculateDate()
         {
             if(format == 2)
             {
@@ -142,7 +118,7 @@ namespace Scheduler2
         //
         // Retorna la diferencia entre el siguiente día y el actual.
         //
-        public int nextDayF2()
+        public int NextDayWeeklyFormat()
         {
             int weekDay = (int)timeDate.DayOfWeek;
             int auxDay = weekDay;
@@ -172,7 +148,7 @@ namespace Scheduler2
         }
        
 
-        public DateTime nextHour(DateTime current)
+        public DateTime NextHour(DateTime current)
         {
             int day = current.Day;
             current = current.AddHours(timePeriod);

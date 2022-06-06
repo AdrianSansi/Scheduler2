@@ -8,15 +8,14 @@ namespace Scheduler2
 {
     public class WeekSettings
     {
-        public bool monday { get; set; } = false;
-        public bool tuesday { get; set; } = false; 
-        public bool wednesday { get; set; } = false;
-        public bool thursday { get; set; } = false; 
-        public bool friday { get; set; } = false; 
-        public bool saturday { get; set; } = false;
-        public bool sunday { get; set; } = false;
-
-        List<int> weekDays = new List<int>();
+        public bool Monday { get; set; } = false;
+        public bool Tuesday { get; set; } = false; 
+        public bool Wednesday { get; set; } = false;
+        public bool Thursday { get; set; } = false; 
+        public bool Friday { get; set; } = false; 
+        public bool Saturday { get; set; } = false;
+        public bool Sunday { get; set; } = false;
+        public List<int> WeekDays { get; set; } = new List<int>();
 
         public WeekSettings()
         {

@@ -8,25 +8,20 @@ namespace Scheduler2
 {
     public class Settings
     {
-        public DateTime currentDate { get; set; } = new DateTime();
+        public DateTime CurrentDate { get; set; } = new DateTime();
 
-        public DateTime timeDate { get; set; } = new DateTime();
-        public DateTime endDate { get; set; } = new DateTime();
+        public DateTime TimeDate { get; set; } = new DateTime();
+        public DateTime EndDate { get; set; } = new DateTime();
 
-        public DateTime endTime { get; set; } = new DateTime(1900, 1, 1, 0, 0, 0);
-        public DateTime startTime { get; set; } = new DateTime(1900, 1, 1, 0, 0, 0);
-
-        public WeekSettings weekSettings { get; set; } = new WeekSettings();
-
-        List<int> weekDays = new List<int>();
-
-        public int weekPeriod { get; set; } = 1;
-        public int timePeriod { get; set; } = 0;
+        public DateTime EndTime { get; set; } = new DateTime(1900, 1, 1, 0, 0, 0);
+        public DateTime StartTime { get; set; } = new DateTime(1900, 1, 1, 0, 0, 0);
+        public WeekSettings WeekSettings { get; set; } = new WeekSettings();
+        public int WeekPeriod { get; set; } = 1;
+        public int TimePeriod { get; set; } = 0;
         public PeriodType PeriodType { get; set; } = PeriodType.Hours;
 
         public Format Format { get; set; } = Format.Daily;
-        public int numberOfDates { get; set; } = 0;
-        public int dayPeriod { get; set; } = 1;
+        public int DayPeriod { get; set; } = 1;
         public DaysPeriodType DaysPeriodType{get; set; } = DaysPeriodType.Days;
        
         public Settings()
