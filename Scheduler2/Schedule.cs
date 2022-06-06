@@ -29,7 +29,7 @@ namespace Scheduler2
 
         }
 
-        public void NextDate()
+        public void NextDate(Settings Settings)
         {
             if (numberOfDates == 0)
             {
@@ -53,24 +53,10 @@ namespace Scheduler2
             
         } 
 
-       public DateTime NextDayDailyFormat(DateTime current)
-        {
-            switch (dayPeriodType)
-            {
-                case 1:
-                    return current.AddDays(dayPeriod);
-                case 2:
-                    return current.AddDays(7*dayPeriod);
-                case 3:
-                    return current.AddMonths(dayPeriod);
-                default:
-                    return current.AddDays(dayPeriod);
-
-            }
-        }
+  
         
 
-        public DateTime CalculateDate()
+        public DateTime CalculateDate(Settings Settings)
         {
             if(format == 2)
             {
@@ -115,10 +101,26 @@ namespace Scheduler2
             
 
         }
+
+        public DateTime NextDayDailyFormat(DateTime current, Settings Settings)
+        {
+            switch (dayPeriodType)
+            {
+                case 1:
+                    return current.AddDays(dayPeriod);
+                case 2:
+                    return current.AddDays(7 * dayPeriod);
+                case 3:
+                    return current.AddMonths(dayPeriod);
+                default:
+                    return current.AddDays(dayPeriod);
+
+            }
+        }
         //
         // Retorna la diferencia entre el siguiente día y el actual.
         //
-        public int NextDayWeeklyFormat()
+        public int NextDayWeeklyFormat(Settings Settings)
         {
             int weekDay = (int)timeDate.DayOfWeek;
             int auxDay = weekDay;
@@ -148,7 +150,7 @@ namespace Scheduler2
         }
        
 
-        public DateTime NextHour(DateTime current)
+        public DateTime NextHour(DateTime current, Settings Settings)
         {
             int day = current.Day;
             current = current.AddHours(timePeriod);
@@ -165,7 +167,24 @@ namespace Scheduler2
             
         }
 
-        public DateTime nextMinute(DateTime current)
+        public DateTime nextHourF1(DateTime current, Settings Settings)
+        {
+            int day = current.Day;
+            current = current.AddHours(timePeriod);
+            if (current.Day != day | current.TimeOfDay > endTime.TimeOfDay)
+            {
+                current = current - current.TimeOfDay;
+                current = current + startTime.TimeOfDay;
+                return nextDayF1(current);
+            }
+            else
+            {
+                return current;
+            }
+        }
+
+
+        public DateTime nextMinute(DateTime current, Settings Settings)
         {
             int day = current.Day;
             current = current.AddMinutes(timePeriod);
@@ -182,7 +201,7 @@ namespace Scheduler2
             }
         }
 
-        public DateTime nextSecond(DateTime current)
+        public DateTime nextSecond(DateTime current, Settings Settings)
         {
             int day = current.Day;
             current = current.AddSeconds(timePeriod);
@@ -199,24 +218,10 @@ namespace Scheduler2
             }
         }
 
-        public DateTime nextHourF1(DateTime current)
-        {
-            int day = current.Day;
-            current = current.AddHours(timePeriod);
-            if (current.Day != day | current.TimeOfDay > endTime.TimeOfDay)
-            {
-                current = current - current.TimeOfDay;
-                current = current + startTime.TimeOfDay;
-                return nextDayF1(current);
-            }
-            else
-            {
-                return current;
-            }
-
+        
         }
 
-        public DateTime nextMinuteF1(DateTime current)
+        public DateTime nextMinuteF1(DateTime current, Settings Settings)
         {
             int day = current.Day;
             current = current.AddMinutes(timePeriod);
@@ -233,7 +238,7 @@ namespace Scheduler2
 
         }
 
-        public DateTime nextSecondF1(DateTime current)
+        public DateTime nextSecondF1(DateTime current, Settings Settings)
         {
             int day = current.Day;
             current = current.AddSeconds(timePeriod);
