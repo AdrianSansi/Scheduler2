@@ -38,29 +38,39 @@ namespace Testing
         [Fact]
         public void Test_three_days_a_week_period_2_weeks()
         {
-            Settings Data = new Settings();
-            Data.TimeDate= new DateTime(2022, 6, 7);
-            Data.Format = Format.Weekly;
+            //Arrange
+            Settings Data = new Settings
+            {
+                TimeDate = new DateTime(2022, 6, 7),
+                Format = Format.Weekly,
+                WeekPeriod = 2
+            };
             Data.WeekSettings.Monday = true;
             Data.WeekSettings.Wednesday = true;
             Data.WeekSettings.Sunday = true;
-            Data.WeekPeriod = 2;
             Schedule schedule = new Schedule(Data);
-            DateTime[] expectedValue = new DateTime[5];
+            
             DateTime[] actualValue = new DateTime[5];
-            expectedValue[0] = new DateTime(2022, 6, 8);
-            expectedValue[1] = new DateTime(2022, 6, 12);
-            expectedValue[2] = new DateTime(2022, 6, 20);
-            expectedValue[3] = new DateTime(2022, 6, 22);
-            expectedValue[4] = new DateTime(2022, 6, 26);
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2022, 6, 8),
+                new DateTime(2022, 6, 12),
+                new DateTime(2022, 6, 20),
+                new DateTime(2022, 6, 22),
+                new DateTime(2022, 6, 26)
+            };
             int i = 0;
             while (i < 5)
             {
                 schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
-                actualValue[i].Should().Be(expectedValue[i]);
                 i++;
             }            
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
         }
 
         [Fact]

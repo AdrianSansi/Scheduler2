@@ -115,5 +115,11 @@ namespace Scheduler2
                     }
             }
         }
+
+        public String description()
+        {
+            //Hacer descripción a partir de los settings
+            return "Occurs...";
+        }
     }
 }
