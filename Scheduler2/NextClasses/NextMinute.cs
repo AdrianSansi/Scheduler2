@@ -9,8 +9,12 @@ namespace Scheduler2
             DateTime auxiliar = Current.AddMinutes(Settings.TimePeriod);
             if (auxiliar.Day != day | auxiliar.TimeOfDay > Settings.EndTime.TimeOfDay)
             {
-                Current = Current - Current.TimeOfDay;
-                Current = Current + Settings.StartTime.TimeOfDay;
+                if (NextDay.WeeklyFormat(Settings) == 0)
+                {
+                    return Current;
+                }
+                Current -= Current.TimeOfDay;
+                Current += Settings.StartTime.TimeOfDay;
                 return Current.AddDays(NextDay.WeeklyFormat(Settings));
             }
             else
@@ -25,8 +29,8 @@ namespace Scheduler2
             DateTime auxiliar = Current.AddMinutes(Settings.TimePeriod);
             if (auxiliar.Day != day | auxiliar.TimeOfDay > Settings.EndTime.TimeOfDay)
             {
-                Current = Current - Current.TimeOfDay;
-                Current = Current + Settings.StartTime.TimeOfDay;
+                Current -= Current.TimeOfDay;
+                Current += Settings.StartTime.TimeOfDay;
                 return NextDay.DailyFormat(Current, Settings);
             }
             else

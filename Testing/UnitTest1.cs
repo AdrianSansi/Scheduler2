@@ -464,5 +464,39 @@ namespace Testing
                 i++;
             }
         }
+        [Fact]
+        public void Weekly_but_no_valid_day()
+        {
+            Settings Data = new Settings();
+            Data.TimeDate = new DateTime(2022, 6, 12);
+            Data.StartTime = new DateTime(200, 1, 1, 10, 0, 0);
+            Data.EndTime = new DateTime(200, 1, 1, 10, 1, 7);
+            Data.Format = Format.Weekly;
+            Data.WeekPeriod = 2;
+            Data.PeriodType = PeriodType.Seconds;
+            Data.TimePeriod = 30;
+
+            Schedule schedule = new Schedule(Data);
+            DateTime[] expectedValue = new DateTime[11];
+            DateTime[] actualValue = new DateTime[11];
+
+
+
+            
+            expectedValue[0] = new DateTime(2022, 6, 12, 10, 0, 30);
+            expectedValue[1] = new DateTime(2022, 6, 12, 10, 1, 0);
+            expectedValue[2] = new DateTime(2022, 6, 12, 10, 1, 0);
+            
+
+
+            int i = 0;
+            while (i < 3)
+            {
+                schedule.NextDate(Data);
+                actualValue[i] = Data.TimeDate;
+                actualValue[i].Should().Be(expectedValue[i]);
+                i++;
+            }
+        }
     }
 }
