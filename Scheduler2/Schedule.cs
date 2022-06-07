@@ -116,10 +116,16 @@ namespace Scheduler2
             }
         }
 
-        public String description()
+        public String description(Settings Settings)
         {
+            String description = "Occurs ";
+            if(Settings.Format == Format.Weekly)
+            {
+                description += "every " + Settings.WeekPeriod + " weeks";
+
+            }
             //Hacer descripción a partir de los settings
-            return "Occurs...";
+            return description;
         }
     }
 }
