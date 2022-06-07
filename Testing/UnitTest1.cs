@@ -212,5 +212,47 @@ namespace Testing
             }
         }
 
+        [Fact]
+        public void Test_once_a_month_from_10am_to_end_of_day_every_5_hours()
+        {
+            Settings Data = new Settings();
+            Data.TimeDate = new DateTime(2022, 6, 12);
+            Data.StartTime = new DateTime(200, 1, 1, 10, 0, 0);
+            Data.EndTime = new DateTime(200, 1, 1, 23, 59, 59);
+
+            Data.Format = Format.Daily;
+            
+            Data.PeriodType = PeriodType.Hours;
+            Data.TimePeriod = 5;
+            Data.DaysPeriodType = DaysPeriodType.Months;
+            Data.DayPeriod = 1;
+
+            Schedule schedule = new Schedule(Data);
+            DateTime[] expectedValue = new DateTime[11];
+            DateTime[] actualValue = new DateTime[11];
+
+
+
+            expectedValue[0] = new DateTime(2022, 6, 12, 10, 0, 0);
+            expectedValue[1] = new DateTime(2022, 6, 12, 15, 0, 0);
+            expectedValue[2] = new DateTime(2022, 6, 12, 20, 0, 0);
+            expectedValue[3] = new DateTime(2022, 7, 12, 10, 0, 0);
+            expectedValue[4] = new DateTime(2022, 7, 12, 15, 0, 0);
+            expectedValue[5] = new DateTime(2022, 7, 12, 20, 0, 0);
+            expectedValue[6] = new DateTime(2022, 8, 12, 10, 0, 0);
+            expectedValue[7] = new DateTime(2022, 8, 12, 15, 0, 0);
+            expectedValue[8] = new DateTime(2022, 8, 12, 20, 0, 0);
+
+            int i = 0;
+            while (i < 8)
+            {
+                schedule.NextDate(Data);
+                actualValue[i] = Data.TimeDate;
+                actualValue[i].Should().Be(expectedValue[i]);
+                i++;
+            }
+        }
+
+
     }
 }

@@ -5,8 +5,8 @@
         public static DateTime WeeklyFormat(DateTime Current, Settings Settings)
         {
             int day = Current.Day;
-            Current = Current.AddHours(Settings.TimePeriod);
-            if (Current.Day != day | Current.TimeOfDay > Settings.EndTime.TimeOfDay)
+            DateTime auxiliar = Current.AddHours(Settings.TimePeriod);
+            if (auxiliar.Day != day | auxiliar.TimeOfDay > Settings.EndTime.TimeOfDay)
             {
                 Current = Current - Current.TimeOfDay;
                 Current = Current + Settings.StartTime.TimeOfDay;
@@ -14,15 +14,15 @@
             }
             else
             {
-                return Current;
+                return auxiliar;
             }
         }
 
         public static DateTime DailyFormat(DateTime Current, Settings Settings)
         {
             int day = Current.Day;
-            Current = Current.AddHours(Settings.TimePeriod);
-            if (Current.Day != day | Current.TimeOfDay > Settings.EndTime.TimeOfDay)
+            DateTime auxiliar = Current.AddHours(Settings.TimePeriod);
+            if (auxiliar.Day != day | auxiliar.TimeOfDay > Settings.EndTime.TimeOfDay)
             {
                 Current = Current - Current.TimeOfDay;
                 Current = Current + Settings.StartTime.TimeOfDay;
@@ -30,7 +30,7 @@
             }
             else
             {
-                return Current;
+                return auxiliar;
             }
         }
     }

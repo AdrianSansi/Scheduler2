@@ -6,25 +6,24 @@ namespace Scheduler2
         public static DateTime WeeklyFormat(DateTime Current, Settings Settings)
         {
             int day = Current.Day;
-            Current = Current.AddMinutes(Settings.TimePeriod);
-            if (Current.Day != day | Current.TimeOfDay > Settings.EndTime.TimeOfDay)
+            DateTime auxiliar = Current.AddMinutes(Settings.TimePeriod);
+            if (auxiliar.Day != day | auxiliar.TimeOfDay > Settings.EndTime.TimeOfDay)
             {
                 Current = Current - Current.TimeOfDay;
                 Current = Current + Settings.StartTime.TimeOfDay;
-
                 return Current.AddDays(NextDay.WeeklyFormat(Settings));
             }
             else
             {
-                return Current;
+                return auxiliar;
             }
         }
 
         public static DateTime DailyFormat(DateTime Current, Settings Settings)
         {
             int day = Current.Day;
-            Current = Current.AddMinutes(Settings.TimePeriod);
-            if (Current.Day != day | Current.TimeOfDay > Settings.EndTime.TimeOfDay)
+            DateTime auxiliar = Current.AddMinutes(Settings.TimePeriod);
+            if (auxiliar.Day != day | auxiliar.TimeOfDay > Settings.EndTime.TimeOfDay)
             {
                 Current = Current - Current.TimeOfDay;
                 Current = Current + Settings.StartTime.TimeOfDay;
@@ -32,7 +31,7 @@ namespace Scheduler2
             }
             else
             {
-                return Current;
+                return auxiliar;
             }
 
         }
