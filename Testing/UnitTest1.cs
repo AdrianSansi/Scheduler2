@@ -253,6 +253,187 @@ namespace Testing
             }
         }
 
+        [Fact]
+        public void Test_once_a_year_from_15am_to_16am_every_27minutes()
+        {
+            Settings Data = new Settings();
+            Data.TimeDate = new DateTime(2022, 6, 14);
+            Data.StartTime = new DateTime(200, 1, 1, 15, 0, 0);
+            Data.EndTime = new DateTime(200, 1, 1, 16, 0, 0);
 
+            Data.Format = Format.Daily;
+
+            Data.PeriodType = PeriodType.Minutes;
+            Data.TimePeriod = 27;
+            Data.DaysPeriodType = DaysPeriodType.Years;
+            Data.DayPeriod = 1;
+
+            Schedule schedule = new Schedule(Data);
+            DateTime[] expectedValue = new DateTime[11];
+            DateTime[] actualValue = new DateTime[11];
+
+
+
+            expectedValue[0] = new DateTime(2022, 6, 14, 15, 0, 0);
+            expectedValue[1] = new DateTime(2022, 6, 14, 15, 27, 0);
+            expectedValue[2] = new DateTime(2022, 6, 14, 15, 54, 0);
+            expectedValue[3] = new DateTime(2023, 6, 14, 15, 0, 0);
+            expectedValue[4] = new DateTime(2023, 6, 14, 15, 27, 0);
+            expectedValue[5] = new DateTime(2023, 6, 14, 15, 54, 0);
+            expectedValue[6] = new DateTime(2024, 6, 14, 15, 0, 0);
+            expectedValue[7] = new DateTime(2024, 6, 14, 15, 27, 0);
+            expectedValue[8] = new DateTime(2024, 6, 14, 15, 54, 0);
+            
+
+            int i = 0;
+            while (i < 9)
+            {
+                schedule.NextDate(Data);
+                actualValue[i] = Data.TimeDate;
+                actualValue[i].Should().Be(expectedValue[i]);
+                i++;
+            }
+        }
+        [Fact]
+        public void Test_once_a_day_once_a_week()
+        {
+            Settings Data = new Settings();
+            Data.TimeDate = new DateTime(2022, 6, 14);
+            Data.StartTime = new DateTime(200, 1, 1, 15, 0, 0);
+            Data.EndTime = new DateTime(200, 1, 1, 15, 0, 0);
+
+            Data.Format = Format.Daily;
+            Data.DaysPeriodType = DaysPeriodType.Weeks;
+            Data.DayPeriod = 1;
+
+            Schedule schedule = new Schedule(Data);
+            DateTime[] expectedValue = new DateTime[11];
+            DateTime[] actualValue = new DateTime[11];
+
+            expectedValue[0] = new DateTime(2022, 6, 14, 15, 0, 0);
+            expectedValue[1] = new DateTime(2022, 6, 21, 15, 0, 0);
+            expectedValue[2] = new DateTime(2022, 6, 28, 15, 0, 0);
+            expectedValue[3] = new DateTime(2022, 7, 5, 15, 0, 0);
+            expectedValue[4] = new DateTime(2022, 7, 12, 15, 0, 0);
+            expectedValue[5] = new DateTime(2022, 7, 19, 15, 0, 0);
+            expectedValue[6] = new DateTime(2022, 7, 26, 15, 0, 0);
+            expectedValue[7] = new DateTime(2022, 8, 2, 15, 0, 0);
+            expectedValue[8] = new DateTime(2022, 8, 9, 15, 0, 0);
+
+
+            int i = 0;
+            while (i < 9)
+            {
+                schedule.NextDate(Data);
+                actualValue[i] = Data.TimeDate;
+                actualValue[i].Should().Be(expectedValue[i]);
+                i++;
+            }
+        } 
+        [Fact]
+        public void Test_once_a_day_every_8_days()
+        {
+            Settings Data = new Settings();
+            Data.TimeDate = new DateTime(2022, 6, 14);
+            Data.StartTime = new DateTime(200, 1, 1, 15, 0, 0);
+            Data.EndTime = new DateTime(200, 1, 1, 15, 0, 0);
+
+            Data.Format = Format.Daily;
+            Data.DaysPeriodType = DaysPeriodType.Days;
+            Data.DayPeriod = 8;
+
+            Schedule schedule = new Schedule(Data);
+            DateTime[] expectedValue = new DateTime[11];
+            DateTime[] actualValue = new DateTime[11];
+
+            expectedValue[0] = new DateTime(2022, 6, 14, 15, 0, 0);
+            expectedValue[1] = new DateTime(2022, 6, 22, 15, 0, 0);
+            expectedValue[2] = new DateTime(2022, 6, 30, 15, 0, 0);
+            expectedValue[3] = new DateTime(2022, 7, 8, 15, 0, 0);
+            expectedValue[4] = new DateTime(2022, 7, 16, 15, 0, 0);
+            expectedValue[5] = new DateTime(2022, 7, 24, 15, 0, 0);
+            
+            int i = 0;
+            while (i < 6)
+            {
+                schedule.NextDate(Data);
+                actualValue[i] = Data.TimeDate;
+                actualValue[i].Should().Be(expectedValue[i]);
+                i++;
+            }
+        }
+        [Fact]
+        public void Test_once_a_day_everyday_till_endDate()
+        {
+            Settings Data = new Settings();
+            Data.TimeDate = new DateTime(2022, 6, 14);
+            Data.EndDate = new DateTime(2022, 6, 18);
+            Data.StartTime = new DateTime(200, 1, 1, 15, 0, 0);
+            Data.EndTime = new DateTime(200, 1, 1, 15, 0, 0);
+
+            Data.Format = Format.Daily;
+            Data.DaysPeriodType = DaysPeriodType.Days;
+            Data.DayPeriod = 1;
+
+            Schedule schedule = new Schedule(Data);
+            DateTime[] expectedValue = new DateTime[11];
+            DateTime[] actualValue = new DateTime[11];
+
+            expectedValue[0] = new DateTime(2022, 6, 14, 15, 0, 0);
+            expectedValue[1] = new DateTime(2022, 6, 15, 15, 0, 0);
+            expectedValue[2] = new DateTime(2022, 6, 16, 15, 0, 0);
+            expectedValue[3] = new DateTime(2022, 6, 17, 15, 0, 0);
+            expectedValue[4] = new DateTime(2022, 6, 18, 15, 0, 0);
+            expectedValue[5] = new DateTime(2022, 6, 18, 15, 0, 0);
+            expectedValue[6] = new DateTime(2022, 6, 18, 15, 0, 0);
+
+            int i = 0;
+            while (i < 7)
+            {
+                schedule.NextDate(Data);
+                actualValue[i] = Data.TimeDate;
+                actualValue[i].Should().Be(expectedValue[i]);
+                i++;
+            }
+        }
+        [Fact]
+        public void Test_just_one_day_every_4hours_till_end_of_the_day()
+        {
+            Settings Data = new Settings();
+            Data.TimeDate = new DateTime(2022, 6, 12);
+            Data.EndDate = new DateTime(2022, 6, 12);
+            Data.StartTime = new DateTime(200, 1, 1, 10, 0, 0);
+            Data.EndTime = new DateTime(200, 1, 1, 23, 59, 59);
+
+            Data.Format = Format.Daily;
+
+            Data.PeriodType = PeriodType.Hours;
+            Data.TimePeriod = 4;
+            Data.DaysPeriodType = DaysPeriodType.Months;
+            Data.DayPeriod = 1;
+
+            Schedule schedule = new Schedule(Data);
+            DateTime[] expectedValue = new DateTime[11];
+            DateTime[] actualValue = new DateTime[11];
+
+
+
+            expectedValue[0] = new DateTime(2022, 6, 12, 10, 0, 0);
+            expectedValue[1] = new DateTime(2022, 6, 12, 14, 0, 0);
+            expectedValue[2] = new DateTime(2022, 6, 12, 18, 0, 0);
+            expectedValue[3] = new DateTime(2022, 6, 12, 22, 0, 0);
+            expectedValue[4] = new DateTime(2022, 6, 12, 22, 0, 0);
+            expectedValue[5] = new DateTime(2022, 6, 12, 22, 0, 0);
+            expectedValue[6] = new DateTime(2022, 6, 12, 22, 0, 0);
+            
+            int i = 0;
+            while (i < 7)
+            {
+                schedule.NextDate(Data);
+                actualValue[i] = Data.TimeDate;
+                actualValue[i].Should().Be(expectedValue[i]);
+                i++;
+            }
+        }
     }
 }
