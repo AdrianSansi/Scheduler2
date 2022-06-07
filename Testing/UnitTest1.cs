@@ -135,5 +135,82 @@ namespace Testing
                 i++;
             }
         }
+        [Fact]
+        public void Test_weekly_everyday_period_2_30minutes_from_10am_to_11am()
+        {
+            Settings Data = new Settings();
+            Data.TimeDate = new DateTime(2022, 6, 12);
+            Data.StartTime = new DateTime(200, 1, 1, 10, 1, 1);
+            Data.EndTime = new DateTime(200, 1, 1, 11, 1, 1);
+            Data.Format = Format.Weekly;
+            Data.WeekPeriod = 2;
+            Data.PeriodType = PeriodType.Minutes;
+            Data.TimePeriod = 30;
+            Schedule schedule = new Schedule(Data);
+            DateTime[] expectedValue = new DateTime[11];
+            DateTime[] actualValue = new DateTime[11];
+            Data.WeekSettings.Thursday = true;
+            Data.WeekSettings.Monday = true;
+            Data.WeekSettings.Tuesday = true;
+            Data.WeekSettings.Wednesday = true;
+            Data.WeekSettings.Friday = true;
+            Data.WeekSettings.Saturday = true;
+            Data.WeekSettings.Sunday = true;
+            expectedValue[0] = new DateTime(2022, 6, 12, 10, 1, 1);
+            expectedValue[1] = new DateTime(2022, 6, 12, 10, 31, 1);
+            expectedValue[2] = new DateTime(2022, 6, 12, 11, 1, 1);
+            expectedValue[3] = new DateTime(2022, 6, 20, 10, 1, 1);
+            expectedValue[4] = new DateTime(2022, 6, 20, 10, 31, 1);
+            expectedValue[5] = new DateTime(2022, 6, 20, 11, 1, 1);
+
+            int i = 0;
+            while (i < 6)
+            {
+                schedule.NextDate(Data);
+                actualValue[i] = Data.TimeDate;
+                actualValue[i].Should().Be(expectedValue[i]);
+                i++;
+            }
+        }
+
+        [Fact]
+        public void Test_weekly_sundays_period_2_30seconds_from_10am_to_10_01()
+        {
+            Settings Data = new Settings();
+            Data.TimeDate = new DateTime(2022, 6, 12);
+            Data.StartTime = new DateTime(200, 1, 1, 10, 0, 0);
+            Data.EndTime = new DateTime(200, 1, 1, 10, 1, 7);
+            Data.Format = Format.Weekly;
+            Data.WeekPeriod = 2;
+            Data.PeriodType = PeriodType.Seconds;
+            Data.TimePeriod = 30;
+            Data.WeekSettings.Sunday = true;
+
+            Schedule schedule = new Schedule(Data);
+            DateTime[] expectedValue = new DateTime[11];
+            DateTime[] actualValue = new DateTime[11];
+            
+            
+            
+            expectedValue[0] = new DateTime(2022, 6, 12, 10, 0, 0);
+            expectedValue[1] = new DateTime(2022, 6, 12, 10, 0, 30);
+            expectedValue[2] = new DateTime(2022, 6, 12, 10, 1, 0);
+            expectedValue[3] = new DateTime(2022, 6, 26, 10, 0, 0);
+            expectedValue[4] = new DateTime(2022, 6, 26, 10, 0, 30);
+            expectedValue[5] = new DateTime(2022, 6, 26, 10, 1, 0);
+            expectedValue[6] = new DateTime(2022, 7, 10, 10, 0, 0);
+            expectedValue[7] = new DateTime(2022, 7, 10, 10, 0, 30);
+            
+
+            int i = 0;
+            while (i < 8)
+            {
+                schedule.NextDate(Data);
+                actualValue[i] = Data.TimeDate;
+                actualValue[i].Should().Be(expectedValue[i]);
+                i++;
+            }
+        }
+
     }
 }

@@ -25,15 +25,17 @@
             if (weekDay == 0) weekDay = 7;
             int auxDay = weekDay;
             int index;
+            int i = 0;
             weekDay = (weekDay + 1) % 7;
             if (weekDay == 0) weekDay = 7;
-            while (auxDay != weekDay)
+            while (i<8)
             {
+                i++;
                 index = Settings.WeekSettings.WeekDays.IndexOf(weekDay);
                 if (index == -1) //El siguiente día no está marcado
                 {
                     weekDay = (weekDay + 1) % 7;
-                    if (weekDay == 0) weekDay = 7;//Paso al siguiente
+                    if (weekDay == 0) weekDay = 7;  //Paso al siguiente
                 }
                 else //Si está marcado el siguiente, devuelvo ese menos la diferencia con el actual para sumarla luego
                 {
