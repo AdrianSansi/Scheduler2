@@ -22,25 +22,28 @@
         public static int WeeklyFormat(Settings Settings)
         {
             int weekDay = (int)Settings.TimeDate.DayOfWeek;
+            if (weekDay == 0) weekDay = 7;
             int auxDay = weekDay;
             int index;
             weekDay = (weekDay + 1) % 7;
+            if (weekDay == 0) weekDay = 7;
             while (auxDay != weekDay)
             {
                 index = Settings.WeekSettings.WeekDays.IndexOf(weekDay);
                 if (index == -1) //El siguiente día no está marcado
                 {
-                    weekDay = (weekDay + 1) % 7; //Paso al siguiente
+                    weekDay = (weekDay + 1) % 7;
+                    if (weekDay == 0) weekDay = 7;//Paso al siguiente
                 }
                 else //Si está marcado el siguiente, devuelvo ese menos la diferencia con el actual para sumarla luego
                 {
-                    if ((weekDay - (int)Settings.TimeDate.DayOfWeek) > 0)
+                    if ((weekDay - auxDay) > 0)
                     {
-                        return weekDay - (int)Settings.TimeDate.DayOfWeek;
+                        return weekDay - auxDay;
                     }
                     else
                     {
-                        return 7 * Settings.WeekPeriod + weekDay - (int)Settings.TimeDate.DayOfWeek;
+                        return 7 * Settings.WeekPeriod + weekDay - auxDay;
                     }
                 }
             }
