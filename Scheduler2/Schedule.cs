@@ -44,8 +44,12 @@ namespace Scheduler2
             if (Settings.Format == Format.Weekly) CreateListOfDays(Settings);
             if (NumberOfDates == 0)
             {
-                NumberOfDates++; 
-                if (!FirstDayChecking(Settings) && Settings.Format == Format.Weekly) NextDate(Settings);
+                NumberOfDates++;
+                if (!FirstDayChecking(Settings) && Settings.Format == Format.Weekly)
+                {
+                    Settings.TimeDate += Settings.StartTime.TimeOfDay;
+                    NextDate(Settings);
+                }
                 else Settings.TimeDate = Settings.TimeDate + Settings.StartTime.TimeOfDay;
             } 
             else

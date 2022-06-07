@@ -104,7 +104,6 @@ namespace Testing
             }
         }
 
-
         [Fact]
         public void Test_daily_period_2_30minutes_from_10am_to_11am()
         {
@@ -428,6 +427,36 @@ namespace Testing
             
             int i = 0;
             while (i < 7)
+            {
+                schedule.NextDate(Data);
+                actualValue[i] = Data.TimeDate;
+                actualValue[i].Should().Be(expectedValue[i]);
+                i++;
+            }
+        }
+        [Fact]
+        public void Just_Tomorrow_at_16_25_37_with_weekly()
+        {
+            Settings Data = new Settings();
+            Data.TimeDate = new DateTime(2022, 6, 7);
+            Data.EndDate = new DateTime(2022, 6, 10);
+            Data.StartTime = new DateTime(200, 1, 1, 16, 25, 37);
+            Data.EndTime = new DateTime(200, 1, 1, 16, 25, 37);
+            Data.Format = Format.Weekly;
+            Data.WeekPeriod = 2;
+            Data.PeriodType = PeriodType.Seconds;
+            Data.TimePeriod = 30;
+            Data.WeekSettings.Wednesday = true;
+
+            Schedule schedule = new Schedule(Data);
+            DateTime[] expectedValue = new DateTime[11];
+            DateTime[] actualValue = new DateTime[11];
+
+            expectedValue[0] = new DateTime(2022, 6, 8, 16, 25, 37);
+            expectedValue[1] = new DateTime(2022, 6, 8, 16, 25, 37);
+            
+            int i = 0;
+            while (i < 2)
             {
                 schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
