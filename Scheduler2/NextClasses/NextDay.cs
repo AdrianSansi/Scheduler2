@@ -103,6 +103,9 @@
             // Si es weekday y no es viernes coger el siguiente día de la semana
 
         }
+        //Si es day: first es 1, second es 2... y last es el último día del mes
+        //Si es weekday: primer día entresemana, segundo, tercero..., cuarto ... y last último día entresemana
+        //Si es endday: ...
 
         //internal static DateTime Day(Settings Settings, DateTime Aux)
         //{
