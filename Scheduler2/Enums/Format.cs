@@ -3,6 +3,7 @@
     public enum Format
     {
         Weekly,
-        Daily
+        Daily,
+        Monthly
     }
 }

@@ -39,7 +39,7 @@ namespace Scheduler2
             else return true;
         }
 
-        public void NextDate(Settings Settings)
+        public DateTime NextDate(Settings Settings)
         {
             if (Settings.Format == Format.Weekly) CreateListOfDays(Settings);
             if (NumberOfDates == 0)
@@ -48,9 +48,13 @@ namespace Scheduler2
                 if (!FirstDayChecking(Settings) && Settings.Format == Format.Weekly)
                 {
                     Settings.TimeDate += Settings.StartTime.TimeOfDay;
-                    NextDate(Settings);
+                    return NextDate(Settings);
                 }
-                else Settings.TimeDate = Settings.TimeDate + Settings.StartTime.TimeOfDay;
+                else
+                {
+                    Settings.TimeDate = Settings.TimeDate + Settings.StartTime.TimeOfDay;
+                    return Settings.TimeDate;
+                }
             } 
             else
             {
@@ -59,10 +63,11 @@ namespace Scheduler2
                 {
                     Settings.TimeDate = candidate;
                     NumberOfDates++;
+                    return Settings.TimeDate;
                 }
                 else
                 {
-
+                    return Settings.TimeDate;
                 }
             }
             

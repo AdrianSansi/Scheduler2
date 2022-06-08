@@ -24,6 +24,8 @@ namespace Scheduler2
         public int DayPeriod { get; set; } = 1;
         public DaysPeriodType DaysPeriodType{get; set; } = DaysPeriodType.Days;
        
+        public MonthSettings MonthSettings { get; set; } = new MonthSettings();
+
         public Settings()
         {
 
