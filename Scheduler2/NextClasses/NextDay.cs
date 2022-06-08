@@ -73,7 +73,7 @@
             int sumMonths = Settings.MonthSettings.MonthNum;
             int nextMonth = (sumMonths + currentMonth) % 12;
             if(nextMonth == 0) nextMonth = 12;
-            int nextYear = Settings.TimeDate.Year+(sumMonths+currentMonth)/12;
+            int nextYear = Settings.TimeDate.Year+(sumMonths+currentMonth-1)/12;
             DateTime Date = new DateTime(nextYear, nextMonth, Settings.MonthSettings.DayNum);
             return Date+Settings.StartTime.TimeOfDay;
         }
@@ -84,13 +84,13 @@
             int sumMonths = Settings.MonthSettings.MonthNum;
             int nextMonth = (sumMonths + currentMonth) % 12;
             if (nextMonth == 0) nextMonth = 12;
-            int nextYear = Settings.TimeDate.Year + (sumMonths + currentMonth) / 12;
+            int nextYear = Settings.TimeDate.Year + (sumMonths + currentMonth-1) / 12;
             DateTime aux = new DateTime(nextYear, nextMonth, 1);
             
             switch (Settings.MonthSettings.MonthDays)
             {
                 case MonthDays.Day:
-                    return Day(Settings, aux);
+                    return Settings.TimeDate;
                 case MonthDays.Weekday:
                     return Settings.TimeDate;
                 case MonthDays.WeekendDay:
@@ -104,10 +104,10 @@
 
         }
 
-        internal static DateTime Day(Settings Settings, DateTime Aux)
-        {
-            return new DateTime(Aux.Year, Aux.Month, 1);
-        }
+        //internal static DateTime Day(Settings Settings, DateTime Aux)
+        //{
+        //    return new DateTime(Aux.Year, Aux.Month, 1);
+        //}
 
         //internal static DateTime WeekDay(Settings Settings, DateTime Aux)
         //{
