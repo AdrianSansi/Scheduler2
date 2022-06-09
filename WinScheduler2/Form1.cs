@@ -399,6 +399,52 @@ namespace WinScheduler2
                     break;
             }
         }
+               
+
+        private void MonthyRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DayMonthy_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TheMonthy_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EveryMonthy_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EveryMonthMonthy_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MonthyFrequency_SelectedItemChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MonthDaysMonthy_SelectedItemChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MonthNumMonthy_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Description_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

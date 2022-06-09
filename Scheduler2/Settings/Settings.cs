@@ -17,7 +17,7 @@ namespace Scheduler2
         public DateTime StartTime { get; set; } = new DateTime(1900, 1, 1, 0, 0, 0);
         public WeekSettings WeekSettings { get; set; } = new WeekSettings();
         public int WeekPeriod { get; set; } = 1;
-        public int TimePeriod { get; set; } = 0;
+        public int TimePeriod { get; set; } = 1;
         public PeriodType PeriodType { get; set; } = PeriodType.Hours;
 
         public Format Format { get; set; } = Format.Daily;

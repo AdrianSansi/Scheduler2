@@ -161,16 +161,111 @@ namespace Scheduler2
             }
         }
 
-        public String description(Settings Settings)
+        public static String description(Settings Settings)
         {
             String description = "Occurs ";
-            if(Settings.Format == Format.Weekly)
+            switch (Settings.Format)
             {
-                description += "every " + Settings.WeekPeriod + " weeks";
-
+                case Format.Weekly:
+                    description += "every " + Settings.WeekPeriod + " weeks";
+                    description += "on" + EnumerateWeekDays(Settings);
+                    description += " every " + Settings.TimePeriod + " " + Settings.PeriodType.ToString();
+                    description += " between " + Settings.StartTime.TimeOfDay.ToString() + " and " + Settings.EndTime.TimeOfDay.ToString();
+                    description += " starting on " + Settings.TimeDate.ToString(); 
+                    break;
+                case Format.Monthy:
+                    if(Settings.MonthSettings.MonthlyFormat == MonthyFormat.FixedDay)
+                    {
+                        description += "the day number " + Settings.MonthSettings.DayNum.ToString();
+                        description += " of very " + Settings.MonthSettings.MonthNum + " months ";
+                    }
+                    else
+                    {
+                        //TODO
+                    }
+                    description += " every " + Settings.TimePeriod + " " + Settings.PeriodType.ToString();
+                    description += " between " + Settings.StartTime.TimeOfDay.ToString() + " and " + Settings.EndTime.TimeOfDay.ToString();
+                    description += " starting on " + Settings.TimeDate.ToString();
+                    break;
+                default:
+                    description += " every " + Settings.TimePeriod + " " + Settings.PeriodType.ToString();
+                    description += " between " + Settings.StartTime.TimeOfDay.ToString() + " and " + Settings.EndTime.TimeOfDay.ToString();
+                    description += " starting on " + Settings.TimeDate.ToString();
+                    break;
             }
-            //Hacer descripción a partir de los settings
+            
             return description;
+        }
+
+        internal static String EnumerateWeekDays(Settings settings)
+        {
+            String[] weekDays = new String[7];
+            int i = 0;
+            if (settings.WeekSettings.Monday)
+            {
+                weekDays[i] = "monday";
+                i++;
+            }
+            if (settings.WeekSettings.Tuesday)
+            {
+                weekDays[i] = "tuesday";
+                i++;
+            }
+            if (settings.WeekSettings.Monday)
+            {
+                weekDays[i] = "wednesday";
+                i++;
+            }
+            if (settings.WeekSettings.Tuesday)
+            {
+                weekDays[i] = "thursday";
+                i++;
+            }
+            if (settings.WeekSettings.Monday)
+            {
+                weekDays[i] = "friday";
+                i++;
+            }
+            if (settings.WeekSettings.Tuesday)
+            {
+                weekDays[i] = "saturday";
+                i++;
+            }
+            if (settings.WeekSettings.Tuesday)
+            {
+                weekDays[i] = "sunday";
+                i++;
+            }
+
+            if (i == 1)
+            {
+                return weekDays[0];
+            }
+            else if (i > 1)
+            {
+                String text = "";
+                for (int j = 0; j < i; j++)
+                {
+                    if(j == i - 2)
+                    {
+                        text = text + weekDays[j] + " and ";
+                    } 
+                    else if(j == i - 1)
+                    {
+                        text = text + weekDays[j] + " and ";
+                    } 
+                    else
+                    {
+                        text = text + weekDays[j] + ", ";
+                    }
+                }
+                return text;
+            }
+            else
+            {
+                return settings.TimeDate.DayOfWeek.ToString();
+            }
+         
         }
     }
 }
