@@ -519,7 +519,7 @@ namespace Testing
             };
             Data.MonthSettings.DayNum = 7;
             Data.MonthSettings.MonthNum = 2;
-            Data.MonthSettings.MonthlyFormat = MonthlyFormat.FixedDay;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.FixedDay;
             
 
             DateTime[] actualValue = new DateTime[5];
@@ -534,7 +534,7 @@ namespace Testing
             int i = 0;
             while (i < 5)
             {
-                Data.TimeDate = NextDay.MonthlyFormat(Data);
+                Data.TimeDate = NextDay.MonthyFormat(Data);
                 actualValue[i] = Data.TimeDate;
                 i++;
             }
@@ -555,7 +555,7 @@ namespace Testing
             };
             Data.MonthSettings.DayNum = 2;
             Data.MonthSettings.MonthNum = 13;
-            Data.MonthSettings.MonthlyFormat = MonthlyFormat.FixedDay;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.FixedDay;
 
 
             DateTime[] actualValue = new DateTime[7];
@@ -572,7 +572,7 @@ namespace Testing
             int i = 0;
             while (i < 7)
             {
-                Data.TimeDate = NextDay.MonthlyFormat(Data);
+                Data.TimeDate = NextDay.MonthyFormat(Data);
                 actualValue[i] = Data.TimeDate;
                 i++;
             }
@@ -595,7 +595,7 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 2;
             Data.MonthSettings.MonthDays = MonthDays.Monday;
-            Data.MonthSettings.MonthlyFormat = MonthlyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
 
 
             DateTime[] actualValue = new DateTime[5];
@@ -610,7 +610,7 @@ namespace Testing
             int i = 0;
             while (i < 5)
             {
-                Data.TimeDate = NextDay.MonthlyFormat(Data);
+                Data.TimeDate = NextDay.MonthyFormat(Data);
                 actualValue[i] = Data.TimeDate;
                 i++;
             }
@@ -631,8 +631,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 3;
             Data.MonthSettings.MonthDays = MonthDays.Friday;
-            Data.MonthSettings.MonthlyFormat = MonthlyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthlyFrequency.Second;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Second;
 
 
             DateTime[] actualValue = new DateTime[3];
@@ -646,7 +646,7 @@ namespace Testing
             int i = 0;
             while (i < 3)
             {
-                Data.TimeDate = NextDay.MonthlyFormat(Data);
+                Data.TimeDate = NextDay.MonthyFormat(Data);
                 actualValue[i] = Data.TimeDate;
                 i++;
             }
@@ -666,8 +666,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.MonthDays = MonthDays.Saturday;
-            Data.MonthSettings.MonthlyFormat = MonthlyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthlyFrequency.Last;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Last;
 
 
             DateTime[] actualValue = new DateTime[7];
@@ -684,7 +684,7 @@ namespace Testing
             int i = 0;
             while (i < 7)
             {
-                Data.TimeDate = NextDay.MonthlyFormat(Data);
+                Data.TimeDate = NextDay.MonthyFormat(Data);
                 actualValue[i] = Data.TimeDate;
                 i++;
             }

@@ -2,10 +2,10 @@
 {
     public class MonthSettings
     {
-        public MonthlyFormat MonthlyFormat { get; set; } = MonthlyFormat.FixedDay;
+        public MonthyFormat MonthlyFormat { get; set; } = MonthyFormat.FixedDay;
         // The
         public MonthDays MonthDays { get; set; } = MonthDays.Day;
-        public MonthlyFrequency MonthlyFrequency { get; set; } = MonthlyFrequency.First;
+        public MonthyFrequency MonthlyFrequency { get; set; } = MonthyFrequency.First;
 
         // Day
         public int DayNum = 1;

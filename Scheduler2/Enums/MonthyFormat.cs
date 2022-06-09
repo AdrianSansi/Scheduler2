@@ -1,6 +1,6 @@
 ﻿namespace Scheduler2
 {
-    public enum MonthlyFormat
+    public enum MonthyFormat
     {
         FixedDay,
         DayOfWeek

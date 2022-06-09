@@ -1,6 +1,6 @@
 ﻿namespace Scheduler2
 {
-    public enum MonthlyFrequency
+    public enum MonthyFrequency
     {
         First,
         Second,
