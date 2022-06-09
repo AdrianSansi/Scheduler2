@@ -515,7 +515,7 @@ namespace Testing
             Settings Data = new Settings
             {
                 TimeDate = new DateTime(2022, 6, 7),
-                Format = Format.Monthly,
+                Format = Format.Monthy,
             };
             Data.MonthSettings.DayNum = 7;
             Data.MonthSettings.MonthNum = 2;
@@ -551,7 +551,7 @@ namespace Testing
             Settings Data = new Settings
             {
                 TimeDate = new DateTime(2022, 6, 7),
-                Format = Format.Monthly,
+                Format = Format.Monthy,
             };
             Data.MonthSettings.DayNum = 2;
             Data.MonthSettings.MonthNum = 13;
@@ -591,7 +591,7 @@ namespace Testing
             Settings Data = new Settings
             {
                 TimeDate = new DateTime(2022, 6, 7),
-                Format = Format.Monthly,
+                Format = Format.Monthy,
             };
             Data.MonthSettings.MonthNum = 2;
             Data.MonthSettings.MonthDays = MonthDays.Monday;
@@ -627,7 +627,7 @@ namespace Testing
             Settings Data = new Settings
             {
                 TimeDate = new DateTime(2022, 6, 7),
-                Format = Format.Monthly,
+                Format = Format.Monthy,
             };
             Data.MonthSettings.MonthNum = 3;
             Data.MonthSettings.MonthDays = MonthDays.Friday;
@@ -662,7 +662,7 @@ namespace Testing
             Settings Data = new Settings
             {
                 TimeDate = new DateTime(2022, 6, 7),
-                Format = Format.Monthly,
+                Format = Format.Monthy,
             };
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.MonthDays = MonthDays.Saturday;
@@ -704,7 +704,7 @@ namespace Testing
             Settings Data = new Settings
             {
                 TimeDate = new DateTime(2022, 6, 9),
-                Format = Format.Monthly,
+                Format = Format.Monthy,
             };
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.MonthDays = MonthDays.Weekday;
@@ -747,7 +747,7 @@ namespace Testing
             Settings Data = new Settings
             {
                 TimeDate = new DateTime(2022, 6, 9),
-                Format = Format.Monthly,
+                Format = Format.Monthy,
             };
             Data.MonthSettings.MonthNum = 2;
             Data.MonthSettings.MonthDays = MonthDays.Weekday;
@@ -790,7 +790,7 @@ namespace Testing
             Settings Data = new Settings
             {
                 TimeDate = new DateTime(2022, 6, 9),
-                Format = Format.Monthly,
+                Format = Format.Monthy,
             };
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
@@ -834,7 +834,7 @@ namespace Testing
             Settings Data = new Settings
             {
                 TimeDate = new DateTime(2022, 6, 9),
-                Format = Format.Monthly,
+                Format = Format.Monthy,
             };
             Data.MonthSettings.MonthNum = 3;
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
@@ -879,7 +879,7 @@ namespace Testing
             Settings Data = new Settings
             {
                 TimeDate = new DateTime(2022, 2, 17),
-                Format = Format.Monthly,
+                Format = Format.Monthy,
             };
             Data.MonthSettings.MonthNum = 12;
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
@@ -913,7 +913,7 @@ namespace Testing
             Settings Data = new Settings
             {
                 TimeDate = new DateTime(2022, 6, 9,5,4,2),
-                Format = Format.Monthly,
+                Format = Format.Monthy,
                 StartTime = new DateTime(2022,6,9,5,0,0)
             };
             Data.MonthSettings.MonthNum = 1;
@@ -966,7 +966,7 @@ namespace Testing
             Settings Data = new Settings
             {
                 TimeDate = new DateTime(2022, 6, 9),
-                Format = Format.Monthly,
+                Format = Format.Monthy,
                 StartTime = new DateTime(1987,10, 9,5,0,0),
             };
             Data.MonthSettings.MonthNum = 1;
@@ -1020,7 +1020,7 @@ namespace Testing
             Settings Data = new Settings
             {
                 TimeDate = new DateTime(2022, 6, 9),
-                Format = Format.Monthly,
+                Format = Format.Monthy,
                 StartTime = new DateTime(1987, 10, 9, 5, 0, 0),
             };
             Data.MonthSettings.MonthNum = 1;
@@ -1066,6 +1066,241 @@ namespace Testing
             actualValue[10].Should().Be(expectedValue[10]);
             actualValue[11].Should().Be(expectedValue[11]);
 
+        }
+        [Fact]
+        public void Test_First_Thursday_Every_3_Months_From_3_To_6_Every_Hour()
+        {
+            //Arrange
+            Settings Data = new Settings
+            {
+                TimeDate = new DateTime(2020, 1, 1),
+                StartTime = new DateTime(1988, 8, 8, 3, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 6, 0, 0),                
+                Format = Format.Monthy,
+                WeekPeriod = 2,
+                TimePeriod = 1,
+                PeriodType = PeriodType.Hours
+            };
+            Data.MonthSettings.MonthNum = 3;
+            Data.MonthSettings.MonthDays = MonthDays.Thursday;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.First;
+            Schedule schedule = new Schedule(Data);
+
+            DateTime[] actualValue = new DateTime[9];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2020, 1, 2, 3, 0, 0),
+                new DateTime(2020, 1, 2, 4, 0, 0),
+                new DateTime(2020, 1, 2, 5, 0, 0),
+                new DateTime(2020, 1, 2, 6, 0, 0),
+                new DateTime(2020, 4, 2, 3, 0, 0),
+                new DateTime(2020, 4, 2, 4, 0, 0),
+                new DateTime(2020, 4, 2, 5, 0, 0),
+                new DateTime(2020, 4, 2, 6, 0, 0),
+                new DateTime(2020, 7, 2, 3, 0, 0),
+            };
+            int i = 0;
+            while (i < 9)
+            {
+                actualValue[i] = schedule.NextDate(Data);
+                i++;
+            }
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+            actualValue[5].Should().Be(expectedValue[5]);
+            actualValue[6].Should().Be(expectedValue[6]);
+            actualValue[7].Should().Be(expectedValue[7]);
+            actualValue[8].Should().Be(expectedValue[8]);
+        }
+        [Fact]
+        public void Test_Second_WeekendDay_Every_1_Months_From_3_To_6_Every_30_Minutes()
+        {
+            //Arrange
+            Settings Data = new Settings
+            {
+                TimeDate = new DateTime(2020, 1, 1),
+                StartTime = new DateTime(1988, 8, 8, 3, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 6, 0, 0),
+                Format = Format.Monthy,
+                WeekPeriod = 89,
+                TimePeriod = 30,
+                PeriodType = PeriodType.Minutes
+            };
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Second;
+            Schedule schedule = new Schedule(Data);
+
+            DateTime[] actualValue = new DateTime[20];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2020, 1, 5, 3, 0, 0),
+                new DateTime(2020, 1, 5, 3, 30, 0),
+                new DateTime(2020, 1, 5, 4, 0, 0),
+                new DateTime(2020, 1, 5, 4, 30, 0),
+                new DateTime(2020, 1, 5, 5, 0, 0),
+                new DateTime(2020, 1, 5, 5, 30, 0),
+                new DateTime(2020, 1, 5, 6, 0, 0),
+                new DateTime(2020, 2, 2, 3, 0, 0),
+                new DateTime(2020, 2, 2, 3, 30, 0),
+                new DateTime(2020, 2, 2, 4, 0, 0),
+                new DateTime(2020, 2, 2, 4, 30, 0),
+                new DateTime(2020, 2, 2, 5, 0, 0),
+                new DateTime(2020, 2, 2, 5, 30, 0),
+                new DateTime(2020, 2, 2, 6, 0, 0),
+                new DateTime(2020, 3, 7, 3, 0, 0),
+                new DateTime(2020, 3, 7, 3, 30, 0),
+                new DateTime(2020, 3, 7, 4, 0, 0),
+                new DateTime(2020, 3, 7, 4, 30, 0),
+                new DateTime(2020, 3, 7, 5, 0, 0),
+                new DateTime(2020, 3, 7, 5, 30, 0),
+
+            };
+            int i = 0;
+            while (i < 20)
+            {
+                actualValue[i] = schedule.NextDate(Data);
+                i++;
+            }
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+            actualValue[5].Should().Be(expectedValue[5]);
+            actualValue[6].Should().Be(expectedValue[6]);
+            actualValue[7].Should().Be(expectedValue[7]);
+            actualValue[8].Should().Be(expectedValue[8]);
+            actualValue[9].Should().Be(expectedValue[9]);
+            actualValue[10].Should().Be(expectedValue[10]);
+            actualValue[11].Should().Be(expectedValue[11]);
+            actualValue[12].Should().Be(expectedValue[12]);
+            actualValue[13].Should().Be(expectedValue[13]);
+            actualValue[14].Should().Be(expectedValue[14]);
+            actualValue[15].Should().Be(expectedValue[15]);
+            actualValue[16].Should().Be(expectedValue[16]);
+            actualValue[17].Should().Be(expectedValue[17]);
+            actualValue[18].Should().Be(expectedValue[18]);
+            actualValue[19].Should().Be(expectedValue[19]);
+        }
+        [Fact]
+        public void Test_27th_Day_Every_4_Months_From_3_30_To_3_31_Every_20_Seconds()
+        {
+            //Arrange
+            Settings Data = new Settings
+            {
+                TimeDate = new DateTime(2023, 12, 1),
+                StartTime = new DateTime(1988, 8, 8, 3, 30, 0),
+                EndTime = new DateTime(1950, 1, 1, 3, 31, 0),
+                Format = Format.Monthy,
+                WeekPeriod = 89,
+                TimePeriod = 20,
+                PeriodType = PeriodType.Seconds
+            };
+            Data.MonthSettings.MonthNum = 4;
+            Data.MonthSettings.DayNum = 27;
+            Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.FixedDay;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Second;
+            Schedule schedule = new Schedule(Data);
+
+            DateTime[] actualValue = new DateTime[12];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2023, 12, 27, 3, 30, 0),
+                new DateTime(2023, 12, 27, 3, 30, 20),
+                new DateTime(2023, 12, 27, 3, 30, 40),
+                new DateTime(2023, 12, 27, 3, 31, 0),
+                new DateTime(2024, 4, 27, 3, 30, 0),
+                new DateTime(2024, 4, 27, 3, 30, 20),
+                new DateTime(2024, 4, 27, 3, 30, 40),
+                new DateTime(2024, 4, 27, 3, 31, 0),
+                new DateTime(2024, 8, 27, 3, 30, 0),
+                new DateTime(2024, 8, 27, 3, 30, 20),
+                new DateTime(2024, 8, 27, 3, 30, 40),
+                new DateTime(2024, 8, 27, 3, 31, 0),
+           
+
+            };
+            int i = 0;
+            while (i < 12)
+            {
+                actualValue[i] = schedule.NextDate(Data);
+                i++;
+            }
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+            actualValue[5].Should().Be(expectedValue[5]);
+            actualValue[6].Should().Be(expectedValue[6]);
+            actualValue[7].Should().Be(expectedValue[7]);
+            actualValue[8].Should().Be(expectedValue[8]);
+            actualValue[9].Should().Be(expectedValue[9]);
+            actualValue[10].Should().Be(expectedValue[10]);
+            actualValue[11].Should().Be(expectedValue[11]);
+        }
+        [Fact]
+        public void Test_Last_Day_Every_Month_At_12()
+        {
+            //Arrange
+            Settings Data = new Settings
+            {
+                TimeDate = new DateTime(2023, 12, 1),
+                StartTime = new DateTime(1988, 8, 8, 12,0,0),
+                EndTime = new DateTime(1950, 1, 1, 12, 0, 0),
+                Format = Format.Monthy,
+                WeekPeriod = 89,
+                TimePeriod = 894,
+                PeriodType = PeriodType.Seconds
+            };
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.DayNum = 27;
+            Data.MonthSettings.MonthDays = MonthDays.Day;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Last;
+            Schedule schedule = new Schedule(Data);
+
+            DateTime[] actualValue = new DateTime[12];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2023, 12, 31, 12, 0, 0),
+                new DateTime(2024, 1, 31, 12, 0, 0),
+                new DateTime(2024, 2, 29, 12, 0, 0),
+                new DateTime(2024, 3, 31, 12, 0, 0),
+                new DateTime(2024, 4, 30, 12, 0, 0),
+                new DateTime(2024, 5, 31, 12, 0, 0),
+                new DateTime(2024, 6, 30, 12, 0, 0),
+                new DateTime(2024, 7, 31, 12, 0, 0),
+                new DateTime(2024, 8, 31, 12, 0, 0),
+                new DateTime(2024, 9, 30, 12, 0, 0),
+                new DateTime(2024, 10, 31, 12, 0, 0),
+                new DateTime(2024, 11, 30, 12, 0, 0),
+            };
+            int i = 0;
+            while (i < 12)
+            {
+                actualValue[i] = schedule.NextDate(Data);
+                i++;
+            }
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+            actualValue[5].Should().Be(expectedValue[5]);
+            actualValue[6].Should().Be(expectedValue[6]);
+            actualValue[7].Should().Be(expectedValue[7]);
+            actualValue[8].Should().Be(expectedValue[8]);
+            actualValue[9].Should().Be(expectedValue[9]);
+            actualValue[10].Should().Be(expectedValue[10]);
+            actualValue[11].Should().Be(expectedValue[11]);
         }
     }
 }

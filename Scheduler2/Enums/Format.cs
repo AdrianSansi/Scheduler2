@@ -4,6 +4,6 @@
     {
         Weekly,
         Daily,
-        Monthly
+        Monthy
     }
 }

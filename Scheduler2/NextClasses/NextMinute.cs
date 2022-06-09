@@ -39,5 +39,22 @@ namespace Scheduler2
             }
 
         }
+
+        public static DateTime MonthyFormat(DateTime Current, Settings Settings)
+        {
+            int day = Current.Day;
+            DateTime auxiliar = Current.AddMinutes(Settings.TimePeriod);
+            if (auxiliar.Day != day | auxiliar.TimeOfDay > Settings.EndTime.TimeOfDay)
+            {
+                Current -= Current.TimeOfDay;
+                Current += Settings.StartTime.TimeOfDay;
+                return NextDay.MonthyFormat(Settings);
+            }
+            else
+            {
+                return auxiliar;
+            }
+
+        }
     }
 }
