@@ -509,7 +509,7 @@ namespace Testing
             }
         }
         [Fact]
-        public void Test_NextDay_MonthlyFormat_FixedDay_every2Months()
+        public void Test_NextDay_MonthyFormat_FixedDay_every2Months()
         {
             //Arrange
             Settings Data = new Settings
@@ -545,7 +545,7 @@ namespace Testing
             actualValue[4].Should().Be(expectedValue[4]);
         }
         [Fact]
-        public void Test_NextDay_MonthlyFormat_FixedDay_every13Months()
+        public void Test_NextDay_MonthyFormat_FixedDay_every13Months()
         {
             //Arrange
             Settings Data = new Settings
@@ -585,7 +585,7 @@ namespace Testing
             actualValue[6].Should().Be(expectedValue[6]);
         }
         [Fact]
-        public void Test_NextDay_MonthlyFormat_DayOfDay_mondays()
+        public void Test_NextDay_MonthyFormat_DayOfDay_mondays()
         {
             //Arrange
             Settings Data = new Settings
@@ -621,7 +621,7 @@ namespace Testing
             actualValue[4].Should().Be(expectedValue[4]);
         }
         [Fact]
-        public void Test_NextDay_MonthlyFormat_DayOfDay_seconds_fridays()
+        public void Test_NextDay_MonthyFormat_DayOfDay_seconds_fridays()
         {
             //Arrange
             Settings Data = new Settings
@@ -656,7 +656,7 @@ namespace Testing
 
         }
         [Fact]
-        public void Test_NextDay_MonthlyFormat_DayOfDay_Last_saturdays()
+        public void Test_NextDay_MonthyFormat_DayOfDay_Last_saturdays()
         {
             //Arrange
             Settings Data = new Settings
@@ -695,6 +695,376 @@ namespace Testing
             actualValue[4].Should().Be(expectedValue[4]);
             actualValue[5].Should().Be(expectedValue[5]);
             actualValue[6].Should().Be(expectedValue[6]);
+
+        }
+        [Fact]
+        public void Test_NextDay_MonthyFormat_Second_WeekDay()
+        {
+            //Arrange
+            Settings Data = new Settings
+            {
+                TimeDate = new DateTime(2022, 6, 9),
+                Format = Format.Monthly,
+            };
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.MonthDays = MonthDays.Weekday;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Second;
+
+
+            DateTime[] actualValue = new DateTime[7];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2022, 7,4),
+                new DateTime(2022, 8, 2),
+                new DateTime(2022, 9, 2),
+                new DateTime(2022, 10,4),
+                new DateTime(2022, 11, 2),
+                new DateTime(2022, 12, 2),
+                new DateTime(2023, 1,3)
+
+            };
+            int i = 0;
+            while (i < 7)
+            {
+                Data.TimeDate = NextDay.MonthyFormat(Data);
+                actualValue[i] = Data.TimeDate;
+                i++;
+            }
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+            actualValue[5].Should().Be(expectedValue[5]);
+            actualValue[6].Should().Be(expectedValue[6]);
+
+        }
+        [Fact]
+        public void Test_NextDay_MonthyFormat_Last_WeekDay()
+        {
+            //Arrange
+            Settings Data = new Settings
+            {
+                TimeDate = new DateTime(2022, 6, 9),
+                Format = Format.Monthly,
+            };
+            Data.MonthSettings.MonthNum = 2;
+            Data.MonthSettings.MonthDays = MonthDays.Weekday;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Last;
+
+
+            DateTime[] actualValue = new DateTime[7];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2022, 8,31),
+                new DateTime(2022, 10, 31),
+                new DateTime(2022, 12, 30),
+                new DateTime(2023, 2,28),
+                new DateTime(2023, 4, 28),
+                new DateTime(2023, 6, 30),
+                new DateTime(2023, 8,31)
+
+            };
+            int i = 0;
+            while (i < 7)
+            {
+                Data.TimeDate = NextDay.MonthyFormat(Data);
+                actualValue[i] = Data.TimeDate;
+                i++;
+            }
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+            actualValue[5].Should().Be(expectedValue[5]);
+            actualValue[6].Should().Be(expectedValue[6]);
+
+        }
+        [Fact]
+        public void Test_NextDay_MonthyFormat_Fourth_WeekendDay()
+        {
+            //Arrange
+            Settings Data = new Settings
+            {
+                TimeDate = new DateTime(2022, 6, 9),
+                Format = Format.Monthly,
+            };
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Fourth;
+
+
+            DateTime[] actualValue = new DateTime[7];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2022, 7,10),
+                new DateTime(2022, 8, 14),
+                new DateTime(2022, 9, 11),
+                new DateTime(2022, 10, 9),
+                new DateTime(2022, 11, 13),
+                new DateTime(2022, 12, 11),
+                new DateTime(2023, 1, 14)
+
+            };
+            int i = 0;
+            while (i < 7)
+            {
+                Data.TimeDate = NextDay.MonthyFormat(Data);
+                actualValue[i] = Data.TimeDate;
+                i++;
+            }
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+            actualValue[5].Should().Be(expectedValue[5]);
+            actualValue[6].Should().Be(expectedValue[6]);
+
+        }
+
+        [Fact]
+        public void Test_NextDay_MonthyFormat_Last_WeekendDay()
+        {
+            //Arrange
+            Settings Data = new Settings
+            {
+                TimeDate = new DateTime(2022, 6, 9),
+                Format = Format.Monthly,
+            };
+            Data.MonthSettings.MonthNum = 3;
+            Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Last;
+
+
+            DateTime[] actualValue = new DateTime[7];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2022, 9,25),
+                new DateTime(2022, 12, 31),
+                new DateTime(2023, 3, 26),
+                new DateTime(2023, 6, 25), 
+                new DateTime(2023, 9, 30),
+                new DateTime(2023, 12, 31),
+                new DateTime(2024, 2, 25)
+            };
+            int i = 0;
+            while (i < 6)
+            {
+                Data.TimeDate = NextDay.MonthyFormat(Data);
+                actualValue[i] = Data.TimeDate;
+                i++;
+            }
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+            actualValue[5].Should().Be(expectedValue[5]);
+
+            Data.MonthSettings.MonthNum = 2;
+            Data.TimeDate = NextDay.MonthyFormat(Data);
+            actualValue[i] = Data.TimeDate;
+            actualValue[6].Should().Be(expectedValue[6]);
+        }
+        [Fact]
+        public void Test_NextDay_MonthyFormat_Last_WeekendDay_Of_Frebruary()
+        {
+            //Arrange
+            Settings Data = new Settings
+            {
+                TimeDate = new DateTime(2022, 2, 17),
+                Format = Format.Monthly,
+            };
+            Data.MonthSettings.MonthNum = 12;
+            Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Last;
+
+
+            DateTime[] actualValue = new DateTime[4];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2023, 2,26),
+                new DateTime(2024, 2, 25),
+
+            };
+            int i = 0;
+            while (i < 2)
+            {
+                Data.TimeDate = NextDay.MonthyFormat(Data);
+                actualValue[i] = Data.TimeDate;
+                i++;
+            }
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+
+        }
+
+        [Fact]
+        public void Test_NextDay_MonthyFormat_Second_WeekendDay()
+        {
+            //Arrange
+            Settings Data = new Settings
+            {
+                TimeDate = new DateTime(2022, 6, 9,5,4,2),
+                Format = Format.Monthly,
+                StartTime = new DateTime(2022,6,9,5,0,0)
+            };
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Second;
+
+
+            DateTime[] actualValue = new DateTime[12];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2022, 7,3,5,0,0),
+                new DateTime(2022, 8, 7,5,0,0),
+                new DateTime(2022, 9,4,5,0,0),
+                new DateTime(2022, 10, 2,5,0,0),
+                new DateTime(2022, 11,6,5,0,0),
+                new DateTime(2022, 12, 4,5,0,0),
+                new DateTime(2023, 1,7,5,0,0),
+                new DateTime(2023, 2, 5,5,0,0),
+                new DateTime(2023, 3,5,5,0,0),
+                new DateTime(2023, 4, 2,5,0,0),
+                new DateTime(2023, 5,7,5,0,0),
+                new DateTime(2023, 6, 4,5,0,0)
+
+            };
+            int i = 0;
+            while (i < 12)
+            {
+                Data.TimeDate = NextDay.MonthyFormat(Data);
+                actualValue[i] = Data.TimeDate;
+                i++;
+            }
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+            actualValue[5].Should().Be(expectedValue[5]);
+            actualValue[6].Should().Be(expectedValue[6]);
+            actualValue[7].Should().Be(expectedValue[7]);
+            actualValue[8].Should().Be(expectedValue[8]);
+            actualValue[9].Should().Be(expectedValue[9]);
+            actualValue[10].Should().Be(expectedValue[10]);
+            actualValue[11].Should().Be(expectedValue[11]);
+        }
+        [Fact]
+        public void Test_NextDay_MonthyFormat_Third_WeekDay()
+        {
+            //Arrange
+            Settings Data = new Settings
+            {
+                TimeDate = new DateTime(2022, 6, 9),
+                Format = Format.Monthly,
+                StartTime = new DateTime(1987,10, 9,5,0,0),
+            };
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.MonthDays = MonthDays.Weekday;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Third;
+
+
+            DateTime[] actualValue = new DateTime[12];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2022, 7,5,5,0,0),
+                new DateTime(2022, 8, 3,5,0,0),
+                new DateTime(2022, 9,5,5,0,0),
+                new DateTime(2022, 10, 5,5,0,0),
+                new DateTime(2022, 11,3,5,0,0),
+                new DateTime(2022, 12, 5,5,0,0),
+                new DateTime(2023, 1,4,5,0,0),
+                new DateTime(2023, 2, 3,5,0,0),
+                new DateTime(2023, 3,3,5,0,0),
+                new DateTime(2023, 4, 5,5,0,0),
+                new DateTime(2023, 5,3,5,0,0),
+                new DateTime(2023, 6, 5,5,0,0)
+
+            };
+            int i = 0;
+            while (i < 12)
+            {
+                Data.TimeDate = NextDay.MonthyFormat(Data);
+                actualValue[i] = Data.TimeDate;
+                i++;
+            }
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+            actualValue[5].Should().Be(expectedValue[5]);
+            actualValue[6].Should().Be(expectedValue[6]);
+            actualValue[7].Should().Be(expectedValue[7]);
+            actualValue[8].Should().Be(expectedValue[8]);
+            actualValue[9].Should().Be(expectedValue[9]);
+            actualValue[10].Should().Be(expectedValue[10]);
+            actualValue[11].Should().Be(expectedValue[11]);
+
+        }
+        [Fact]
+        public void Test_NextDay_MonthyFormat_Fourth_WeekDay()
+        {
+            //Arrange
+            Settings Data = new Settings
+            {
+                TimeDate = new DateTime(2022, 6, 9),
+                Format = Format.Monthly,
+                StartTime = new DateTime(1987, 10, 9, 5, 0, 0),
+            };
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.MonthDays = MonthDays.Weekday;
+            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Fourth;
+
+
+            DateTime[] actualValue = new DateTime[12];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2022, 7,6,5,0,0),
+                new DateTime(2022, 8, 4,5,0,0),
+                new DateTime(2022, 9,6,5,0,0),
+                new DateTime(2022, 10, 6,5,0,0),
+                new DateTime(2022, 11,4,5,0,0),
+                new DateTime(2022, 12, 6,5,0,0),
+                new DateTime(2023, 1,5,5,0,0),
+                new DateTime(2023, 2, 6,5,0,0),
+                new DateTime(2023, 3,6,5,0,0),
+                new DateTime(2023, 4, 6,5,0,0),
+                new DateTime(2023, 5,4,5,0,0),
+                new DateTime(2023, 6, 6,5,0,0)
+
+            };
+            int i = 0;
+            while (i < 12)
+            {
+                Data.TimeDate = NextDay.MonthyFormat(Data);
+                actualValue[i] = Data.TimeDate;
+                i++;
+            }
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+            actualValue[5].Should().Be(expectedValue[5]);
+            actualValue[6].Should().Be(expectedValue[6]);
+            actualValue[7].Should().Be(expectedValue[7]);
+            actualValue[8].Should().Be(expectedValue[8]);
+            actualValue[9].Should().Be(expectedValue[9]);
+            actualValue[10].Should().Be(expectedValue[10]);
+            actualValue[11].Should().Be(expectedValue[11]);
 
         }
     }

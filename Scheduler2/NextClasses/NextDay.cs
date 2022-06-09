@@ -98,7 +98,9 @@
                     aux -= aux.TimeOfDay;
                     return aux + Settings.StartTime.TimeOfDay;
                 case MonthDays.WeekendDay:
-                    return Settings.TimeDate;
+                    aux = WeekendDay(Settings, aux);
+                    aux -= aux.TimeOfDay;
+                    return aux + Settings.StartTime.TimeOfDay;
                 default:
                     aux = SpecificDay(Settings, aux);
                     aux -= aux.TimeOfDay;
@@ -163,12 +165,13 @@
                 case MonthyFrequency.Third:
                     aux = aux.AddDays(2);
                     if((int)aux.DayOfWeek == 6) return aux.AddDays(2);
-                    else if((int)aux.DayOfWeek == 0) return aux.AddDays(1);
+                    else if((int)aux.DayOfWeek == 0) return aux.AddDays(2);
                     else return aux;
                 case MonthyFrequency.Fourth:
-                    aux = aux.AddDays(2);
+                    aux = aux.AddDays(3);
                     if ((int)aux.DayOfWeek == 6) return aux.AddDays(2);
-                    else if ((int)aux.DayOfWeek == 0) return aux.AddDays(1);
+                    else if ((int)aux.DayOfWeek == 0) return aux.AddDays(2);
+                    else if((int)aux.DayOfWeek == 1) return aux.AddDays(2);
                     else return aux;
                 default:
                     aux = LastDayOfMonth(aux);
@@ -208,13 +211,13 @@
             switch (frequency)
             {
                 case MonthyFrequency.First:
-                    return aux.AddDays(1);
-                case MonthyFrequency.Second:
                     return aux.AddDays(2);
-                case MonthyFrequency.Third:
+                case MonthyFrequency.Second:
                     return aux.AddDays(3);
-                case MonthyFrequency.Fourth:
+                case MonthyFrequency.Third:
                     return aux.AddDays(4);
+                case MonthyFrequency.Fourth:
+                    return aux.AddDays(5);
                 default:
                     aux = LastDayOfMonth(aux);
                     switch (aux.Day)
@@ -250,19 +253,11 @@
                 case MonthyFrequency.First:
                     return aux;
                 case MonthyFrequency.Second:
-                    aux = aux.AddDays(1);
-                    if ((int)aux.DayOfWeek == 6) return aux.AddDays(2);
-                    return aux;
+                    return aux.AddDays(1);                    
                 case MonthyFrequency.Third:
-                    aux = aux.AddDays(7);
-                    if ((int)aux.DayOfWeek == 6) return aux.AddDays(2);
-                    else if ((int)aux.DayOfWeek == 0) return aux.AddDays(1);
-                    else return aux;
+                    return aux.AddDays(7);                    
                 case MonthyFrequency.Fourth:
-                    aux = aux.AddDays(8);
-                    if ((int)aux.DayOfWeek == 6) return aux.AddDays(2);
-                    else if ((int)aux.DayOfWeek == 0) return aux.AddDays(1);
-                    else return aux;
+                    return aux.AddDays(8);                   
                 default:
                     aux = LastDayOfMonth(aux);
                     if ((int)aux.DayOfWeek == 6 || (int)aux.DayOfWeek == 0) return aux;
