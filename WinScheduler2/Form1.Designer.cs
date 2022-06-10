@@ -44,6 +44,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.Description = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.SundayBox = new System.Windows.Forms.CheckBox();
@@ -76,19 +78,17 @@
             this.DayPeriodType = new System.Windows.Forms.DomainUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.DayMonthy = new System.Windows.Forms.CheckBox();
-            this.TheMonthy = new System.Windows.Forms.CheckBox();
-            this.EveryMonthy = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
-            this.EveryMonthMonthy = new System.Windows.Forms.NumericUpDown();
-            this.label14 = new System.Windows.Forms.Label();
-            this.MonthyFrequency = new System.Windows.Forms.DomainUpDown();
-            this.MonthDaysMonthy = new System.Windows.Forms.DomainUpDown();
-            this.label15 = new System.Windows.Forms.Label();
-            this.MonthNumMonthy = new System.Windows.Forms.NumericUpDown();
             this.label16 = new System.Windows.Forms.Label();
-            this.Description = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
+            this.MonthNumMonthy = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.MonthDaysMonthyDomain = new System.Windows.Forms.DomainUpDown();
+            this.MonthyFrequencyDomain = new System.Windows.Forms.DomainUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.EveryMonthMonthy = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
+            this.EveryMonthy = new System.Windows.Forms.NumericUpDown();
+            this.TheMonthy = new System.Windows.Forms.CheckBox();
+            this.DayMonthy = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -100,9 +100,9 @@
             this.groupBox7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DayPeriod)).BeginInit();
             this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.EveryMonthy)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EveryMonthMonthy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MonthNumMonthy)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EveryMonthMonthy)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EveryMonthy)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -175,6 +175,7 @@
             // MonthyRadioButton
             // 
             this.MonthyRadioButton.AutoSize = true;
+            this.MonthyRadioButton.Enabled = false;
             this.MonthyRadioButton.Location = new System.Drawing.Point(595, 62);
             this.MonthyRadioButton.Name = "MonthyRadioButton";
             this.MonthyRadioButton.Size = new System.Drawing.Size(67, 19);
@@ -187,6 +188,7 @@
             // RecurringCheckBox
             // 
             this.RecurringCheckBox.AutoSize = true;
+            this.RecurringCheckBox.Enabled = false;
             this.RecurringCheckBox.Location = new System.Drawing.Point(74, 66);
             this.RecurringCheckBox.Name = "RecurringCheckBox";
             this.RecurringCheckBox.Size = new System.Drawing.Size(77, 19);
@@ -198,6 +200,7 @@
             // OnceCheckBox
             // 
             this.OnceCheckBox.AutoSize = true;
+            this.OnceCheckBox.Enabled = false;
             this.OnceCheckBox.Location = new System.Drawing.Point(74, 31);
             this.OnceCheckBox.Name = "OnceCheckBox";
             this.OnceCheckBox.Size = new System.Drawing.Size(54, 19);
@@ -278,6 +281,25 @@
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Output";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(16, 47);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(67, 15);
+            this.label17.TabIndex = 4;
+            this.label17.Text = "Description";
+            // 
+            // Description
+            // 
+            this.Description.Enabled = false;
+            this.Description.Location = new System.Drawing.Point(16, 65);
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            this.Description.Size = new System.Drawing.Size(744, 23);
+            this.Description.TabIndex = 3;
+            this.Description.TextChanged += new System.EventHandler(this.Description_TextChanged);
             // 
             // label5
             // 
@@ -662,8 +684,8 @@
             this.groupBox8.Controls.Add(this.label16);
             this.groupBox8.Controls.Add(this.MonthNumMonthy);
             this.groupBox8.Controls.Add(this.label15);
-            this.groupBox8.Controls.Add(this.MonthDaysMonthy);
-            this.groupBox8.Controls.Add(this.MonthyFrequency);
+            this.groupBox8.Controls.Add(this.MonthDaysMonthyDomain);
+            this.groupBox8.Controls.Add(this.MonthyFrequencyDomain);
             this.groupBox8.Controls.Add(this.label14);
             this.groupBox8.Controls.Add(this.EveryMonthMonthy);
             this.groupBox8.Controls.Add(this.label13);
@@ -677,29 +699,116 @@
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Monthy Configuration";
             // 
-            // DayMonthy
+            // label16
             // 
-            this.DayMonthy.AutoSize = true;
-            this.DayMonthy.Enabled = false;
-            this.DayMonthy.Location = new System.Drawing.Point(18, 22);
-            this.DayMonthy.Name = "DayMonthy";
-            this.DayMonthy.Size = new System.Drawing.Size(46, 19);
-            this.DayMonthy.TabIndex = 0;
-            this.DayMonthy.Text = "Day";
-            this.DayMonthy.UseVisualStyleBackColor = true;
-            this.DayMonthy.CheckedChanged += new System.EventHandler(this.DayMonthy_CheckedChanged);
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(639, 54);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(56, 15);
+            this.label16.TabIndex = 10;
+            this.label16.Text = "month(s)";
             // 
-            // TheMonthy
+            // MonthNumMonthy
             // 
-            this.TheMonthy.AutoSize = true;
-            this.TheMonthy.Enabled = false;
-            this.TheMonthy.Location = new System.Drawing.Point(18, 47);
-            this.TheMonthy.Name = "TheMonthy";
-            this.TheMonthy.Size = new System.Drawing.Size(45, 19);
-            this.TheMonthy.TabIndex = 1;
-            this.TheMonthy.Text = "The";
-            this.TheMonthy.UseVisualStyleBackColor = true;
-            this.TheMonthy.CheckedChanged += new System.EventHandler(this.TheMonthy_CheckedChanged);
+            this.MonthNumMonthy.Enabled = false;
+            this.MonthNumMonthy.Location = new System.Drawing.Point(512, 51);
+            this.MonthNumMonthy.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.MonthNumMonthy.Name = "MonthNumMonthy";
+            this.MonthNumMonthy.Size = new System.Drawing.Size(108, 23);
+            this.MonthNumMonthy.TabIndex = 9;
+            this.MonthNumMonthy.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.MonthNumMonthy.ValueChanged += new System.EventHandler(this.MonthNumMonthy_ValueChanged);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(442, 54);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(51, 15);
+            this.label15.TabIndex = 8;
+            this.label15.Text = "Of every";
+            // 
+            // MonthDaysMonthyDomain
+            // 
+            this.MonthDaysMonthyDomain.Enabled = false;
+            this.MonthDaysMonthyDomain.Items.Add("Day");
+            this.MonthDaysMonthyDomain.Items.Add("Monday");
+            this.MonthDaysMonthyDomain.Items.Add("Tuesday");
+            this.MonthDaysMonthyDomain.Items.Add("Wednesday");
+            this.MonthDaysMonthyDomain.Items.Add("Thursday");
+            this.MonthDaysMonthyDomain.Items.Add("Friday");
+            this.MonthDaysMonthyDomain.Items.Add("Saturday");
+            this.MonthDaysMonthyDomain.Items.Add("Sunday");
+            this.MonthDaysMonthyDomain.Items.Add("Weekday");
+            this.MonthDaysMonthyDomain.Items.Add("Weekend day");
+            this.MonthDaysMonthyDomain.Location = new System.Drawing.Point(275, 51);
+            this.MonthDaysMonthyDomain.Name = "MonthDaysMonthyDomain";
+            this.MonthDaysMonthyDomain.ReadOnly = true;
+            this.MonthDaysMonthyDomain.Size = new System.Drawing.Size(158, 23);
+            this.MonthDaysMonthyDomain.TabIndex = 7;
+            this.MonthDaysMonthyDomain.Text = "Day";
+            this.MonthDaysMonthyDomain.SelectedItemChanged += new System.EventHandler(this.MonthDaysMonthy_SelectedItemChanged);
+            // 
+            // MonthyFrequencyDomain
+            // 
+            this.MonthyFrequencyDomain.Enabled = false;
+            this.MonthyFrequencyDomain.Items.Add("First");
+            this.MonthyFrequencyDomain.Items.Add("Second");
+            this.MonthyFrequencyDomain.Items.Add("Third");
+            this.MonthyFrequencyDomain.Items.Add("Fourth");
+            this.MonthyFrequencyDomain.Items.Add("Last");
+            this.MonthyFrequencyDomain.Location = new System.Drawing.Point(106, 52);
+            this.MonthyFrequencyDomain.Name = "MonthyFrequencyDomain";
+            this.MonthyFrequencyDomain.ReadOnly = true;
+            this.MonthyFrequencyDomain.Size = new System.Drawing.Size(142, 23);
+            this.MonthyFrequencyDomain.TabIndex = 6;
+            this.MonthyFrequencyDomain.Text = "First";
+            this.MonthyFrequencyDomain.SelectedItemChanged += new System.EventHandler(this.MonthyFrequency_SelectedItemChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(403, 26);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(56, 15);
+            this.label14.TabIndex = 5;
+            this.label14.Text = "month(s)";
+            // 
+            // EveryMonthMonthy
+            // 
+            this.EveryMonthMonthy.Enabled = false;
+            this.EveryMonthMonthy.Location = new System.Drawing.Point(310, 22);
+            this.EveryMonthMonthy.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.EveryMonthMonthy.Name = "EveryMonthMonthy";
+            this.EveryMonthMonthy.Size = new System.Drawing.Size(82, 23);
+            this.EveryMonthMonthy.TabIndex = 4;
+            this.EveryMonthMonthy.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.EveryMonthMonthy.ValueChanged += new System.EventHandler(this.EveryMonthMonthy_ValueChanged);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(216, 26);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(35, 15);
+            this.label13.TabIndex = 3;
+            this.label13.Text = "Every";
             // 
             // EveryMonthy
             // 
@@ -725,135 +834,31 @@
             0});
             this.EveryMonthy.ValueChanged += new System.EventHandler(this.EveryMonthy_ValueChanged);
             // 
-            // label13
+            // TheMonthy
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(216, 26);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(35, 15);
-            this.label13.TabIndex = 3;
-            this.label13.Text = "Every";
+            this.TheMonthy.AutoSize = true;
+            this.TheMonthy.Enabled = false;
+            this.TheMonthy.Location = new System.Drawing.Point(18, 47);
+            this.TheMonthy.Name = "TheMonthy";
+            this.TheMonthy.Size = new System.Drawing.Size(45, 19);
+            this.TheMonthy.TabIndex = 1;
+            this.TheMonthy.Text = "The";
+            this.TheMonthy.UseVisualStyleBackColor = true;
+            this.TheMonthy.CheckedChanged += new System.EventHandler(this.TheMonthy_CheckedChanged);
             // 
-            // EveryMonthMonthy
+            // DayMonthy
             // 
-            this.EveryMonthMonthy.Enabled = false;
-            this.EveryMonthMonthy.Location = new System.Drawing.Point(310, 22);
-            this.EveryMonthMonthy.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.EveryMonthMonthy.Name = "EveryMonthMonthy";
-            this.EveryMonthMonthy.Size = new System.Drawing.Size(82, 23);
-            this.EveryMonthMonthy.TabIndex = 4;
-            this.EveryMonthMonthy.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.EveryMonthMonthy.ValueChanged += new System.EventHandler(this.EveryMonthMonthy_ValueChanged);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(403, 26);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(56, 15);
-            this.label14.TabIndex = 5;
-            this.label14.Text = "month(s)";
-            // 
-            // MonthyFrequency
-            // 
-            this.MonthyFrequency.Enabled = false;
-            this.MonthyFrequency.Items.Add("First");
-            this.MonthyFrequency.Items.Add("Second");
-            this.MonthyFrequency.Items.Add("Third");
-            this.MonthyFrequency.Items.Add("Fourth");
-            this.MonthyFrequency.Items.Add("Last");
-            this.MonthyFrequency.Location = new System.Drawing.Point(106, 52);
-            this.MonthyFrequency.Name = "MonthyFrequency";
-            this.MonthyFrequency.ReadOnly = true;
-            this.MonthyFrequency.Size = new System.Drawing.Size(142, 23);
-            this.MonthyFrequency.TabIndex = 6;
-            this.MonthyFrequency.Text = "First";
-            this.MonthyFrequency.SelectedItemChanged += new System.EventHandler(this.MonthyFrequency_SelectedItemChanged);
-            // 
-            // MonthDaysMonthy
-            // 
-            this.MonthDaysMonthy.Enabled = false;
-            this.MonthDaysMonthy.Items.Add("Day");
-            this.MonthDaysMonthy.Items.Add("Monday");
-            this.MonthDaysMonthy.Items.Add("Tuesday");
-            this.MonthDaysMonthy.Items.Add("Wednesday");
-            this.MonthDaysMonthy.Items.Add("Thursday");
-            this.MonthDaysMonthy.Items.Add("Friday");
-            this.MonthDaysMonthy.Items.Add("Saturday");
-            this.MonthDaysMonthy.Items.Add("Sunday");
-            this.MonthDaysMonthy.Items.Add("Weekday");
-            this.MonthDaysMonthy.Items.Add("Weekend day");
-            this.MonthDaysMonthy.Location = new System.Drawing.Point(275, 51);
-            this.MonthDaysMonthy.Name = "MonthDaysMonthy";
-            this.MonthDaysMonthy.ReadOnly = true;
-            this.MonthDaysMonthy.Size = new System.Drawing.Size(158, 23);
-            this.MonthDaysMonthy.TabIndex = 7;
-            this.MonthDaysMonthy.Text = "Day";
-            this.MonthDaysMonthy.SelectedItemChanged += new System.EventHandler(this.MonthDaysMonthy_SelectedItemChanged);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(442, 54);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(51, 15);
-            this.label15.TabIndex = 8;
-            this.label15.Text = "Of every";
-            // 
-            // MonthNumMonthy
-            // 
-            this.MonthNumMonthy.Enabled = false;
-            this.MonthNumMonthy.Location = new System.Drawing.Point(512, 51);
-            this.MonthNumMonthy.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.MonthNumMonthy.Name = "MonthNumMonthy";
-            this.MonthNumMonthy.Size = new System.Drawing.Size(108, 23);
-            this.MonthNumMonthy.TabIndex = 9;
-            this.MonthNumMonthy.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.MonthNumMonthy.ValueChanged += new System.EventHandler(this.MonthNumMonthy_ValueChanged);
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(639, 54);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(56, 15);
-            this.label16.TabIndex = 10;
-            this.label16.Text = "month(s)";
-            // 
-            // Description
-            // 
-            this.Description.Enabled = false;
-            this.Description.Location = new System.Drawing.Point(16, 65);
-            this.Description.Name = "Description";
-            this.Description.ReadOnly = true;
-            this.Description.Size = new System.Drawing.Size(744, 23);
-            this.Description.TabIndex = 3;
-            this.Description.TextChanged += new System.EventHandler(this.Description_TextChanged);
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(16, 47);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(67, 15);
-            this.label17.TabIndex = 4;
-            this.label17.Text = "Description";
+            this.DayMonthy.AutoSize = true;
+            this.DayMonthy.Checked = true;
+            this.DayMonthy.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.DayMonthy.Enabled = false;
+            this.DayMonthy.Location = new System.Drawing.Point(18, 22);
+            this.DayMonthy.Name = "DayMonthy";
+            this.DayMonthy.Size = new System.Drawing.Size(46, 19);
+            this.DayMonthy.TabIndex = 0;
+            this.DayMonthy.Text = "Day";
+            this.DayMonthy.UseVisualStyleBackColor = true;
+            this.DayMonthy.CheckedChanged += new System.EventHandler(this.DayMonthy_CheckedChanged);
             // 
             // Form1
             // 
@@ -868,7 +873,6 @@
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Enabled = false;
             this.Name = "Form1";
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
@@ -890,9 +894,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.DayPeriod)).EndInit();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.EveryMonthy)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.EveryMonthMonthy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MonthNumMonthy)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EveryMonthMonthy)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.EveryMonthy)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -953,9 +957,9 @@
         private Label label14;
         private NumericUpDown EveryMonthMonthy;
         private Label label13;
-        private DomainUpDown MonthyFrequency;
+        private DomainUpDown MonthyFrequencyDomain;
         private Label label15;
-        private DomainUpDown MonthDaysMonthy;
+        private DomainUpDown MonthDaysMonthyDomain;
         private NumericUpDown MonthNumMonthy;
         private Label label17;
         private TextBox Description;
