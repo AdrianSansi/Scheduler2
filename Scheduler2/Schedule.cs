@@ -10,155 +10,164 @@ namespace Scheduler2
     {    
         public int NumberOfDates { get; set; } = 0;
          
-        public Schedule(Settings Settings)
+        public Schedule(Settings settings)
         {                      
 
         }
   
-        public void CreateListOfDays(Settings Settings)
+        public void CreateListOfDays(Settings settings)
         {
-            Settings.WeekSettings.WeekDays.Clear();
+            settings.WeekSettings.WeekDays.Clear();
                         
-            if (Settings.WeekSettings.Monday) Settings.WeekSettings.WeekDays.Add(1);
-            if (Settings.WeekSettings.Tuesday) Settings.WeekSettings.WeekDays.Add(2);
-            if (Settings.WeekSettings.Wednesday) Settings.WeekSettings.WeekDays.Add(3);
-            if (Settings.WeekSettings.Thursday) Settings.WeekSettings.WeekDays.Add(4);
-            if (Settings.WeekSettings.Friday) Settings.WeekSettings.WeekDays.Add(5);
-            if (Settings.WeekSettings.Saturday) Settings.WeekSettings.WeekDays.Add(6);
-            if (Settings.WeekSettings.Sunday) Settings.WeekSettings.WeekDays.Add(7);
+            if (settings.WeekSettings.Monday) settings.WeekSettings.WeekDays.Add(1);
+            if (settings.WeekSettings.Tuesday) settings.WeekSettings.WeekDays.Add(2);
+            if (settings.WeekSettings.Wednesday) settings.WeekSettings.WeekDays.Add(3);
+            if (settings.WeekSettings.Thursday) settings.WeekSettings.WeekDays.Add(4);
+            if (settings.WeekSettings.Friday) settings.WeekSettings.WeekDays.Add(5);
+            if (settings.WeekSettings.Saturday) settings.WeekSettings.WeekDays.Add(6);
+            if (settings.WeekSettings.Sunday) settings.WeekSettings.WeekDays.Add(7);
 
         }
 
-        public bool FirstDayChecking(Settings Settings)
+        public static bool FirstDayChecking(Settings settings)
         {
             int WeekDay;
-            WeekDay = (int)Settings.TimeDate.DayOfWeek;
+            WeekDay = (int)settings.TimeDate.DayOfWeek;
             if (WeekDay == 0) WeekDay = 7;
-            int index = Settings.WeekSettings.WeekDays.IndexOf(WeekDay);
+            int index = settings.WeekSettings.WeekDays.IndexOf(WeekDay);
             if (index == -1) return false;
             else return true;
         }
 
-        public DateTime NextDate(Settings Settings)
+        public DateTime NextDate(Settings settings)
         {
-            if (Settings.Format == Format.Weekly) CreateListOfDays(Settings);
+            if (settings.Format == Format.Weekly) CreateListOfDays(settings);
             if (NumberOfDates == 0)
             {
                 NumberOfDates++;
-                if (!FirstDayChecking(Settings) && Settings.Format == Format.Weekly)
-                {
-                    Settings.TimeDate -= Settings.TimeDate.TimeOfDay;
-                    Settings.TimeDate += Settings.StartTime.TimeOfDay;
-                    return NextDate(Settings);
-                }
-                else if(Settings.Format == Format.Monthy)
-                {
-                    Settings.TimeDate -= Settings.TimeDate.TimeOfDay;
-                    Settings.TimeDate += Settings.StartTime.TimeOfDay;
-                    DateTime actualTimeDate = Settings.TimeDate;
-                    Settings.TimeDate = Settings.TimeDate.AddMonths(-1);
-                    int actualMonthNumber = Settings.MonthSettings.MonthNum;
-                    Settings.MonthSettings.MonthNum = 1;
-                    if(NextDay.MonthyFormat(Settings) <Settings.EndDate.AddDays(1) - Settings.EndDate.TimeOfDay)
-                    {
-                        Settings.TimeDate = NextDay.MonthyFormat(Settings);
-                        if(actualTimeDate>Settings.TimeDate) Settings.TimeDate = NextDay.MonthyFormat(Settings);
-                        Settings.MonthSettings.MonthNum = actualMonthNumber;
-                        return Settings.TimeDate;
-                    }
-                    else
-                    {
-                        Settings.TimeDate = actualTimeDate;
-                        return Settings.TimeDate;
-                    }
-                    
-                }
-                else
-                {
-                    Settings.TimeDate -= Settings.TimeDate.TimeOfDay;
-                    Settings.TimeDate += Settings.StartTime.TimeOfDay;
-                    return Settings.TimeDate;
-                }
+                return ItsFirstDate(settings);
+                
+                
             } 
             else
             {
-                DateTime candidate = CalculateDate(Settings);
-                if (candidate <=  (Settings.EndDate.AddDays(1)-Settings.EndDate.TimeOfDay)) 
-                {
-                    Settings.TimeDate = candidate;
-                    NumberOfDates++;
-                    return Settings.TimeDate;
-                }
-                else
-                {
-                    return Settings.TimeDate;
-                }
+                return NotFirstDate(settings);
+            }            
+        }
+        private static DateTime NotFirstDate(Settings settings)
+        {
+            DateTime candidate = CalculateDate(settings);
+            if (!LastDate(candidate, settings))
+            {
+                settings.TimeDate = candidate;
+                return settings.TimeDate;
             }
-            
-            
-        } 
+            else
+            {
+                return settings.TimeDate;
+            }
+        }
 
-  
+        private static bool LastDate(DateTime candidate, Settings settings)
+        {
+            return candidate > (settings.EndDate.AddDays(1) - settings.EndDate.TimeOfDay);
+        }
+        private static DateTime ItsFirstDate(Settings settings)
+        {
+            if (!FirstDayChecking(settings) && settings.Format == Format.Weekly)
+            {
+                SetTimeDate(settings);
+                return NotFirstDate(settings);
+            }
+            else if (settings.Format == Format.Monthy)
+            {
+                SetTimeDate(settings);
+                return ItsFirstDateMonthy(settings);
+                
+
+            }
+            else
+            {
+                SetTimeDate(settings);
+                return settings.TimeDate;
+            }
+        }
+        private static DateTime ItsFirstDateMonthy(Settings settings)
+        {
+            DateTime actualTimeDate = settings.TimeDate;
+            settings.TimeDate = settings.TimeDate.AddMonths(-1);
+            int actualMonthNumber = settings.MonthSettings.MonthNum;
+            settings.MonthSettings.MonthNum = 1;
+            if (AreMoreDates(settings))
+            {
+                settings.TimeDate = NextDay.MonthyFormat(settings);
+                if (actualTimeDate > settings.TimeDate) settings.TimeDate = NextDay.MonthyFormat(settings);
+                settings.MonthSettings.MonthNum = actualMonthNumber;
+                return settings.TimeDate;
+            }
+            else
+            {
+                settings.TimeDate = actualTimeDate;
+                return settings.TimeDate;
+            }
+        }
+
+        private static void SetTimeDate(Settings settings)
+        {
+            settings.TimeDate -= settings.TimeDate.TimeOfDay;
+            settings.TimeDate += settings.StartTime.TimeOfDay;
+        }
+
+        
+        private static bool AreMoreDates(Settings settings)
+        {
+            return NextDay.MonthyFormat(settings) < settings.EndDate.AddDays(1) - settings.EndDate.TimeOfDay;
+        }
         
 
-        public DateTime CalculateDate(Settings Settings)
+        public static DateTime CalculateDate(Settings settings)
         {
-            switch (Settings.Format)
+            if (IsOnce(settings)) 
             {
-                case Format.Weekly:
-
-                    
-                    if (DateTime.Compare(Settings.StartTime, Settings.EndTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
-                    {
-                        return Settings.TimeDate.AddDays(NextDay.WeeklyFormat(Settings));
-                    }
-                    else
-                    {
-                        switch (Settings.PeriodType)
-                        {
-                            case PeriodType.Minutes:
-                                return NextMinute.WeeklyFormat(Settings.TimeDate, Settings);
-                            case PeriodType.Seconds:
-                                return NextSecond.WeeklyFormat(Settings.TimeDate, Settings);
-                            default:
-                                return NextHour.WeeklyFormat(Settings.TimeDate, Settings);
-                        }
-                    }
-                case Format.Monthy:
-                    if (Settings.StartTime.TimeOfDay == Settings.EndTime.TimeOfDay) //Si ocurre una vez al día, pasar al siguiente día marcado 
-                    {
-                        return NextDay.MonthyFormat(Settings);
-                    }
-                    else
-                    {
-                        switch (Settings.PeriodType)
-                        {
-                            case PeriodType.Minutes:
-                                return NextMinute.MonthyFormat(Settings.TimeDate, Settings);
-                            case PeriodType.Seconds:
-                                return NextSecond.MonthyFormat(Settings.TimeDate, Settings);
-                            default:
-                                return NextHour.MonthyFormat(Settings.TimeDate, Settings);
-                        }
-                    }
-                default:
-                    if (DateTime.Compare(Settings.StartTime, Settings.EndTime) == 0) //Si ocurre una vez al día, pasar al siguiente día marcado 
-                    {
-                        return NextDay.DailyFormat(Settings.TimeDate, Settings);
-                    }
-                    else
-                    {
-                        switch (Settings.PeriodType)
-                        {
-                            case PeriodType.Minutes:
-                                return NextMinute.DailyFormat(Settings.TimeDate, Settings);
-                            case PeriodType.Seconds:
-                                return NextSecond.DailyFormat(Settings.TimeDate, Settings);
-                            default:
-                                return NextHour.DailyFormat(Settings.TimeDate, Settings);
-                        }
-                    }
+                return CalculateOnceDate(settings);
             }
-        }        
+            else
+            {
+                return CalculateRecurringDate(settings);                           
+            }
+        }  
+        
+        private static bool IsOnce(Settings settings)
+        {
+            return settings.StartTime.TimeOfDay == settings.EndTime.TimeOfDay;
+        }
+
+        private static DateTime CalculateOnceDate(Settings settings)
+        {
+            switch (settings.Format)
+            {
+                case Format.Monthy:
+                    return NextDay.MonthyFormat(settings);
+                case Format.Weekly:
+                    return settings.TimeDate.AddDays(NextDay.WeeklyFormat(settings));
+                default:
+                    return NextDay.DailyFormat(settings.TimeDate, settings);
+            }
+        }
+
+        private static DateTime CalculateRecurringDate(Settings settings)
+        {
+            switch (settings.PeriodType)
+            {
+                case PeriodType.Minutes:
+                    return NextMinute.Calculate(settings.TimeDate, settings);
+                case PeriodType.Seconds:
+                    return NextSecond.Calculate(settings.TimeDate, settings);
+                default:
+                    return NextHour.Calculate(settings.TimeDate, settings);
+            }
+        }
+
+
     }
 }

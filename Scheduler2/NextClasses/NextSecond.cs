@@ -3,58 +3,43 @@ namespace Scheduler2
 {
     internal class NextSecond
     {
-        public static DateTime WeeklyFormat(DateTime Current, Settings Settings)
+
+        private static DateTime SetTimeDate(DateTime current, Settings settings)
         {
-            int day = Current.Day;
-            DateTime auxiliar = Current.AddSeconds(Settings.TimePeriod);
-            if (auxiliar.Day != day | auxiliar.TimeOfDay > Settings.EndTime.TimeOfDay)
+            current -= current.TimeOfDay;
+            current += settings.StartTime.TimeOfDay;
+            return current;
+        }
+
+        public static DateTime Calculate(DateTime current, Settings settings)
+        {
+            int day = current.Day;
+            DateTime auxiliar = current.AddSeconds(settings.TimePeriod);
+            if (auxiliar.Day != day | auxiliar.TimeOfDay > settings.EndTime.TimeOfDay)
             {
-                if (NextDay.WeeklyFormat(Settings) == 0)
+                switch (settings.Format)
                 {
-                    return Current;
+                    case Format.Weekly:
+                        if (NextDay.WeeklyFormat(settings) == 0)
+                        {
+                            return current;
+                        }
+                        current = SetTimeDate(current, settings);
+                        return current.AddDays(NextDay.WeeklyFormat(settings));
+                    case Format.Monthy:
+                        current = SetTimeDate(current, settings);
+                        return NextDay.MonthyFormat(settings);
+                    default:
+                        current = SetTimeDate(current, settings);
+                        return NextDay.DailyFormat(current, settings);
+
                 }
-                Current -= Current.TimeOfDay;
-                Current += Settings.StartTime.TimeOfDay;
-                return Current.AddDays(NextDay.WeeklyFormat(Settings));
             }
             else
             {
                 return auxiliar;
             }
         }
-
-        public static DateTime DailyFormat(DateTime Current, Settings Settings)
-        {
-            int day = Current.Day;
-            DateTime auxiliar = Current.AddSeconds(Settings.TimePeriod);
-            if (auxiliar.Day != day | auxiliar.TimeOfDay > Settings.EndTime.TimeOfDay)
-            {                
-                Current -= Current.TimeOfDay;
-                Current += Settings.StartTime.TimeOfDay;
-                return NextDay.DailyFormat(Current, Settings);
-            }
-            else
-            {
-                return auxiliar;
-            }
-
-        }
-
-        public static DateTime MonthyFormat(DateTime Current, Settings Settings)
-        {
-            int day = Current.Day;
-            DateTime auxiliar = Current.AddSeconds(Settings.TimePeriod);
-            if (auxiliar.Day != day | auxiliar.TimeOfDay > Settings.EndTime.TimeOfDay)
-            {
-                Current -= Current.TimeOfDay;
-                Current += Settings.StartTime.TimeOfDay;
-                return NextDay.MonthyFormat(Settings);
-            }
-            else
-            {
-                return auxiliar;
-            }
-
-        }
+        
     }
 }
