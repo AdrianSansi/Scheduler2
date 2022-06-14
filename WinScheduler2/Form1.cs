@@ -3,35 +3,34 @@ namespace WinScheduler2
 {
     public partial class Form1 : Form
     {
-        int cYear;
-        int cMonth;
-        int cDay;
-        int cHour;
-        int cMinute;
-        int cSecond;
-        int period;
-        Schedule schedule;
-        int numPeriod;
-        DateTime endDate;
+
+        Settings Data;
+        Schedule Schedule;
+        
 
 
         public Form1()
         {
-            schedule = new Schedule(); schedule.timeDate = DateTime.MinValue;
-            cYear = 0; cMonth = 0; cDay = 0; period = 1; numPeriod = 0;
-            cHour = 0; cMinute = 0; cSecond = 0;
-            endDate = DateTime.MinValue;
             InitializeComponent();
+            Data = new Settings();
+            Schedule = new Schedule(Data);
+
         }
 
         private void InputBox_TextChanged(object sender, EventArgs e)
         {
             try
             {
-                schedule.currentDate = DateTime.Parse(InputBox.Text);
+                Data.CurrentDate = DateTime.Parse(InputBox.Text);
+                if (Data.TimeDate < Data.CurrentDate)
+                {
+                    Data.StartDate = Data.CurrentDate;
+                    Data.TimeDate = Data.CurrentDate;
+                }
+                Data.StartTime = DateTime.Parse(InputBox.Text);
                 OnceCheckBox.Enabled = true;
                 RecurringCheckBox.Enabled = true;
-                
+
             }
             catch (Exception FormatException)
             {
@@ -50,11 +49,14 @@ namespace WinScheduler2
                 OnceCheckBox.Checked = false;
                 DailyRadioButton.Enabled = true;
                 WeeklyRadioButton.Enabled = true;
+                MonthyRadioButton.Enabled = true;
+
             }
             else
             {
                 DailyRadioButton.Enabled = false;
                 WeeklyRadioButton.Enabled = false;
+                MonthyRadioButton.Enabled = false;
             }
         }
 
@@ -79,6 +81,28 @@ namespace WinScheduler2
             {
                 DailyEvery.Enabled = true;
                 DailyOnce.Enabled = true;
+                MondayBox.Enabled = false;
+                TuesdayBox.Enabled = false;
+                WednesdayBox.Enabled = false;
+                ThursdayBox.Enabled = false;
+                FridayBox.Enabled = false;
+                SaturdayBox.Enabled = false;
+                SundayBox.Enabled = false;
+                MondayBox.Checked = true;
+                TuesdayBox.Checked = true;
+                WednesdayBox.Checked = true;
+                ThursdayBox.Checked = true;
+                FridayBox.Checked = true;
+                SaturdayBox.Checked = true;
+                SundayBox.Checked = true;
+                Data.Format = Format.Daily;
+                DayPeriod.Enabled = true;
+                DayPeriodType.Enabled = true;
+                DayMonthy.Enabled = false;
+                TheMonthy.Enabled = false;
+                DayMonthy.Enabled = false;
+                TheMonthy.Enabled = false;
+
             }
             else
             {
@@ -101,6 +125,11 @@ namespace WinScheduler2
                 SundayBox.Enabled = true;
                 DailyEvery.Enabled = true;
                 DailyOnce.Enabled = true;
+                Data.Format = Format.Weekly;
+                DayMonthy.Enabled = false;
+                TheMonthy.Enabled = false;
+                DayMonthy.Enabled = false;
+                TheMonthy.Enabled = false;
 
             }
             else
@@ -113,6 +142,7 @@ namespace WinScheduler2
                 FridayBox.Enabled = false;
                 SaturdayBox.Enabled = false;
                 SundayBox.Enabled = false;
+                Data.Format = Format.Daily;
             }
         }
 
@@ -120,7 +150,7 @@ namespace WinScheduler2
         {
             try
             {
-                schedule.timeDate = DateTime.Parse(OnceTextBox.Text);
+                Data.TimeDate = DateTime.Parse(OnceTextBox.Text);
                 NextButton.Enabled = true;
             }
             catch (Exception FormatException)
@@ -132,27 +162,175 @@ namespace WinScheduler2
 
         private void NextButton_Click(object sender, EventArgs e)
         {
-            OutputBox.Text = schedule.timeDate.ToString();
+            Description.Text = DescriptionClass.Description(Data);
+            if (DailyOnce.Checked == true)
+            {
+                Schedule.NextDate(Data);
+                OutputBox.Text = Data.TimeDate.ToString();
+            }
+            else if (DailyEvery.Checked == true)
+            {
+                Schedule.NextDate(Data);
+                OutputBox.Text = Data.TimeDate.ToString();
+            }
+            else
+            {
+                Description.Text = "Occurs the " + Data.TimeDate.ToShortDateString() + " at " + Data.TimeDate.TimeOfDay.ToString();
+                OutputBox.Text = Data.TimeDate.ToString();
+            }
         }
+
+        private void WeeksUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            Data.WeekPeriod = (int)WeeksUpDown.Value;
+        }
+
+
+        private void MondayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (MondayBox.Checked == true)
+            {
+                Data.WeekSettings.Monday = true;
+            }
+            else
+            {
+                Data.WeekSettings.Monday = false;
+            }
+        }
+        private void TuesdayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (TuesdayBox.Checked == true)
+            {
+                Data.WeekSettings.Tuesday = true;
+            }
+            else
+            {
+                Data.WeekSettings.Tuesday = false;
+            }
+        }
+        private void WednesdayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (WednesdayBox.Checked == true)
+            {
+                Data.WeekSettings.Wednesday = true;
+            }
+            else
+            {
+                Data.WeekSettings.Wednesday = false;
+            }
+        }
+        private void ThursdayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ThursdayBox.Checked == true)
+            {
+                Data.WeekSettings.Thursday = true;
+            }
+            else
+            {
+                Data.WeekSettings.Thursday = false;
+            }
+        }
+        private void FridayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (FridayBox.Checked == true)
+            {
+                Data.WeekSettings.Friday = true;
+            }
+            else
+            {
+                Data.WeekSettings.Friday = false;
+            }
+        }
+        private void SaturdayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SaturdayBox.Checked == true)
+            {
+                Data.WeekSettings.Saturday = true;
+            }
+            else
+            {
+                Data.WeekSettings.Saturday = false;
+            }
+        }
+        private void SundayBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SundayBox.Checked == true)
+            {
+                Data.WeekSettings.Sunday = true;
+            }
+            else
+            {
+                Data.WeekSettings.Sunday = false;
+            }
+        }
+
+
+
 
 
         private void DailyOnce_CheckedChanged(object sender, EventArgs e)
         {
-            if (DailyRadioButton.Checked == true)
+            if (DailyOnce.Checked == true)
             {
-                
+                Data.StartTime = OnceTimePicker.Value;
+                Data.EndTime = OnceTimePicker.Value;
+                OnceTimePicker.Enabled = true;
+                DailyEvery.Checked = false;
             }
             else
             {
-
+                OnceTimePicker.Enabled = false;
             }
         }
 
         private void DailyEvery_CheckedChanged(object sender, EventArgs e)
         {
-            if (DailyRadioButton.Checked == true)
+            if (DailyEvery.Checked == true)
             {
+                DailyOnce.Checked = false;
+                EveryUpDown.Enabled = true;
+                EveryPeriod.Enabled = true;
+                Data.StartTime = StartTimePicker.Value;
+                Data.EndTime = EndTimePicker.Value;
+            }
+            else
+            {
+                EveryUpDown.Enabled = false;
+                EveryPeriod.Enabled = false;
+            }
+        }
 
+        private void EveryPeriod_ItemChanged(object sender, EventArgs e)
+        {
+            switch (EveryPeriod.SelectedItem)
+            {
+                case "Minutes":
+                    Data.PeriodType = PeriodType.Minutes;
+                    EveryUpDown.Maximum = 24 * 60 - 1;
+                    break;
+                case "Seconds":
+                    Data.PeriodType = PeriodType.Seconds;
+                    EveryUpDown.Maximum = 24 * 60 + 60 - 1;
+                    break;
+                default:
+                    Data.PeriodType = PeriodType.Hours;
+                    break;
+            }
+        }
+
+        private void OnceTimePickler_ValueChanged(object sender, EventArgs e)
+        {
+            Data.StartTime = OnceTimePicker.Value;
+            Data.EndTime = OnceTimePicker.Value;
+        }
+
+        private void OnceTimePicker_EnabledChanged(object sender, EventArgs e)
+        {
+            if (OnceTimePicker.Enabled == true)
+            {
+                StartDate.Enabled = true;
+                EndDate.Enabled = true;
+                NextButton.Enabled = true;
             }
             else
             {
@@ -160,7 +338,253 @@ namespace WinScheduler2
             }
         }
 
-      
+        private void EveryUpDown_ValueChanged(Object sender, EventArgs e)
+        {
+            Data.TimePeriod = (int)EveryUpDown.Value;
+            StartTimePicker.Enabled = true;
+            EndTimePicker.Enabled = true;
+            StartDate.Enabled = true;
+            EndDate.Enabled = true;
+            NextButton.Enabled = true;
+        }
+
+        private void StartDate_TextChanged(Object sender, EventArgs e)
+        {
+            try
+            {
+                Data.TimeDate = DateTime.Parse(StartDate.Text);
+                EndDate.Enabled = true;
+                NextButton.Enabled = true;
+
+            }
+            catch (Exception FormatException)
+            {
+                NextButton.Enabled = false;
+                EndDate.Enabled = false;
+            }
+        }
+
+        private void EndDate_TextChanged(Object sender, EventArgs e)
+        {
+            if(EndDate.Text.Length == 0)
+            {
+                Data.TimeDate = DateTime.MaxValue.AddDays(-1) + Data.EndTime.TimeOfDay;
+                NextButton.Enabled = true;
+            }
+            else
+            {
+                try
+                {
+                    Data.EndDate = DateTime.Parse(EndDate.Text);
+                    Data.TimeDate = Data.TimeDate;
+
+                    if (Data.EndDate + Data.EndDate.TimeOfDay < Data.TimeDate + Data.StartTime.TimeOfDay)
+                    {
+                        NextButton.Enabled = false;
+                        OutputBox.Text = "Start date can not be later than end date!";
+                    }
+                    else
+                    {
+                        NextButton.Enabled = true;
+                        OutputBox.Text = "";
+                    }
+
+                }
+                catch (Exception FormatException)
+                {
+                    NextButton.Enabled = false;
+                }
+            }
+            
+        }
+
+        private void StartTimePicker_ValueChanged(Object sender, EventArgs e)
+        {
+            Data.StartTime = StartTimePicker.Value;
+            EndTimePicker.MinDate = StartTimePicker.Value;
+        }
+        private void EndTimePicker_ValueChanged(Object sender, EventArgs e)
+        {
+            Data.EndTime = EndTimePicker.Value;
+        }
+
+        private void DayPeriod_ValueChanged(Object sender, EventArgs e)
+        {
+            Data.DayPeriod = (int)DayPeriod.Value;
+        }
+        private void DayPeriodType_ItemChanged(Object sender, EventArgs e)
+        {
+            switch (DayPeriodType.SelectedItem)
+            {
+                case "Days":
+                    Data.DaysPeriodType = DaysPeriodType.Days;
+                    break;
+                case "Weeks":
+                    Data.DaysPeriodType = DaysPeriodType.Weeks;
+                    break;
+                case "Months":
+                    Data.DaysPeriodType = DaysPeriodType.Months;
+                    break;
+                default:
+                    break;
+            }
+        }
+               
+
+        private void MonthyRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (MonthyRadioButton.Checked == true)
+            {
+                DailyEvery.Enabled = true;
+                DailyOnce.Enabled = true;
+                MondayBox.Enabled = false;
+                TuesdayBox.Enabled = false;
+                WednesdayBox.Enabled = false;
+                ThursdayBox.Enabled = false;
+                FridayBox.Enabled = false;
+                SaturdayBox.Enabled = false;
+                SundayBox.Enabled = false;
+                MondayBox.Checked = true;
+                TuesdayBox.Checked = true;
+                WednesdayBox.Checked = true;
+                ThursdayBox.Checked = true;
+                FridayBox.Checked = true;
+                SaturdayBox.Checked = true;
+                SundayBox.Checked = true;
+                Data.Format = Format.Monthy;
+                DayPeriod.Enabled = false;
+                DayPeriodType.Enabled = false;
+                DayMonthy.Enabled = true;
+                TheMonthy.Enabled = true;
+                Data.MonthSettings.MonthlyFormat = MonthyFormat.FixedDay;
+                EveryMonthMonthy.Enabled = true;
+                EveryMonthy.Enabled = true;
+
+            }
+            else
+            {
+
+            }
+
+        }
+
+        private void DayMonthy_CheckedChanged(object sender, EventArgs e)
+        {
+           if(DayMonthy.Checked == true)
+            {
+                Data.MonthSettings.MonthlyFormat = MonthyFormat.FixedDay;
+                EveryMonthMonthy.Enabled = true;
+                EveryMonthy.Enabled = true;
+                TheMonthy.Checked = false;
+                Data.MonthSettings.MonthNum = (int)EveryMonthMonthy.Value;
+            }
+            else
+            {
+                EveryMonthMonthy.Enabled = false;
+                EveryMonthy.Enabled = false;
+            }
+        }
+
+        private void TheMonthy_CheckedChanged(object sender, EventArgs e)
+        {
+            if(TheMonthy.Checked == true)
+            {
+                Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+                MonthyFrequencyDomain.Enabled = true;
+                MonthNumMonthy.Enabled = true;
+                MonthDaysMonthyDomain.Enabled = true;
+                DayMonthy.Checked = false;
+                Data.MonthSettings.MonthNum = (int)MonthNumMonthy.Value;
+            }
+            else
+            {
+                MonthyFrequencyDomain.Enabled = false;
+                MonthNumMonthy.Enabled = false;
+                MonthDaysMonthyDomain.Enabled = false;
+            }
+
+        }
+
+        private void EveryMonthy_ValueChanged(object sender, EventArgs e)
+        {
+            Data.MonthSettings.DayNum = (int)EveryMonthy.Value;
+        }
+
+        private void EveryMonthMonthy_ValueChanged(object sender, EventArgs e)
+        {
+            Data.MonthSettings.MonthNum = (int)EveryMonthMonthy.Value;
+        }
+
+        private void MonthyFrequency_SelectedItemChanged(object sender, EventArgs e)
+        {
+            switch (MonthyFrequencyDomain.SelectedItem)
+            {
+                case "Second":
+                    Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Second;
+                    break;
+                case "Third":
+                    Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Third;
+                    break;
+                case "Fourth":
+                    Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Fourth;
+                    break;
+                case "Last":
+                    Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Last;
+                    break;
+                default:
+                    Data.MonthSettings.MonthlyFrequency = MonthyFrequency.First;
+                    break;
+            }
+        }
+
+        private void MonthDaysMonthy_SelectedItemChanged(object sender, EventArgs e)
+        {
+            {
+                switch (MonthDaysMonthyDomain.SelectedItem)
+                {
+                    case "Monday":
+                        Data.MonthSettings.MonthDays = MonthDays.Monday;
+                        break;
+                    case "Tuesday":
+                        Data.MonthSettings.MonthDays = MonthDays.Tuesday;
+                        break;
+                    case "Wednesday":
+                        Data.MonthSettings.MonthDays = MonthDays.Wednesday;
+                        break;
+                    case "Thursday":
+                        Data.MonthSettings.MonthDays = MonthDays.Thursday;
+                        break;
+                    case "Friday":
+                        Data.MonthSettings.MonthDays = MonthDays.Friday;
+                        break;
+                    case "Saturday":
+                        Data.MonthSettings.MonthDays = MonthDays.Saturday;
+                        break;
+                    case "Sunday":
+                        Data.MonthSettings.MonthDays = MonthDays.Sunday;
+                        break;
+                    case "Weekday":
+                        Data.MonthSettings.MonthDays = MonthDays.Weekday;
+                        break;
+                    case "Weekend day":
+                        Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
+                        break;
+                    default:
+                        Data.MonthSettings.MonthDays = MonthDays.Day;
+                        break;
+                }
+            }
+        }
+
+        private void MonthNumMonthy_ValueChanged(object sender, EventArgs e)
+        {
+            Data.MonthSettings.MonthNum = (int)MonthNumMonthy.Value;
+        }
+
+        private void Description_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
