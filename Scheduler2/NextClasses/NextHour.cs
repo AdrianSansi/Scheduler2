@@ -1,6 +1,6 @@
 ﻿namespace Scheduler2
 {
-    public class NextHour
+    public static class NextHour
     {
         public static DateTime Calculate(DateTime current, Settings settings)
         {

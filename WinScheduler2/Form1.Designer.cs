@@ -299,7 +299,6 @@
             this.Description.ReadOnly = true;
             this.Description.Size = new System.Drawing.Size(744, 23);
             this.Description.TabIndex = 3;
-            this.Description.TextChanged += new System.EventHandler(this.Description_TextChanged);
             // 
             // label5
             // 

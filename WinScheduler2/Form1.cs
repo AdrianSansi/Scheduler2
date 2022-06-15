@@ -102,12 +102,7 @@ namespace WinScheduler2
                 TheMonthy.Enabled = false;
                 DayMonthy.Enabled = false;
                 TheMonthy.Enabled = false;
-
-            }
-            else
-            {
-
-            }
+            }           
         }
 
         private void WeeklyRadioButton_CheckedChanged(object sender, EventArgs e)
@@ -163,16 +158,11 @@ namespace WinScheduler2
         private void NextButton_Click(object sender, EventArgs e)
         {
             Description.Text = DescriptionClass.Description(Data);
-            if (DailyOnce.Checked == true)
+            if (DailyOnce.Checked || DailyEvery.Checked)
             {
                 Schedule.NextDate(Data);
                 OutputBox.Text = Data.TimeDate.ToString();
-            }
-            else if (DailyEvery.Checked == true)
-            {
-                Schedule.NextDate(Data);
-                OutputBox.Text = Data.TimeDate.ToString();
-            }
+            }            
             else
             {
                 Description.Text = "Occurs the " + Data.TimeDate.ToShortDateString() + " at " + Data.TimeDate.TimeOfDay.ToString();
@@ -331,11 +321,7 @@ namespace WinScheduler2
                 StartDate.Enabled = true;
                 EndDate.Enabled = true;
                 NextButton.Enabled = true;
-            }
-            else
-            {
-
-            }
+            }           
         }
 
         private void EveryUpDown_ValueChanged(Object sender, EventArgs e)
@@ -459,12 +445,7 @@ namespace WinScheduler2
                 EveryMonthMonthy.Enabled = true;
                 EveryMonthy.Enabled = true;
 
-            }
-            else
-            {
-
-            }
-
+            }            
         }
 
         private void DayMonthy_CheckedChanged(object sender, EventArgs e)
@@ -578,12 +559,6 @@ namespace WinScheduler2
         private void MonthNumMonthy_ValueChanged(object sender, EventArgs e)
         {
             Data.MonthSettings.MonthNum = (int)MonthNumMonthy.Value;
-        }
-
-        private void Description_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        }       
     }
-
 }

@@ -1,6 +1,6 @@
 ﻿namespace Scheduler2
 {
-    public class NextDay
+    public static class NextDay
     {
         public static DateTime DailyFormat(DateTime current, Settings settings)
         {
@@ -170,14 +170,11 @@
                     return aux;
                 case MonthyFrequency.Third:
                     aux = aux.AddDays(2);
-                    if((int)aux.DayOfWeek == 6) return aux.AddDays(2);
-                    else if((int)aux.DayOfWeek == 0) return aux.AddDays(2);
+                    if((int)aux.DayOfWeek == 6 || (int)aux.DayOfWeek == 0) return aux.AddDays(2);
                     else return aux;
                 case MonthyFrequency.Fourth:
                     aux = aux.AddDays(3);
-                    if ((int)aux.DayOfWeek == 6) return aux.AddDays(2);
-                    else if ((int)aux.DayOfWeek == 0) return aux.AddDays(2);
-                    else if((int)aux.DayOfWeek == 1) return aux.AddDays(2);
+                    if ((int)aux.DayOfWeek == 6 || (int)aux.DayOfWeek == 0 || (int)aux.DayOfWeek == 1) return aux.AddDays(2);
                     else return aux;
                 default:
                     aux = LastDayOfMonth(aux);

@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Scheduler2
 {
-    internal class MainClass
+    internal static class MainClass
     {
 
         public static void Main(String[] Args)
         {
-
+            //Do nothing, this method is used to run Form without warnings
         }
     }
 }

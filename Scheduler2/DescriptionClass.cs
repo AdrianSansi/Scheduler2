@@ -1,7 +1,7 @@
 ﻿
 namespace Scheduler2
 {
-    public class DescriptionClass
+    public static class DescriptionClass
     {
         public static String Description(Settings Settings)
         {
@@ -24,7 +24,8 @@ namespace Scheduler2
         internal static String EnumerateWeekDays(Settings settings)
         {
             String[] weekDays = new String[7];
-            int i = 0;
+            int i = 0;           
+            
             if (settings.WeekSettings.Monday)
             {
                 weekDays[i] = " monday";

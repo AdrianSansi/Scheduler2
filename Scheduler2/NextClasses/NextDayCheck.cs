@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Scheduler2
 {
-    public class NextDayCheck
+    public static class NextDayCheck
     {
         public static DateTime checkIfMustBeNextDay(DateTime current, DateTime auxiliar, Settings settings)
         {
@@ -23,7 +23,7 @@ namespace Scheduler2
                         current = SetTimeDate(current, settings);
                         return current.AddDays(NextDay.WeeklyFormat(settings));
                     case Format.Monthy:
-                        current = SetTimeDate(current, settings);
+                        
                         return NextDay.MonthyFormat(settings);
                     default:
                         current = SetTimeDate(current, settings);

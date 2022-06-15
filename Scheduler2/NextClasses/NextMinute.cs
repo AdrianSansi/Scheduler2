@@ -1,7 +1,7 @@
 ﻿
 namespace Scheduler2
 {
-    internal class NextMinute
+    internal static class NextMinute
     {
         public static DateTime Calculate(DateTime current, Settings settings)
         {            
