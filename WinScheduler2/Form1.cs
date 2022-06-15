@@ -44,7 +44,7 @@ namespace WinScheduler2
 
         private void RecurringCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (RecurringCheckBox.Checked == true)
+            if (RecurringCheckBox.Checked)
             {
                 OnceCheckBox.Checked = false;
                 DailyRadioButton.Enabled = true;
@@ -62,7 +62,7 @@ namespace WinScheduler2
 
         private void OnceCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (OnceCheckBox.Checked == true)
+            if (OnceCheckBox.Checked)
             {
                 RecurringCheckBox.Checked = false;
                 OnceTextBox.Enabled = true;
@@ -77,7 +77,7 @@ namespace WinScheduler2
 
         private void DailyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (DailyRadioButton.Checked == true)
+            if (DailyRadioButton.Checked)
             {
                 DailyEvery.Enabled = true;
                 DailyOnce.Enabled = true;
@@ -107,7 +107,7 @@ namespace WinScheduler2
 
         private void WeeklyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (WeeklyRadioButton.Checked == true)
+            if (WeeklyRadioButton.Checked)
             {
 
                 WeeksUpDown.Enabled = true;
@@ -178,7 +178,7 @@ namespace WinScheduler2
 
         private void MondayBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (MondayBox.Checked == true)
+            if (MondayBox.Checked)
             {
                 Data.WeekSettings.Monday = true;
             }
@@ -189,7 +189,7 @@ namespace WinScheduler2
         }
         private void TuesdayBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (TuesdayBox.Checked == true)
+            if (TuesdayBox.Checked)
             {
                 Data.WeekSettings.Tuesday = true;
             }
@@ -200,7 +200,7 @@ namespace WinScheduler2
         }
         private void WednesdayBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (WednesdayBox.Checked == true)
+            if (WednesdayBox.Checked)
             {
                 Data.WeekSettings.Wednesday = true;
             }
@@ -211,7 +211,7 @@ namespace WinScheduler2
         }
         private void ThursdayBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (ThursdayBox.Checked == true)
+            if (ThursdayBox.Checked)
             {
                 Data.WeekSettings.Thursday = true;
             }
@@ -222,7 +222,7 @@ namespace WinScheduler2
         }
         private void FridayBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (FridayBox.Checked == true)
+            if (FridayBox.Checked)
             {
                 Data.WeekSettings.Friday = true;
             }
@@ -233,7 +233,7 @@ namespace WinScheduler2
         }
         private void SaturdayBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (SaturdayBox.Checked == true)
+            if (SaturdayBox.Checked)
             {
                 Data.WeekSettings.Saturday = true;
             }
@@ -244,7 +244,7 @@ namespace WinScheduler2
         }
         private void SundayBox_CheckedChanged(object sender, EventArgs e)
         {
-            if (SundayBox.Checked == true)
+            if (SundayBox.Checked)
             {
                 Data.WeekSettings.Sunday = true;
             }
@@ -260,7 +260,7 @@ namespace WinScheduler2
 
         private void DailyOnce_CheckedChanged(object sender, EventArgs e)
         {
-            if (DailyOnce.Checked == true)
+            if (DailyOnce.Checked)
             {
                 Data.StartTime = OnceTimePicker.Value;
                 Data.EndTime = OnceTimePicker.Value;
@@ -275,7 +275,7 @@ namespace WinScheduler2
 
         private void DailyEvery_CheckedChanged(object sender, EventArgs e)
         {
-            if (DailyEvery.Checked == true)
+            if (DailyEvery.Checked)
             {
                 DailyOnce.Checked = false;
                 EveryUpDown.Enabled = true;
@@ -316,7 +316,7 @@ namespace WinScheduler2
 
         private void OnceTimePicker_EnabledChanged(object sender, EventArgs e)
         {
-            if (OnceTimePicker.Enabled == true)
+            if (OnceTimePicker.Enabled)
             {
                 StartDate.Enabled = true;
                 EndDate.Enabled = true;
@@ -418,7 +418,7 @@ namespace WinScheduler2
 
         private void MonthyRadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            if (MonthyRadioButton.Checked == true)
+            if (MonthyRadioButton.Checked)
             {
                 DailyEvery.Enabled = true;
                 DailyOnce.Enabled = true;
@@ -450,7 +450,7 @@ namespace WinScheduler2
 
         private void DayMonthy_CheckedChanged(object sender, EventArgs e)
         {
-           if(DayMonthy.Checked == true)
+           if(DayMonthy.Checked)
             {
                 Data.MonthSettings.MonthlyFormat = MonthyFormat.FixedDay;
                 EveryMonthMonthy.Enabled = true;

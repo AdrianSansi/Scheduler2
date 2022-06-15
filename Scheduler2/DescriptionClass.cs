@@ -73,6 +73,7 @@ namespace Scheduler2
                 {
                     if (j == i - 2)
                     {
+                        
                         text = text + weekDays[j] + " and ";
                     }
                     else if (j == i - 1)

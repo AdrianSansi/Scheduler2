@@ -8,8 +8,19 @@
         public MonthyFrequency MonthlyFrequency { get; set; } = MonthyFrequency.First;
 
         // Day
-        public int DayNum = 1;
-        public int MonthNum = 1;
+        private int dayNum = 1;
+        public int DayNum { 
+            get { return dayNum; } 
+            set { dayNum = value; } 
+        }
+
+
+        private int monthNum = 1;
+        public int MonthNum
+        {
+            get { return monthNum; }
+            set { monthNum = value; }
+        }
 
 
 
