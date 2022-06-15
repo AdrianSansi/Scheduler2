@@ -21,10 +21,46 @@ namespace Scheduler2
             return description;
         }
 
-        internal static String EnumerateWeekDays(Settings settings)
+
+        private static String EnumerateWeekDays(Settings settings)
+        {
+            int i = 0;
+            String[] weekDays = StringOfWeekDays(settings, i);
+            if (i == 1)
+            {
+                return weekDays[0];
+            }
+            else if (i > 1)
+            {
+                String text = "";
+                for (int j = 0; j < i; j++)
+                {
+                    if (j == i - 2)
+                    {
+
+                        text = text + weekDays[j] + " and ";
+                    }
+                    else if (j == i - 1)
+                    {
+                        text = text + weekDays[j] + " ";
+                    }
+                    else
+                    {
+                        text = text + weekDays[j] + ", ";
+                    }
+                }
+                return text;
+            }
+            else
+            {
+                return settings.TimeDate.DayOfWeek.ToString();
+            }
+        }
+
+        private static String[] StringOfWeekDays(Settings settings, int i)
         {
             String[] weekDays = new String[7];
-            int i = 0;           
+                   
             
             if (settings.WeekSettings.Monday)
             {
@@ -62,35 +98,7 @@ namespace Scheduler2
                 i++;
             }
 
-            if (i == 1)
-            {
-                return weekDays[0];
-            }
-            else if (i > 1)
-            {
-                String text = "";
-                for (int j = 0; j < i; j++)
-                {
-                    if (j == i - 2)
-                    {
-                        
-                        text = text + weekDays[j] + " and ";
-                    }
-                    else if (j == i - 1)
-                    {
-                        text = text + weekDays[j] + " ";
-                    }
-                    else
-                    {
-                        text = text + weekDays[j] + ", ";
-                    }
-                }
-                return text;
-            }
-            else
-            {
-                return settings.TimeDate.DayOfWeek.ToString();
-            }
+            return weekDays;
 
         }
 
