@@ -32,7 +32,7 @@ namespace WinScheduler2
                 RecurringCheckBox.Enabled = true;
 
             }
-            catch (Exception FormatException)
+            catch (Exception)
             {
                 OnceCheckBox.Checked = false;
                 RecurringCheckBox.Checked = false;
@@ -153,7 +153,7 @@ namespace WinScheduler2
                 Data.TimeDate = DateTime.Parse(OnceTextBox.Text);
                 NextButton.Enabled = true;
             }
-            catch (Exception FormatException)
+            catch (Exception)
             {
                 NextButton.Enabled = false;
             }
@@ -357,7 +357,7 @@ namespace WinScheduler2
                 NextButton.Enabled = true;
 
             }
-            catch (Exception FormatException)
+            catch (Exception)
             {
                 NextButton.Enabled = false;
                 EndDate.Enabled = false;
@@ -376,8 +376,7 @@ namespace WinScheduler2
                 try
                 {
                     Data.EndDate = DateTime.Parse(EndDate.Text);
-                    Data.TimeDate = Data.TimeDate;
-
+                    
                     if (Data.EndDate + Data.EndDate.TimeOfDay < Data.TimeDate + Data.StartTime.TimeOfDay)
                     {
                         NextButton.Enabled = false;
@@ -390,7 +389,7 @@ namespace WinScheduler2
                     }
 
                 }
-                catch (Exception FormatException)
+                catch (Exception)
                 {
                     NextButton.Enabled = false;
                 }
