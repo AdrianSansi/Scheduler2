@@ -2,24 +2,16 @@ name: build and test
 
 on:
   push:
+    branches: [ Rama2 ]
   pull_request:
     branches: [ Rama2 ]
-    paths:
-    - '**.cs'
-    - '**.csproj'
 
 env:
-  DOTNET_VERSION: '6.0.0' # The .NET SDK version to use
+  DOTNET_VERSION: '6.x.x' # The .NET SDK version to use
 
 jobs:
   build-and-test:
-
-    name: build-and-test-${{matrix.os}}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest]
-
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     
@@ -32,10 +24,8 @@ jobs:
     - name: Test
       run: dotnet test --no-restore --verbosity normal
       
-  build:
-      
-    name: Build
-    runs-on: windows-latest
+  analyze:
+    runs-on: ubuntu-latest
     steps:
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
@@ -43,25 +33,14 @@ jobs:
           path: ~\sonar\cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
-      - name: Cache SonarCloud scanner
-        id: cache-sonar-scanner
-        uses: actions/cache@v1
-        with:
-          path: .\.sonar\scanner
-          key: ${{ runner.os }}-sonar-scanner
-          restore-keys: ${{ runner.os }}-sonar-scanner
-      - name: Install SonarCloud scanner
-        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
-        shell: powershell
+      - name: Install SonarCloud scanners
         run: |
-          New-Item -Path .\.sonar\scanner -ItemType Directory
-          dotnet tool update dotnet-sonarscanner --tool-path .\.sonar\scanner
+          dotnet tool install --global dotnet-sonarscanner
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"AdrianSansi_Scheduler2" /o:"adriansansi" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+          dotnet-sonarscanner begin /k:"colin-sonarsource_dotnet_core_sample" /o:"colin-sonarsource" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build
-          .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
