@@ -4,18 +4,14 @@
     {
         public static DateTime DailyFormat(DateTime current, Settings settings)
         {
-            switch (settings.DaysPeriodType)
+            return settings.DaysPeriodType switch
             {
-                case DaysPeriodType.Days:
-                    return current.AddDays(settings.DayPeriod);
-                case DaysPeriodType.Weeks:
-                    return current.AddDays(7 * settings.DayPeriod);
-                case DaysPeriodType.Months:
-                    return current.AddMonths(settings.DayPeriod);
-                default:
-                    return current.AddYears(settings.DayPeriod);
-
-            }
+                DaysPeriodType.Days => current.AddDays(settings.DayPeriod),
+                DaysPeriodType.Weeks => current.AddDays(7 * settings.DayPeriod),
+                DaysPeriodType.Months => current.AddMonths(settings.DayPeriod),
+                DaysPeriodType.Years => current.AddYears(settings.DayPeriod),
+                _ => current.AddYears(settings.DayPeriod),
+            };
         }
 
 
@@ -80,7 +76,7 @@
             int nextMonth = (sumMonths + currentMonth) % 12;
             if(nextMonth == 0) nextMonth = 12;
             int nextYear = settings.TimeDate.Year+(sumMonths+currentMonth-1)/12;
-            DateTime Date = new DateTime(nextYear, nextMonth, settings.MonthSettings.DayNum);
+            DateTime Date = new (nextYear, nextMonth, settings.MonthSettings.DayNum);
             return Date+settings.StartTime.TimeOfDay;
         }
 
@@ -91,7 +87,7 @@
             int nextMonth = (sumMonths + currentMonth) % 12;
             if (nextMonth == 0) nextMonth = 12;
             int nextYear = settings.TimeDate.Year + (sumMonths + currentMonth-1) / 12;
-            DateTime aux = new DateTime(nextYear, nextMonth, 1);
+            DateTime aux = new (nextYear, nextMonth, 1);
             
             switch (settings.MonthSettings.MonthDays)
             {
@@ -116,19 +112,15 @@
 
         private static DateTime Day(Settings settings, DateTime aux)
         {
-            switch (settings.MonthSettings.MonthlyFrequency)
+            return settings.MonthSettings.MonthlyFrequency switch
             {
-                case MonthyFrequency.First:
-                    return aux;
-                case MonthyFrequency.Second:
-                    return aux.AddDays(1);
-                case MonthyFrequency.Third:
-                    return aux.AddDays(2);
-                case MonthyFrequency.Fourth:
-                    return aux.AddDays(3);
-                default:
-                    return LastDayOfMonth(aux);
-            }
+                MonthyFrequency.First => aux,
+                MonthyFrequency.Second => aux.AddDays(1),
+                MonthyFrequency.Third => aux.AddDays(2),
+                MonthyFrequency.Fourth => aux.AddDays(3),
+                MonthyFrequency.Last => LastDayOfMonth(aux),
+                _ => LastDayOfMonth(aux),
+            };
         }
 
         private static DateTime LastDayOfMonth(DateTime aux)

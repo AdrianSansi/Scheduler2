@@ -8,7 +8,7 @@ namespace Scheduler2
 {
     public static class NextDayCheck
     {
-        public static DateTime checkIfMustBeNextDay(DateTime current, DateTime auxiliar, Settings settings)
+        public static DateTime CheckIfMustBeNextDay(DateTime current, DateTime auxiliar, Settings settings)
         {
             int day = current.Day;
             if (auxiliar.Day != day || auxiliar.TimeOfDay > settings.EndTime.TimeOfDay)

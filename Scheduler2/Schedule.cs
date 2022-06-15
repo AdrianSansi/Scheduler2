@@ -15,7 +15,7 @@ namespace Scheduler2
 
         }
   
-        public void CreateListOfDays(Settings settings)
+        public static void CreateListOfDays(Settings settings)
         {
             settings.WeekSettings.WeekDays.Clear();
                         
