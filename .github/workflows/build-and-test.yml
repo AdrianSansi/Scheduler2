@@ -1,38 +1,12 @@
-name: build and test
+name: Build
 on:
   push:
+    branches:
+      - master
   pull_request:
-    branches: [ Rama2 ]
-    paths:
-    - '**.cs'
-    - '**.csproj'
-
-env:
-  DOTNET_VERSION: '6.0.0' # The .NET SDK version to use
-
+    types: [opened, synchronize, reopened]
 jobs:
-  build-and-test:
-
-    name: build-and-test-${{matrix.os}}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [windows-latest]
-
-    steps:
-    - uses: actions/checkout@v2
-    
-    - name: Install dependencies
-      run: dotnet restore
-      
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
-    
-    - name: Test
-      run: dotnet test --no-restore --verbosity normal
-      
   build:
-      
     name: Build
     runs-on: windows-latest
     steps:
@@ -69,5 +43,5 @@ jobs:
         shell: powershell
         run: |
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"AdrianSansi_Scheduler2" /o:"adriansansi" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          build-and-test
+          dotnet build
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
