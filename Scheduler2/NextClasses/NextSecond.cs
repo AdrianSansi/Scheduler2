@@ -15,7 +15,7 @@ namespace Scheduler2
         {
             int day = current.Day;
             DateTime auxiliar = current.AddSeconds(settings.TimePeriod);
-            if (auxiliar.Day != day | auxiliar.TimeOfDay > settings.EndTime.TimeOfDay)
+            if (auxiliar.Day != day || auxiliar.TimeOfDay > settings.EndTime.TimeOfDay)
             {
                 switch (settings.Format)
                 {
