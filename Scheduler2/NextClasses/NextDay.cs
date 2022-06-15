@@ -21,21 +21,20 @@
 
         public static int WeeklyFormat(Settings settings)
         {
-            int weekDay = (int)settings.TimeDate.DayOfWeek;
-            if (weekDay == 0) weekDay = 7;
+           
+            int weekDay = ChangeWeekDayFormat((int)settings.TimeDate.DayOfWeek);
             int auxDay = weekDay;
             int index;
             int i = 0;
-            weekDay = (weekDay + 1) % 7;
-            if (weekDay == 0) weekDay = 7;
+            weekDay = ChangeWeekDayFormat(weekDay + 1);
+            
             while (i<8)
             {
                 i++;
                 index = settings.WeekSettings.WeekDays.IndexOf(weekDay);
                 if (index == -1) //El siguiente día no está marcado
                 {
-                    weekDay = (weekDay + 1) % 7;
-                    if (weekDay == 0) weekDay = 7;  //Paso al siguiente
+                    weekDay = ChangeWeekDayFormat(weekDay + 1); //Paso al siguiente
                 }
                 else //Si está marcado el siguiente, devuelvo ese menos la diferencia con el actual para sumarla luego
                 {
@@ -51,6 +50,13 @@
             }
             return 0;
 
+        }
+
+        private static int ChangeWeekDayFormat(int weekDay)
+        {
+            weekDay %= 7;
+            if (weekDay == 0) weekDay = 7;
+            return weekDay;
         }
 
         public static DateTime MonthyFormat(Settings settings)
@@ -320,8 +326,8 @@
         private static DateTime SpecificDay(Settings settings, DateTime aux)
         {
             aux = new DateTime(aux.Year, aux.Month, 1);
-            int day = (int)aux.DayOfWeek;
-            if (day == 0) day = 7;
+            int day = ChangeWeekDayFormat((int)aux.DayOfWeek);
+            
             switch (settings.MonthSettings.MonthDays)
             {
                 case MonthDays.Monday:
