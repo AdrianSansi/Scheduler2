@@ -3,9 +3,8 @@ namespace WinScheduler2
 {
     public partial class Form1 : Form
     {
-
-        Settings Data;
-        Schedule Schedule;
+        readonly Settings Data;
+        readonly Schedule Schedule;
         
 
 
@@ -467,7 +466,7 @@ namespace WinScheduler2
 
         private void TheMonthy_CheckedChanged(object sender, EventArgs e)
         {
-            if(TheMonthy.Checked == true)
+            if(TheMonthy.Checked)
             {
                 Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
                 MonthyFrequencyDomain.Enabled = true;
@@ -497,63 +496,31 @@ namespace WinScheduler2
 
         private void MonthyFrequency_SelectedItemChanged(object sender, EventArgs e)
         {
-            switch (MonthyFrequencyDomain.SelectedItem)
+            Data.MonthSettings.MonthlyFrequency = MonthyFrequencyDomain.SelectedItem switch
             {
-                case "Second":
-                    Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Second;
-                    break;
-                case "Third":
-                    Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Third;
-                    break;
-                case "Fourth":
-                    Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Fourth;
-                    break;
-                case "Last":
-                    Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Last;
-                    break;
-                default:
-                    Data.MonthSettings.MonthlyFrequency = MonthyFrequency.First;
-                    break;
-            }
+                "Second" => MonthyFrequency.Second,
+                "Third" => MonthyFrequency.Third,
+                "Fourth" => MonthyFrequency.Fourth,
+                "Last" => MonthyFrequency.Last,
+                _ => MonthyFrequency.First,
+            };
         }
 
         private void MonthDaysMonthy_SelectedItemChanged(object sender, EventArgs e)
         {
+            Data.MonthSettings.MonthDays = MonthDaysMonthyDomain.SelectedItem switch
             {
-                switch (MonthDaysMonthyDomain.SelectedItem)
-                {
-                    case "Monday":
-                        Data.MonthSettings.MonthDays = MonthDays.Monday;
-                        break;
-                    case "Tuesday":
-                        Data.MonthSettings.MonthDays = MonthDays.Tuesday;
-                        break;
-                    case "Wednesday":
-                        Data.MonthSettings.MonthDays = MonthDays.Wednesday;
-                        break;
-                    case "Thursday":
-                        Data.MonthSettings.MonthDays = MonthDays.Thursday;
-                        break;
-                    case "Friday":
-                        Data.MonthSettings.MonthDays = MonthDays.Friday;
-                        break;
-                    case "Saturday":
-                        Data.MonthSettings.MonthDays = MonthDays.Saturday;
-                        break;
-                    case "Sunday":
-                        Data.MonthSettings.MonthDays = MonthDays.Sunday;
-                        break;
-                    case "Weekday":
-                        Data.MonthSettings.MonthDays = MonthDays.Weekday;
-                        break;
-                    case "Weekend day":
-                        Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
-                        break;
-                    default:
-                        Data.MonthSettings.MonthDays = MonthDays.Day;
-                        break;
-                }
-            }
+                "Monday" => MonthDays.Monday,
+                "Tuesday" => MonthDays.Tuesday,
+                "Wednesday" => MonthDays.Wednesday,
+                "Thursday" => MonthDays.Thursday,
+                "Friday" => MonthDays.Friday,
+                "Saturday" => MonthDays.Saturday,
+                "Sunday" => MonthDays.Sunday,
+                "Weekday" => MonthDays.Weekday,
+                "Weekend day" => MonthDays.WeekendDay,
+                _ => MonthDays.Day,
+            };
         }
 
         private void MonthNumMonthy_ValueChanged(object sender, EventArgs e)

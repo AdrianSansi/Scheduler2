@@ -9,10 +9,11 @@ namespace Scheduler2
     public class Schedule
     {    
         public int NumberOfDates { get; set; } = 0;
-         
-        public Schedule(Settings settings)
-        {                      
+        public Settings Settings { get; }
 
+        public Schedule(Settings settings)
+        {
+            Settings = settings;
         }
   
         public static void CreateListOfDays(Settings settings)
@@ -145,28 +146,22 @@ namespace Scheduler2
 
         private static DateTime CalculateOnceDate(Settings settings)
         {
-            switch (settings.Format)
+            return settings.Format switch
             {
-                case Format.Monthy:
-                    return NextDay.MonthyFormat(settings);
-                case Format.Weekly:
-                    return settings.TimeDate.AddDays(NextDay.WeeklyFormat(settings));
-                default:
-                    return NextDay.DailyFormat(settings.TimeDate, settings);
-            }
+                Format.Monthy => NextDay.MonthyFormat(settings),
+                Format.Weekly => settings.TimeDate.AddDays(NextDay.WeeklyFormat(settings)),
+                _ => NextDay.DailyFormat(settings.TimeDate, settings),
+            };
         }
 
         private static DateTime CalculateRecurringDate(Settings settings)
         {
-            switch (settings.PeriodType)
+            return settings.PeriodType switch
             {
-                case PeriodType.Minutes:
-                    return NextMinute.Calculate(settings.TimeDate, settings);
-                case PeriodType.Seconds:
-                    return NextSecond.Calculate(settings.TimeDate, settings);
-                default:
-                    return NextHour.Calculate(settings.TimeDate, settings);
-            }
+                PeriodType.Minutes => NextMinute.Calculate(settings.TimeDate, settings),
+                PeriodType.Seconds => NextSecond.Calculate(settings.TimeDate, settings),
+                _ => NextHour.Calculate(settings.TimeDate, settings),
+            };
         }
 
 

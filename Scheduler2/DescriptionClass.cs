@@ -6,25 +6,19 @@ namespace Scheduler2
         public static String Description(Settings Settings)
         {
             String description = "Occurs ";
-            switch (Settings.Format)
+            description += Settings.Format switch
             {
-                case Format.Weekly:
-                    description += WeeklyDescription(Settings);
-                    break;
-                case Format.Monthy:
-                    description += MonthyDescription(Settings);
-                    break;
-                default:
-                    description += OnceDescription(Settings);
-                    break;
-            }
+                Format.Weekly => WeeklyDescription(Settings),
+                Format.Monthy => MonthyDescription(Settings),
+                _ => OnceDescription(Settings),
+            };
             return description;
         }
 
 
         private static String EnumerateWeekDays(Settings settings)
         {
-            int i = settings.WeekSettings.WeekDays.Count();
+            int i = settings.WeekSettings.WeekDays.Count;
             String[] weekDays = StringOfWeekDays(settings);
             if (i == 1)
             {
