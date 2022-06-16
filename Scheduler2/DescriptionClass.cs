@@ -24,8 +24,8 @@ namespace Scheduler2
 
         private static String EnumerateWeekDays(Settings settings)
         {
-            int i = 0;
-            String[] weekDays = StringOfWeekDays(settings, i);
+            int i = settings.WeekSettings.WeekDays.Count();
+            String[] weekDays = StringOfWeekDays(settings);
             if (i == 1)
             {
                 return weekDays[0];
@@ -57,8 +57,10 @@ namespace Scheduler2
             }
         }
 
-        private static String[] StringOfWeekDays(Settings settings, int i)
+        private static String[] StringOfWeekDays(Settings settings)
         {
+            //settings.WeekSettings.WeekDays
+            int i = 0;
             String[] weekDays = new String[7];
                    
             
@@ -82,20 +84,20 @@ namespace Scheduler2
                 weekDays[i] = " thursday";
                 i++;
             }
-            if (settings.WeekSettings.Monday)
+            if (settings.WeekSettings.Friday)
             {
                 weekDays[i] = " friday";
                 i++;
             }
-            if (settings.WeekSettings.Tuesday)
+            if (settings.WeekSettings.Saturday)
             {
                 weekDays[i] = " saturday";
                 i++;
             }
-            if (settings.WeekSettings.Tuesday)
+            if (settings.WeekSettings.Sunday)
             {
                 weekDays[i] = " sunday";
-                i++;
+
             }
 
             return weekDays;
