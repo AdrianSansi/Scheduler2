@@ -1,4 +1,6 @@
 ﻿
+using System.Text;
+
 namespace Scheduler2
 {
     public static class DescriptionClass
@@ -26,24 +28,25 @@ namespace Scheduler2
             }
             else if (i > 1)
             {
-                String text = "";
+                var daysDescription = new StringBuilder();
                 for (int j = 0; j < i; j++)
                 {
+                    daysDescription.Append(weekDays[j]);
+
                     if (j == i - 2)
                     {
-
-                        text = text + weekDays[j] + " and";
+                        daysDescription.Append(" and");
                     }
                     else if (j == i - 1)
                     {
-                        text = text + weekDays[j] + " ";
+                        daysDescription.Append(" ");
                     }
                     else
                     {
-                        text = text + weekDays[j] + ",";
+                        daysDescription.Append(",");
                     }
                 }
-                return text;
+                return daysDescription.ToString();
             }
             else
             {
@@ -113,7 +116,7 @@ namespace Scheduler2
                 description += " every " + Settings.TimePeriod + " " + Settings.PeriodType.ToString();
                 description += " between " + Settings.StartTime.TimeOfDay.ToString() + " and " + Settings.EndTime.TimeOfDay.ToString();
             }
-            description += " starting on " + Settings.StartDate.ToShortDateString();
+            description += $" starting on {Settings.StartDate:dd/MM/yyyy}";
             return description;
         }
         internal static String MonthyDescription(Settings Settings)
@@ -140,7 +143,7 @@ namespace Scheduler2
                 description += "every " + Settings.TimePeriod + " " + Settings.PeriodType.ToString().ToLower();
                 description += " between " + Settings.StartTime.TimeOfDay.ToString() + " and " + Settings.EndTime.TimeOfDay.ToString();
             }
-            description += " starting on " + Settings.StartDate.ToShortDateString();
+            description += $" starting on {Settings.StartDate:dd/MM/yyyy}";
             return description;
         }
         internal static String OnceDescription(Settings Settings)
@@ -156,7 +159,7 @@ namespace Scheduler2
                 description += " between " + Settings.StartTime.TimeOfDay.ToString() + " and " + Settings.EndTime.TimeOfDay.ToString();
             }
             description += "every " + Settings.DayPeriod.ToString() + " " + Settings.DaysPeriodType.ToString().ToLower();
-            description += " starting on " + Settings.StartDate.ToShortDateString();
+            description += $" starting on{Settings.StartDate:dd/MM/yyyy}";
             return description;
         }
     }
