@@ -39,11 +39,11 @@ namespace Scheduler2
                     }
                     else if (j == i - 1)
                     {
-                        daysDescription.Append(" ");
+                        daysDescription.Append(' ');
                     }
                     else
                     {
-                        daysDescription.Append(",");
+                        daysDescription.Append(',');
                     }
                 }
                 return daysDescription.ToString();
