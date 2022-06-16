@@ -1224,15 +1224,20 @@ namespace Testing
                 new DateTime(2024, 8, 27, 3, 30, 20),
                 new DateTime(2024, 8, 27, 3, 30, 40),
                 new DateTime(2024, 8, 27, 3, 31, 0),
-           
-
             };
+            String expectedValue2 = "Occurs the day number 27 of very 4 months every 20 seconds between 03:30:00 and 03:31:00 starting on 27/12/2023";
+            
+            
+
             int i = 0;
             while (i < 12)
             {
                 actualValue[i] = schedule.NextDate(Data);
                 i++;
             }
+            String actualValue2 = DescriptionClass.Description(Data);
+
+
             actualValue[0].Should().Be(expectedValue[0]);
             actualValue[1].Should().Be(expectedValue[1]);
             actualValue[2].Should().Be(expectedValue[2]);
@@ -1245,6 +1250,8 @@ namespace Testing
             actualValue[9].Should().Be(expectedValue[9]);
             actualValue[10].Should().Be(expectedValue[10]);
             actualValue[11].Should().Be(expectedValue[11]);
+
+            actualValue2.Should().Be(expectedValue2);
         }
         [Fact]
         public void Test_Last_Day_Every_Month_At_12()
@@ -1283,12 +1290,16 @@ namespace Testing
                 new DateTime(2024, 10, 31, 12, 0, 0),
                 new DateTime(2024, 11, 30, 12, 0, 0),
             };
+            String expectedValue2 = "Occurs the last day of very 1 months once at 12:00:00 starting on 31/12/2023";
+
             int i = 0;
             while (i < 12)
             {
                 actualValue[i] = schedule.NextDate(Data);
                 i++;
             }
+            String actualValue2 = DescriptionClass.Description(Data);
+
             actualValue[0].Should().Be(expectedValue[0]);
             actualValue[1].Should().Be(expectedValue[1]);
             actualValue[2].Should().Be(expectedValue[2]);
@@ -1301,6 +1312,11 @@ namespace Testing
             actualValue[9].Should().Be(expectedValue[9]);
             actualValue[10].Should().Be(expectedValue[10]);
             actualValue[11].Should().Be(expectedValue[11]);
+            actualValue2.Should().Be(expectedValue2);
+
+
         }
+
+
     }
 }

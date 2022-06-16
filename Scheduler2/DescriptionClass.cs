@@ -38,7 +38,7 @@ namespace Scheduler2
                     if (j == i - 2)
                     {
 
-                        text = text + weekDays[j] + " and ";
+                        text = text + weekDays[j] + " and";
                     }
                     else if (j == i - 1)
                     {
@@ -46,14 +46,14 @@ namespace Scheduler2
                     }
                     else
                     {
-                        text = text + weekDays[j] + ", ";
+                        text = text + weekDays[j] + ",";
                     }
                 }
                 return text;
             }
             else
             {
-                return settings.TimeDate.DayOfWeek.ToString();
+                return settings.TimeDate.DayOfWeek.ToString().ToLower();
             }
         }
 
@@ -127,23 +127,23 @@ namespace Scheduler2
             String description = "";
             if (Settings.MonthSettings.MonthlyFormat == MonthyFormat.FixedDay)
             {
-                description += " the day number " + Settings.MonthSettings.DayNum.ToString();
+                description += "the day number " + Settings.MonthSettings.DayNum.ToString();
                 description += " of very " + Settings.MonthSettings.MonthNum + " months ";
             }
             else
             {
-                description += " the " + Settings.MonthSettings.MonthlyFrequency.ToString();
-                description += " " + Settings.MonthSettings.MonthDays.ToString();
-                description += " of every " + Settings.MonthSettings.MonthNum.ToString() + " months ";
+                description += "the " + Settings.MonthSettings.MonthlyFrequency.ToString().ToLower();
+                description += " " + Settings.MonthSettings.MonthDays.ToString().ToLower();
+                description += " of very " + Settings.MonthSettings.MonthNum.ToString() + " months ";
             }
 
             if (Settings.StartTime.TimeOfDay == Settings.EndTime.TimeOfDay)
             {
-                description += " once at " + Settings.StartTime.TimeOfDay.ToString();
+                description += "once at " + Settings.StartTime.TimeOfDay.ToString();
             }
             else
             {
-                description += " every " + Settings.TimePeriod + " " + Settings.PeriodType.ToString();
+                description += "every " + Settings.TimePeriod + " " + Settings.PeriodType.ToString().ToLower();
                 description += " between " + Settings.StartTime.TimeOfDay.ToString() + " and " + Settings.EndTime.TimeOfDay.ToString();
             }
             description += " starting on " + Settings.StartDate.ToShortDateString();
@@ -158,10 +158,10 @@ namespace Scheduler2
             }
             else
             {
-                description += " every " + Settings.TimePeriod + " " + Settings.PeriodType.ToString();
+                description += "every " + Settings.TimePeriod + " " + Settings.PeriodType.ToString().ToLower();
                 description += " between " + Settings.StartTime.TimeOfDay.ToString() + " and " + Settings.EndTime.TimeOfDay.ToString();
             }
-            description += " every " + Settings.DayPeriod.ToString() + " " + Settings.DaysPeriodType.ToString();
+            description += "every " + Settings.DayPeriod.ToString() + " " + Settings.DaysPeriodType.ToString().ToLower();
             description += " starting on " + Settings.StartDate.ToShortDateString();
             return description;
         }
