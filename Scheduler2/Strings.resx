@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Monday" xml:space="preserve">
+    <value>Lunes</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Martes</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Miércoles</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Jueves</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Viernes</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Sábado</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Domingo</value>
+  </data>
+  <data name="First" xml:space="preserve">
+    <value>primer</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>día</value>
+  </data>
+  <data name="Weekday" xml:space="preserve">
+    <value>día entre semana</value>
+  </data>
+  <data name="WeekendDay" xml:space="preserve">
+    <value>día en fin de semana</value>
+  </data>
+  <data name="Second" xml:space="preserve">
+    <value>segundo</value>
+  </data>
+  <data name="Third" xml:space="preserve">
+    <value>tercer</value>
+  </data>
+  <data name="Fourth" xml:space="preserve">
+    <value>cuarto</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>último</value>
+  </data>
+  <data name="OfVery" xml:space="preserve">
+    <value>de cada</value>
+  </data>
+  <data name="Every" xml:space="preserve">
+    <value>cada</value>
+  </data>
+  <data name="Starting" xml:space="preserve">
+    <value>comenzando el</value>
+  </data>
+  <data name="Ending" xml:space="preserve">
+    <value>finalizando el</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>hora</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>horas</value>
+  </data>
+  <data name="Minute" xml:space="preserve">
+    <value>minuto</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>minutos</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>segundos</value>
+  </data>
+  <data name="Occurs" xml:space="preserve">
+    <value>Ocurre</value>
+  </data>
+  <data name="The_male" xml:space="preserve">
+    <value>el</value>
+  </data>
+  <data name="The_female" xml:space="preserve">
+    <value>la</value>
+  </data>
+  <data name="And" xml:space="preserve">
+    <value>y</value>
+  </data>
+  <data name="Between" xml:space="preserve">
+    <value>entre</value>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>semana</value>
+  </data>
+  <data name="Weeks" xml:space="preserve">
+    <value>semanas</value>
+  </data>
+  <data name="Once" xml:space="preserve">
+    <value>una vez</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>mes</value>
+  </data>
+  <data name="Months" xml:space="preserve">
+    <value>meses</value>
+  </data>
+  <data name="At" xml:space="preserve">
+    <value>a las</value>
+  </data>
+  <data name="Days" xml:space="preserve">
+    <value>días</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>año</value>
+  </data>
+  <data name="Years" xml:space="preserve">
+    <value>años</value>
+  </data>
+</root>

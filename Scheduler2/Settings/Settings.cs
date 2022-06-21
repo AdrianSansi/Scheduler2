@@ -8,6 +8,7 @@ namespace Scheduler2
 {
     public class Settings
     {
+        public Language Language { get; set; } = Language.Spanish_Es;
         public DateTime CurrentDate { get; set; } = new DateTime();
 
         public DateTime TimeDate { get; set; } = new DateTime();

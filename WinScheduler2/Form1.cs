@@ -440,7 +440,7 @@ namespace WinScheduler2
                 DayPeriodType.Enabled = false;
                 DayMonthy.Enabled = true;
                 TheMonthy.Enabled = true;
-                Data.MonthSettings.MonthlyFormat = MonthyFormat.FixedDay;
+                Data.MonthSettings.MonthyFormat = MonthyFormat.FixedDay;
                 EveryMonthMonthy.Enabled = true;
                 EveryMonthy.Enabled = true;
 
@@ -451,7 +451,7 @@ namespace WinScheduler2
         {
            if(DayMonthy.Checked)
             {
-                Data.MonthSettings.MonthlyFormat = MonthyFormat.FixedDay;
+                Data.MonthSettings.MonthyFormat = MonthyFormat.FixedDay;
                 EveryMonthMonthy.Enabled = true;
                 EveryMonthy.Enabled = true;
                 TheMonthy.Checked = false;
@@ -468,7 +468,7 @@ namespace WinScheduler2
         {
             if(TheMonthy.Checked)
             {
-                Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+                Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
                 MonthyFrequencyDomain.Enabled = true;
                 MonthNumMonthy.Enabled = true;
                 MonthDaysMonthyDomain.Enabled = true;
@@ -496,7 +496,7 @@ namespace WinScheduler2
 
         private void MonthyFrequency_SelectedItemChanged(object sender, EventArgs e)
         {
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequencyDomain.SelectedItem switch
+            Data.MonthSettings.MonthyFrequency = MonthyFrequencyDomain.SelectedItem switch
             {
                 "Second" => MonthyFrequency.Second,
                 "Third" => MonthyFrequency.Third,
@@ -526,6 +526,25 @@ namespace WinScheduler2
         private void MonthNumMonthy_ValueChanged(object sender, EventArgs e)
         {
             Data.MonthSettings.MonthNum = (int)MonthNumMonthy.Value;
-        }       
+        }
+       
+        private void LanguageDomain_SelectedItemChanged(object sender, EventArgs e)
+        {
+            switch (LanguageDomain.SelectedItem)
+            {
+                case "Spanish ES":
+                    Data.Language = Language.Spanish_Es;
+                    break;
+                case "English UK":
+                    Data.Language = Language.English_UK;
+                    break;
+                case "English US":
+                    Data.Language = Language.English_US;
+                    break;
+                default:
+                    break;
+            }
+            SetTheCultureFormat.SetCultureAndLanguage(Data);
+        }
     }
 }

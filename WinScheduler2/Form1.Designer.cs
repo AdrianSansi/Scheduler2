@@ -89,6 +89,9 @@
             this.EveryMonthy = new System.Windows.Forms.NumericUpDown();
             this.TheMonthy = new System.Windows.Forms.CheckBox();
             this.DayMonthy = new System.Windows.Forms.CheckBox();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.LanguageDomain = new System.Windows.Forms.DomainUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -103,6 +106,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.MonthNumMonthy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EveryMonthMonthy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EveryMonthy)).BeginInit();
+            this.groupBox9.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -110,7 +114,7 @@
             this.groupBox1.Controls.Add(this.NextButton);
             this.groupBox1.Controls.Add(this.InputBox);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(21, 10);
+            this.groupBox1.Location = new System.Drawing.Point(21, 56);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(767, 67);
             this.groupBox1.TabIndex = 0;
@@ -165,7 +169,7 @@
             this.groupBox2.Controls.Add(this.OnceTextBox);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(21, 83);
+            this.groupBox2.Location = new System.Drawing.Point(21, 129);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(767, 99);
             this.groupBox2.TabIndex = 2;
@@ -321,7 +325,7 @@
             this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.WeeksUpDown);
             this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Location = new System.Drawing.Point(21, 280);
+            this.groupBox4.Location = new System.Drawing.Point(21, 331);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(767, 97);
             this.groupBox4.TabIndex = 4;
@@ -460,9 +464,9 @@
             this.groupBox5.Controls.Add(this.EveryPeriod);
             this.groupBox5.Controls.Add(this.EveryUpDown);
             this.groupBox5.Controls.Add(this.OnceTimePicker);
-            this.groupBox5.Location = new System.Drawing.Point(21, 383);
+            this.groupBox5.Location = new System.Drawing.Point(21, 434);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(767, 134);
+            this.groupBox5.Size = new System.Drawing.Size(767, 83);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Daily Frequency";
@@ -470,7 +474,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(247, 101);
+            this.label11.Location = new System.Drawing.Point(580, 57);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(40, 15);
             this.label11.TabIndex = 10;
@@ -479,7 +483,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(16, 103);
+            this.label10.Location = new System.Drawing.Point(393, 55);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(61, 15);
             this.label10.TabIndex = 9;
@@ -489,11 +493,11 @@
             // 
             this.EndTimePicker.Enabled = false;
             this.EndTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.EndTimePicker.Location = new System.Drawing.Point(300, 95);
+            this.EndTimePicker.Location = new System.Drawing.Point(639, 52);
             this.EndTimePicker.MaxDate = new System.DateTime(1753, 1, 1, 23, 59, 0, 0);
             this.EndTimePicker.Name = "EndTimePicker";
             this.EndTimePicker.ShowUpDown = true;
-            this.EndTimePicker.Size = new System.Drawing.Size(106, 23);
+            this.EndTimePicker.Size = new System.Drawing.Size(114, 23);
             this.EndTimePicker.TabIndex = 8;
             this.EndTimePicker.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.EndTimePicker.ValueChanged += new System.EventHandler(this.EndTimePicker_ValueChanged);
@@ -502,11 +506,11 @@
             // 
             this.StartTimePicker.Enabled = false;
             this.StartTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.StartTimePicker.Location = new System.Drawing.Point(90, 95);
+            this.StartTimePicker.Location = new System.Drawing.Point(470, 52);
             this.StartTimePicker.MaxDate = new System.DateTime(1753, 1, 1, 23, 59, 0, 0);
             this.StartTimePicker.Name = "StartTimePicker";
             this.StartTimePicker.ShowUpDown = true;
-            this.StartTimePicker.Size = new System.Drawing.Size(114, 23);
+            this.StartTimePicker.Size = new System.Drawing.Size(92, 23);
             this.StartTimePicker.TabIndex = 7;
             this.StartTimePicker.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             this.StartTimePicker.ValueChanged += new System.EventHandler(this.StartTimePicker_ValueChanged);
@@ -514,7 +518,7 @@
             // DailyEvery
             // 
             this.DailyEvery.AutoSize = true;
-            this.DailyEvery.Location = new System.Drawing.Point(18, 61);
+            this.DailyEvery.Location = new System.Drawing.Point(16, 51);
             this.DailyEvery.Name = "DailyEvery";
             this.DailyEvery.Size = new System.Drawing.Size(88, 19);
             this.DailyEvery.TabIndex = 6;
@@ -525,7 +529,7 @@
             // DailyOnce
             // 
             this.DailyOnce.AutoSize = true;
-            this.DailyOnce.Location = new System.Drawing.Point(19, 30);
+            this.DailyOnce.Location = new System.Drawing.Point(16, 26);
             this.DailyOnce.Name = "DailyOnce";
             this.DailyOnce.Size = new System.Drawing.Size(99, 19);
             this.DailyOnce.TabIndex = 5;
@@ -539,7 +543,7 @@
             this.EveryPeriod.Items.Add("Hours");
             this.EveryPeriod.Items.Add("Minutes");
             this.EveryPeriod.Items.Add("Seconds");
-            this.EveryPeriod.Location = new System.Drawing.Point(393, 57);
+            this.EveryPeriod.Location = new System.Drawing.Point(216, 51);
             this.EveryPeriod.Name = "EveryPeriod";
             this.EveryPeriod.ReadOnly = true;
             this.EveryPeriod.Size = new System.Drawing.Size(159, 23);
@@ -550,14 +554,14 @@
             // EveryUpDown
             // 
             this.EveryUpDown.Enabled = false;
-            this.EveryUpDown.Location = new System.Drawing.Point(233, 57);
+            this.EveryUpDown.Location = new System.Drawing.Point(136, 52);
             this.EveryUpDown.Maximum = new decimal(new int[] {
             23,
             0,
             0,
             0});
             this.EveryUpDown.Name = "EveryUpDown";
-            this.EveryUpDown.Size = new System.Drawing.Size(102, 23);
+            this.EveryUpDown.Size = new System.Drawing.Size(73, 23);
             this.EveryUpDown.TabIndex = 3;
             this.EveryUpDown.ValueChanged += new System.EventHandler(this.EveryUpDown_ValueChanged);
             // 
@@ -565,7 +569,7 @@
             // 
             this.OnceTimePicker.Enabled = false;
             this.OnceTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.OnceTimePicker.Location = new System.Drawing.Point(233, 24);
+            this.OnceTimePicker.Location = new System.Drawing.Point(136, 18);
             this.OnceTimePicker.MaxDate = new System.DateTime(1753, 1, 1, 23, 59, 59, 0);
             this.OnceTimePicker.Name = "OnceTimePicker";
             this.OnceTimePicker.ShowUpDown = true;
@@ -581,9 +585,9 @@
             this.groupBox6.Controls.Add(this.label8);
             this.groupBox6.Controls.Add(this.EndDate);
             this.groupBox6.Controls.Add(this.StartDate);
-            this.groupBox6.Location = new System.Drawing.Point(21, 578);
+            this.groupBox6.Location = new System.Drawing.Point(21, 584);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(767, 61);
+            this.groupBox6.Size = new System.Drawing.Size(767, 55);
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Limits";
@@ -629,9 +633,9 @@
             this.groupBox7.Controls.Add(this.DayPeriod);
             this.groupBox7.Controls.Add(this.DayPeriodType);
             this.groupBox7.Controls.Add(this.label12);
-            this.groupBox7.Location = new System.Drawing.Point(21, 521);
+            this.groupBox7.Location = new System.Drawing.Point(21, 523);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(767, 57);
+            this.groupBox7.Size = new System.Drawing.Size(767, 55);
             this.groupBox7.TabIndex = 7;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "PeriodConfiguration";
@@ -691,7 +695,7 @@
             this.groupBox8.Controls.Add(this.EveryMonthy);
             this.groupBox8.Controls.Add(this.TheMonthy);
             this.groupBox8.Controls.Add(this.DayMonthy);
-            this.groupBox8.Location = new System.Drawing.Point(21, 190);
+            this.groupBox8.Location = new System.Drawing.Point(21, 234);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(767, 81);
             this.groupBox8.TabIndex = 8;
@@ -859,11 +863,44 @@
             this.DayMonthy.UseVisualStyleBackColor = true;
             this.DayMonthy.CheckedChanged += new System.EventHandler(this.DayMonthy_CheckedChanged);
             // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.LanguageDomain);
+            this.groupBox9.Controls.Add(this.label18);
+            this.groupBox9.Location = new System.Drawing.Point(21, 1);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Size = new System.Drawing.Size(767, 49);
+            this.groupBox9.TabIndex = 9;
+            this.groupBox9.TabStop = false;
+            this.groupBox9.Text = "Language Format";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(92, 19);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(59, 15);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "Language";
+            // 
+            // LanguageDomain
+            // 
+            this.LanguageDomain.Items.Add("Spanish ES");
+            this.LanguageDomain.Items.Add("English UK");
+            this.LanguageDomain.Items.Add("English US");
+            this.LanguageDomain.Location = new System.Drawing.Point(178, 17);
+            this.LanguageDomain.Name = "LanguageDomain";
+            this.LanguageDomain.Size = new System.Drawing.Size(158, 23);
+            this.LanguageDomain.TabIndex = 1;
+            this.LanguageDomain.Text = "Spanish ES";
+            this.LanguageDomain.SelectedItemChanged += new System.EventHandler(this.LanguageDomain_SelectedItemChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 751);
+            this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
@@ -896,6 +933,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.MonthNumMonthy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EveryMonthMonthy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EveryMonthy)).EndInit();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -963,5 +1002,8 @@
         private Label label17;
         private TextBox Description;
         private Label label16;
+        private GroupBox groupBox9;
+        private DomainUpDown LanguageDomain;
+        private Label label18;
     }
 }

@@ -527,7 +527,7 @@ namespace Testing
             };
             Data.MonthSettings.DayNum = 7;
             Data.MonthSettings.MonthNum = 2;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.FixedDay;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.FixedDay;
             
 
             DateTime[] actualValue = new DateTime[5];
@@ -563,7 +563,7 @@ namespace Testing
             };
             Data.MonthSettings.DayNum = 2;
             Data.MonthSettings.MonthNum = 13;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.FixedDay;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.FixedDay;
 
 
             DateTime[] actualValue = new DateTime[7];
@@ -603,7 +603,7 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 2;
             Data.MonthSettings.MonthDays = MonthDays.Monday;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
 
 
             DateTime[] actualValue = new DateTime[5];
@@ -639,8 +639,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 3;
             Data.MonthSettings.MonthDays = MonthDays.Friday;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Second;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Second;
 
 
             DateTime[] actualValue = new DateTime[3];
@@ -674,8 +674,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.MonthDays = MonthDays.Saturday;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Last;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
 
 
             DateTime[] actualValue = new DateTime[7];
@@ -716,8 +716,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.MonthDays = MonthDays.Weekday;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Second;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Second;
 
 
             DateTime[] actualValue = new DateTime[7];
@@ -759,8 +759,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 2;
             Data.MonthSettings.MonthDays = MonthDays.Weekday;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Last;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
 
 
             DateTime[] actualValue = new DateTime[7];
@@ -802,8 +802,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Fourth;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Fourth;
 
 
             DateTime[] actualValue = new DateTime[7];
@@ -846,8 +846,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 3;
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Last;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
 
 
             DateTime[] actualValue = new DateTime[7];
@@ -891,8 +891,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 12;
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Last;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
 
 
             DateTime[] actualValue = new DateTime[4];
@@ -926,8 +926,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Second;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Second;
 
 
             DateTime[] actualValue = new DateTime[12];
@@ -979,8 +979,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.MonthDays = MonthDays.Weekday;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Third;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Third;
 
 
             DateTime[] actualValue = new DateTime[12];
@@ -1033,8 +1033,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.MonthDays = MonthDays.Weekday;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Fourth;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Fourth;
 
 
             DateTime[] actualValue = new DateTime[12];
@@ -1091,8 +1091,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 3;
             Data.MonthSettings.MonthDays = MonthDays.Thursday;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.First;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.First;
             Schedule schedule = new(Data);
 
             DateTime[] actualValue = new DateTime[9];
@@ -1140,8 +1140,8 @@ namespace Testing
             };
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Second;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Second;
             Schedule schedule = new(Data);
 
             DateTime[] actualValue = new DateTime[20];
@@ -1213,8 +1213,8 @@ namespace Testing
             Data.MonthSettings.MonthNum = 4;
             Data.MonthSettings.DayNum = 27;
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.FixedDay;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Second;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.FixedDay;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Second;
             Schedule schedule = new(Data);
 
             DateTime[] actualValue = new DateTime[12];
@@ -1233,7 +1233,7 @@ namespace Testing
                 new DateTime(2024, 8, 27, 3, 30, 40),
                 new DateTime(2024, 8, 27, 3, 31, 0),
             };
-            String expectedValue2 = "Occurs the day number 27 of very 4 months every 20 seconds between 03:30:00 and 03:31:00 starting on 27/12/2023";
+            String expectedValue2 = "Occurs the day 27 of very 4 months every 20 seconds between 03:30:00 and 03:31:00 starting on 27/12/2023";
             
             
 
@@ -1278,8 +1278,8 @@ namespace Testing
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.DayNum = 27;
             Data.MonthSettings.MonthDays = MonthDays.Day;
-            Data.MonthSettings.MonthlyFormat = MonthyFormat.DayOfWeek;
-            Data.MonthSettings.MonthlyFrequency = MonthyFrequency.Last;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
             Schedule schedule = new(Data);
 
             DateTime[] actualValue = new DateTime[12];
@@ -1298,7 +1298,7 @@ namespace Testing
                 new DateTime(2024, 10, 31, 12, 0, 0),
                 new DateTime(2024, 11, 30, 12, 0, 0),
             };
-            String expectedValue2 = "Occurs the last day of very 1 months once at 12:00:00 starting on 31/12/2023";
+            String expectedValue2 = "Occurs the last day of very 1 month once at 12:00:00 starting on 31/12/2023";
 
             int i = 0;
             while (i < 12)

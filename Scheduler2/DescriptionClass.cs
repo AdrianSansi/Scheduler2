@@ -5,18 +5,45 @@ namespace Scheduler2
 {
     public static class DescriptionClass
     {
-        public static String Description(Settings Settings)
+
+        public static String Description(Settings settings)
         {
-            String description = "Occurs ";
-            description += Settings.Format switch
+            var description = new StringBuilder();
+            description.Append($"{Strings.Occurs} ");
+            switch (settings.Format)
             {
-                Format.Weekly => WeeklyDescription(Settings),
-                Format.Monthy => MonthyDescription(Settings),
-                _ => OnceDescription(Settings),
-            };
-            return description;
+                case Format.Daily:
+                    description.Append(DailyDescription(settings));
+                    break;
+                case Format.Monthy:
+                    description.Append(MonthDescription(settings));
+                    break;
+                default:
+                    description.Append(WeekDescription(settings));
+                    break;
+            }
+            description.Append(EachDayDescription(settings));
+            description.Append(StartingTime(settings));
+            return description.ToString();
+
         }
 
+        private static String WeekDescription(Settings settings)
+        {
+            var description = new StringBuilder();
+            description.Append(WeekPeriod(settings));
+            description.Append(EnumerateWeekDays(settings));
+            return description.ToString();
+        }
+        private static String WeekPeriod(Settings settings)
+        {
+            var weekPeriod = new StringBuilder();
+            int numSemanas = settings.WeekPeriod;
+            weekPeriod.Append($"{Strings.Every}  {numSemanas} ");
+            if (numSemanas == 1) weekPeriod.Append(Strings.Week);
+            else weekPeriod.Append($"{ Strings.Weeks }");
+            return weekPeriod.ToString();
+        }
 
         private static String EnumerateWeekDays(Settings settings)
         {
@@ -35,15 +62,11 @@ namespace Scheduler2
 
                     if (j == i - 2)
                     {
-                        daysDescription.Append(" and");
-                    }
-                    else if (j == i - 1)
-                    {
-                        daysDescription.Append(' ');
+                        daysDescription.Append($"{Strings.And} ");
                     }
                     else
                     {
-                        daysDescription.Append(',');
+                        daysDescription.Append(", ");
                     }
                 }
                 return daysDescription.ToString();
@@ -59,108 +82,239 @@ namespace Scheduler2
             //settings.WeekSettings.WeekDays
             int i = 0;
             String[] weekDays = new String[7];
-                   
-            
+
+
             if (settings.WeekSettings.Monday)
             {
-                weekDays[i] = " monday";
+                weekDays[i] = $"{Strings.Monday} ";
                 i++;
             }
             if (settings.WeekSettings.Tuesday)
             {
-                weekDays[i] = " tuesday";
+                weekDays[i] = $"{Strings.Tuesday} "; 
                 i++;
             }
-            if (settings.WeekSettings.Monday)
+            if (settings.WeekSettings.Wednesday)
             {
-                weekDays[i] = " wednesday";
+                weekDays[i] = $"{Strings.Wednesday} ";
                 i++;
             }
-            if (settings.WeekSettings.Tuesday)
+            if (settings.WeekSettings.Thursday)
             {
-                weekDays[i] = " thursday";
+                weekDays[i] = $"{Strings.Thursday} "; 
                 i++;
             }
             if (settings.WeekSettings.Friday)
             {
-                weekDays[i] = " friday";
+                weekDays[i] = $"{Strings.Friday} ";
                 i++;
             }
             if (settings.WeekSettings.Saturday)
             {
-                weekDays[i] = " saturday";
+                weekDays[i] = $"{Strings.Saturday} ";
                 i++;
             }
             if (settings.WeekSettings.Sunday)
             {
-                weekDays[i] = " sunday";
+                weekDays[i] = $"{Strings.Sunday} ";
 
             }
 
             return weekDays;
 
         }
-
-        internal static String WeeklyDescription(Settings Settings)
+        private static String MonthDescription(Settings settings)
         {
-            String description = "";
-            description += "every " + Settings.WeekPeriod + " weeks";
-            description += "on" + EnumerateWeekDays(Settings);
+            var description = new StringBuilder();
+            if (settings.MonthSettings.MonthyFormat == MonthyFormat.FixedDay)
+            {
+                description.Append(MonthFixedDay(settings));
+            }
+            else
+            {
+                description.Append(MonthyDayOfWeek(settings));
+            }
+            description.Append($"{Strings.OfVery} {settings.MonthSettings.MonthNum} ");
+            if (settings.MonthSettings.MonthNum == 1) description.Append($"{Strings.Month} ");
+            else description.Append($"{Strings.Months} ");
+            return description.ToString();
 
-            if (Settings.StartTime.TimeOfDay == Settings.EndTime.TimeOfDay)
-            {
-                description += " once at " + Settings.StartTime.TimeOfDay.ToString();
-            }
-            else
-            {
-                description += " every " + Settings.TimePeriod + " " + Settings.PeriodType.ToString();
-                description += " between " + Settings.StartTime.TimeOfDay.ToString() + " and " + Settings.EndTime.TimeOfDay.ToString();
-            }
-            description += $" starting on {Settings.StartDate:dd/MM/yyyy}";
-            return description;
         }
-        internal static String MonthyDescription(Settings Settings)
+        private static String MonthFixedDay(Settings settings)
         {
-            String description = "";
-            if (Settings.MonthSettings.MonthlyFormat == MonthyFormat.FixedDay)
+            var description = new StringBuilder();
+            description.Append($"{Strings.The_male} {Strings.Day} {settings.MonthSettings.DayNum} ");
+            return description.ToString();
+        }
+        private static String MonthyDayOfWeek(Settings settings)
+        {
+            var description = new StringBuilder();
+            description.Append($"{Strings.The_male} ");
+            description.Append($"{OrderOfTheDay(settings)}");
+            description.Append($"{DayOfTheWeek(settings)}");
+            
+            return description.ToString();
+        }
+        
+        private static string OrderOfTheDay(Settings settings)
+        {
+            var description = new StringBuilder();
+            switch (settings.MonthSettings.MonthyFrequency)
             {
-                description += "the day number " + Settings.MonthSettings.DayNum.ToString();
-                description += " of very " + Settings.MonthSettings.MonthNum + " months ";
+            case MonthyFrequency.First:
+                description.Append($"{Strings.First} ");
+                break;
+            case MonthyFrequency.Second:
+                description.Append($"{Strings.Second} ");
+                break;
+            case MonthyFrequency.Third:
+                description.Append($"{Strings.Third} ");
+                break;
+            case MonthyFrequency.Fourth:
+                description.Append($"{Strings.Fourth} ");
+                break;
+            default:
+                description.Append($"{Strings.Last} ");
+                break;
             }
-            else
-            {
-                description += "the " + Settings.MonthSettings.MonthlyFrequency.ToString().ToLower();
-                description += " " + Settings.MonthSettings.MonthDays.ToString().ToLower();
-                description += " of very " + Settings.MonthSettings.MonthNum.ToString() + " months ";
-            }
+            return description.ToString();
+        }
 
-            if (Settings.StartTime.TimeOfDay == Settings.EndTime.TimeOfDay)
-            {
-                description += "once at " + Settings.StartTime.TimeOfDay.ToString();
-            }
-            else
-            {
-                description += "every " + Settings.TimePeriod + " " + Settings.PeriodType.ToString().ToLower();
-                description += " between " + Settings.StartTime.TimeOfDay.ToString() + " and " + Settings.EndTime.TimeOfDay.ToString();
-            }
-            description += $" starting on {Settings.StartDate:dd/MM/yyyy}";
-            return description;
-        }
-        internal static String OnceDescription(Settings Settings)
+        private static string DayOfTheWeek(Settings settings)
         {
-            String description = "";
-            if (Settings.StartTime.TimeOfDay == Settings.EndTime.TimeOfDay)
+            var description = new StringBuilder();
+            switch (settings.MonthSettings.MonthDays)
             {
-                description += " once at " + Settings.StartTime.TimeOfDay.ToString();
+                case MonthDays.Monday:
+                    description.Append($"{Strings.Monday} ");
+                    break;
+                case MonthDays.Tuesday:
+                    description.Append($"{Strings.Tuesday} ");
+                    break;
+                case MonthDays.Wednesday:
+                    description.Append($"{Strings.Wednesday} ");
+                    break;
+                case MonthDays.Thursday:
+                    description.Append($"{Strings.Thursday} ");
+                    break;
+                case MonthDays.Friday:
+                    description.Append($"{Strings.Friday} ");
+                    break;
+                case MonthDays.Saturday:
+                    description.Append($"{Strings.Saturday} ");
+                    break;
+                case MonthDays.Sunday:
+                    description.Append($"{Strings.Sunday} ");
+                    break;
+                case MonthDays.Weekday:
+                    description.Append($"{Strings.Weekday} ");
+                    break;
+                case MonthDays.WeekendDay:
+                    description.Append($"{Strings.WeekendDay} ");
+                    break;
+                default:
+                    description.Append($"{Strings.Day} ");
+                    break;
+
             }
-            else
-            {
-                description += "every " + Settings.TimePeriod + " " + Settings.PeriodType.ToString().ToLower();
-                description += " between " + Settings.StartTime.TimeOfDay.ToString() + " and " + Settings.EndTime.TimeOfDay.ToString();
-            }
-            description += "every " + Settings.DayPeriod.ToString() + " " + Settings.DaysPeriodType.ToString().ToLower();
-            description += $" starting on{Settings.StartDate:dd/MM/yyyy}";
-            return description;
+            return description.ToString();
         }
+
+        private static string EachDayDescription(Settings settings)
+        {
+            var description = new StringBuilder();
+
+            if (settings.StartTime.TimeOfDay == settings.EndTime.TimeOfDay)
+            {
+                description.Append($"{Strings.Once} ");
+                description.Append($"{Strings.At} ");
+                description.Append($"{settings.StartTime.TimeOfDay} ");
+                return description.ToString();
+            }            
+            description.Append(EveryTimePeriod(settings));
+            description.Append(TimePeriod(settings));
+            description.Append(TimeRange(settings));
+            return description.ToString();
+        }
+
+        private static string EveryTimePeriod(Settings settings)
+        {
+            var description = new StringBuilder();
+            description.Append($"{Strings.Every} ");
+            description.Append($"{settings.TimePeriod} ");
+            return description.ToString();
+        }
+
+        private static string TimePeriod(Settings settings)
+        {
+            var description = new StringBuilder();
+            int numPeriod = settings.TimePeriod;
+            switch (settings.PeriodType)
+            {
+                case PeriodType.Hours:
+                    if (numPeriod == 1) description.Append($"{Strings.Hour} ");
+                    else description.Append($"{Strings.Hours} ");
+                    break;
+                case PeriodType.Minutes:
+                    if (numPeriod == 1) description.Append($"{Strings.Minute} ");
+                    else description.Append($"{Strings.Minutes} ");
+                    break;
+                case PeriodType.Seconds:
+                    if (numPeriod == 1) description.Append($"{Strings.Second} ");
+                    else description.Append($"{Strings.Seconds} ");
+                    break;
+            }
+            return description.ToString();
+        }
+
+        private static String TimeRange(Settings settings)
+        {
+            var description = new StringBuilder();
+            TimeSpan start = settings.StartTime.TimeOfDay;
+            TimeSpan end = settings.EndTime.TimeOfDay;
+            description.Append($"{Strings.Between} ");
+            description.Append($"{start} ");
+            description.Append($"{Strings.And} ");
+            description.Append($"{end} ");
+            return description.ToString();
+        }
+
+        private static string StartingTime(Settings settings)
+        {
+            var description = new StringBuilder();
+            description.Append($"{Strings.Starting} ");
+            string date = settings.StartDate.ToShortDateString();
+            description.Append($"{date}");
+            return description.ToString();
+        }
+
+        private static string DailyDescription(Settings settings)
+        {
+            var description = new StringBuilder();
+            description.Append($"{Strings.Every} ");
+            int dayPeriod = settings.DayPeriod;
+            bool everyTime = dayPeriod == 1;
+            description.Append($"{dayPeriod} ");
+            switch (settings.DaysPeriodType)
+            {
+                case DaysPeriodType.Days:
+                    if (everyTime) description.Append($"{Strings.Day} ");
+                    else description.Append($"{Strings.Days} ");
+                    break;
+                case DaysPeriodType.Weeks:
+                    if (everyTime) description.Append($"{Strings.Weeks} ");
+                    else description.Append($"{Strings.Weeks} ");
+                    break;
+                case DaysPeriodType.Months:
+                    if (everyTime) description.Append($"{Strings.Month} ");
+                    else description.Append($"{Strings.Months} ");
+                    break;
+                default:
+                    if (everyTime) description.Append($"{Strings.Year} ");
+                    else description.Append($"{Strings.Years} ");
+                    break;
+            }
+            return description.ToString();
+        }        
     }
 }

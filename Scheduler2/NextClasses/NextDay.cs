@@ -57,7 +57,7 @@
 
         public static DateTime MonthyFormat(Settings settings)
         {
-            if (settings.MonthSettings.MonthlyFormat == Scheduler2.MonthyFormat.FixedDay)
+            if (settings.MonthSettings.MonthyFormat == Scheduler2.MonthyFormat.FixedDay)
             {
                 return FixedDay(settings);
             }
@@ -112,7 +112,7 @@
 
         private static DateTime Day(Settings settings, DateTime aux)
         {
-            return settings.MonthSettings.MonthlyFrequency switch
+            return settings.MonthSettings.MonthyFrequency switch
             {
                 MonthyFrequency.First => aux,
                 MonthyFrequency.Second => aux.AddDays(1),
@@ -139,15 +139,12 @@
 
         private static DateTime Weekday(Settings settings, DateTime aux)
         {
-            switch ((int)aux.DayOfWeek)
+            return (int)aux.DayOfWeek switch
             {
-                case 0:
-                    return FirstDayIsSundayAndIWantAWeekDay(settings.MonthSettings.MonthlyFrequency, aux);
-                case 6:
-                    return FirstDayIsSaturdayAndIWantAWeekDay(settings.MonthSettings.MonthlyFrequency, aux);
-                default:
-                    return FirstDayIsWeekDayAndIWantAWeekDay(settings.MonthSettings.MonthlyFrequency, aux);
-            }
+                0 => FirstDayIsSundayAndIWantAWeekDay(settings.MonthSettings.MonthyFrequency, aux),
+                6 => FirstDayIsSaturdayAndIWantAWeekDay(settings.MonthSettings.MonthyFrequency, aux),
+                _ => FirstDayIsWeekDayAndIWantAWeekDay(settings.MonthSettings.MonthyFrequency, aux),
+            };
         }
 
         private static DateTime FirstDayIsWeekDayAndIWantAWeekDay(MonthyFrequency frequency, DateTime aux)
@@ -215,15 +212,12 @@
                     return aux.AddDays(5);
                 default:
                     aux = LastDayOfMonth(aux);
-                    switch (aux.Day)
+                    return aux.Day switch
                     {
-                        case 29:
-                            return aux.AddDays(-1);
-                        case 30:
-                            return aux.AddDays(-2);
-                        default:
-                            return aux;
-                    }
+                        29 => aux.AddDays(-1),
+                        30 => aux.AddDays(-2),
+                        _ => aux,
+                    };
             }
         }
 
@@ -232,11 +226,11 @@
             switch ((int)aux.DayOfWeek)
             {
                 case 0:
-                    return FirstDayIsSundayAndIWantAWeekendDay(settings.MonthSettings.MonthlyFrequency, aux);
+                    return FirstDayIsSundayAndIWantAWeekendDay(settings.MonthSettings.MonthyFrequency, aux);
                 case 6:
-                    return FirstDayIsSaturdayAndIWantAWeekendDay(settings.MonthSettings.MonthlyFrequency, aux);
+                    return FirstDayIsSaturdayAndIWantAWeekendDay(settings.MonthSettings.MonthyFrequency, aux);
                 default:
-                    return FirstDayIsWeekDayAndIWantAWeekendDay(settings.MonthSettings.MonthlyFrequency, aux);
+                    return FirstDayIsWeekDayAndIWantAWeekendDay(settings.MonthSettings.MonthyFrequency, aux);
             }
         }
 
@@ -321,25 +315,25 @@
             {
                 case MonthDays.Monday:
                     aux = aux.AddDays(DaySum(day,1));
-                    return WeekSum(settings.MonthSettings.MonthlyFrequency, aux);
+                    return WeekSum(settings.MonthSettings.MonthyFrequency, aux);
                     case MonthDays.Tuesday:
                     aux = aux.AddDays(DaySum(day, 2));
-                    return WeekSum(settings.MonthSettings.MonthlyFrequency, aux);
+                    return WeekSum(settings.MonthSettings.MonthyFrequency, aux);
                 case MonthDays.Wednesday:
                     aux = aux.AddDays(DaySum(day, 3));
-                    return WeekSum(settings.MonthSettings.MonthlyFrequency, aux);
+                    return WeekSum(settings.MonthSettings.MonthyFrequency, aux);
                 case MonthDays.Thursday:
                     aux = aux.AddDays(DaySum(day, 4));
-                    return WeekSum(settings.MonthSettings.MonthlyFrequency, aux);
+                    return WeekSum(settings.MonthSettings.MonthyFrequency, aux);
                 case MonthDays.Friday:
                     aux = aux.AddDays(DaySum(day, 5));
-                    return WeekSum(settings.MonthSettings.MonthlyFrequency, aux);
+                    return WeekSum(settings.MonthSettings.MonthyFrequency, aux);
                 case MonthDays.Saturday:
                     aux = aux.AddDays(DaySum(day, 6));
-                    return WeekSum(settings.MonthSettings.MonthlyFrequency, aux);
+                    return WeekSum(settings.MonthSettings.MonthyFrequency, aux);
                 default:
                     aux = aux.AddDays(DaySum(day, 7));
-                    return WeekSum(settings.MonthSettings.MonthlyFrequency, aux);
+                    return WeekSum(settings.MonthSettings.MonthyFrequency, aux);
 
             }
         }

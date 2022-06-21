@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scheduler2", "Scheduler2\Sc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinScheduler2", "WinScheduler2\WinScheduler2.csproj", "{ECD3701D-F53F-4A6E-8027-3F739F7C792A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{33584B8A-E589-41EF-8248-F85EEEE5F701}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Testing", "Testing\Testing.csproj", "{33584B8A-E589-41EF-8248-F85EEEE5F701}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +32,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		RESX_TranslatorConfiguration = {"Azure":"{\"AutoDetectHtml\":true,\"MaxCharactersPerMinute\":33300,\"AuthenticationKey\":null,\"Region\":\"\",\"IsEnabled\":true,\"SaveCredentials\":false,\"Ranking\":1.0}","Baidu":"{\"AppId\":null,\"SecretKey\":null,\"ApiUrl\":null,\"Domain\":null,\"IsEnabled\":true,\"SaveCredentials\":false,\"Ranking\":1.0}","DeepL":"{\"ApiKey\":null,\"ApiUrl\":null,\"IsEnabled\":true,\"SaveCredentials\":false,\"Ranking\":1.0}","Google":"{\"ApiKey\":null,\"IsEnabled\":true,\"SaveCredentials\":false,\"Ranking\":1.0}","MSTerm":"{\"IsEnabled\":true,\"SaveCredentials\":false,\"Ranking\":1.0}","MyMemory":"{\"Key\":null,\"Mail\":null,\"IsEnabled\":true,\"SaveCredentials\":false,\"Ranking\":1.0}"}
+		RESX_PrefixTranslations = False
+		RESX_NeutralResourcesLanguage = es-ES
 		SolutionGuid = {28C50EE4-811C-46FB-8A5A-0E3F7D04C247}
 	EndGlobalSection
 EndGlobal
