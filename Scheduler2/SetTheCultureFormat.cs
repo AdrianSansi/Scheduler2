@@ -12,12 +12,15 @@ namespace Scheduler2
             {
                 case Language.Spanish_Es:
                     CultureInfo.CurrentCulture = new CultureInfo("es-ES", false);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("es-ES");
                     break;
                 case Language.English_UK:
                     CultureInfo.CurrentCulture = new CultureInfo("en-GB", false);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-GB");
                     break;
                 case Language.English_US:
                     CultureInfo.CurrentCulture = new CultureInfo("en-US", false);
+                    Thread.CurrentThread.CurrentUICulture = new CultureInfo("en-US");
                     break;
                 default:
                     break;

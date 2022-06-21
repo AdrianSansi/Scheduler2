@@ -117,118 +117,118 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Monday" xml:space="preserve">
-    <value>Monday</value>
-  </data>
-  <data name="Tuesday" xml:space="preserve">
-    <value>Tuesday</value>
-  </data>
-  <data name="Wednesday" xml:space="preserve">
-    <value>Wednesday</value>
-  </data>
-  <data name="Thursday" xml:space="preserve">
-    <value>Thursday</value>
-  </data>
-  <data name="Friday" xml:space="preserve">
-    <value>Friday</value>
-  </data>
-  <data name="Saturday" xml:space="preserve">
-    <value>Saturday</value>
-  </data>
-  <data name="Sunday" xml:space="preserve">
-    <value>Sunday</value>
-  </data>
-  <data name="First" xml:space="preserve">
-    <value>first</value>
-  </data>
-  <data name="Day" xml:space="preserve">
-    <value>day</value>
-  </data>
-  <data name="Weekday" xml:space="preserve">
-    <value>weekday</value>
-  </data>
-  <data name="WeekendDay" xml:space="preserve">
-    <value>weekend day</value>
-  </data>
-  <data name="Second" xml:space="preserve">
-    <value>second</value>
-  </data>
-  <data name="Third" xml:space="preserve">
-    <value>third</value>
-  </data>
-  <data name="Fourth" xml:space="preserve">
-    <value>fourth</value>
-  </data>
-  <data name="Last" xml:space="preserve">
-    <value>last</value>
-  </data>
-  <data name="OfVery" xml:space="preserve">
-    <value>of very</value>
-  </data>
-  <data name="Every" xml:space="preserve">
-    <value>every</value>
-  </data>
-  <data name="Starting" xml:space="preserve">
-    <value>starting on</value>
-  </data>
-  <data name="Ending" xml:space="preserve">
-    <value>ending on</value>
-  </data>
-  <data name="Hour" xml:space="preserve">
-    <value>hour</value>
-  </data>
-  <data name="Hours" xml:space="preserve">
-    <value>hours</value>
-  </data>
-  <data name="Minute" xml:space="preserve">
-    <value>minute</value>
-  </data>
-  <data name="Minutes" xml:space="preserve">
-    <value>minutes</value>
-  </data>
-  <data name="Seconds" xml:space="preserve">
-    <value>seconds</value>
-  </data>
-  <data name="Occurs" xml:space="preserve">
-    <value>Occurs</value>
-  </data>
-  <data name="The_male" xml:space="preserve">
-    <value>the</value>
-  </data>
-  <data name="The_female" xml:space="preserve">
-    <value>the</value>
-  </data>
   <data name="And" xml:space="preserve">
-    <value>and</value>
-  </data>
-  <data name="Between" xml:space="preserve">
-    <value>between</value>
-  </data>
-  <data name="Week" xml:space="preserve">
-    <value>week</value>
-  </data>
-  <data name="Weeks" xml:space="preserve">
-    <value>weeks</value>
-  </data>
-  <data name="Once" xml:space="preserve">
-    <value>once</value>
-  </data>
-  <data name="Month" xml:space="preserve">
-    <value>month</value>
-  </data>
-  <data name="Months" xml:space="preserve">
-    <value>months</value>
+    <value>y</value>
   </data>
   <data name="At" xml:space="preserve">
-    <value>at</value>
+    <value>a las</value>
+  </data>
+  <data name="Between" xml:space="preserve">
+    <value>entre</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>día</value>
   </data>
   <data name="Days" xml:space="preserve">
-    <value>days</value>
+    <value>días</value>
+  </data>
+  <data name="Ending" xml:space="preserve">
+    <value>finalizando el</value>
+  </data>
+  <data name="Every" xml:space="preserve">
+    <value>cada</value>
+  </data>
+  <data name="First" xml:space="preserve">
+    <value>primer</value>
+  </data>
+  <data name="Fourth" xml:space="preserve">
+    <value>cuarto</value>
+  </data>
+  <data name="Friday" xml:space="preserve">
+    <value>Viernes</value>
+  </data>
+  <data name="Hour" xml:space="preserve">
+    <value>hora</value>
+  </data>
+  <data name="Hours" xml:space="preserve">
+    <value>horas</value>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>último</value>
+  </data>
+  <data name="Minute" xml:space="preserve">
+    <value>minuto</value>
+  </data>
+  <data name="Minutes" xml:space="preserve">
+    <value>minutos</value>
+  </data>
+  <data name="Monday" xml:space="preserve">
+    <value>Lunes</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>mes</value>
+  </data>
+  <data name="Months" xml:space="preserve">
+    <value>meses</value>
+  </data>
+  <data name="Occurs" xml:space="preserve">
+    <value>Ocurre</value>
+  </data>
+  <data name="OfVery" xml:space="preserve">
+    <value>de cada</value>
+  </data>
+  <data name="Once" xml:space="preserve">
+    <value>una vez</value>
+  </data>
+  <data name="Saturday" xml:space="preserve">
+    <value>Sábado</value>
+  </data>
+  <data name="Second" xml:space="preserve">
+    <value>segundo</value>
+  </data>
+  <data name="Seconds" xml:space="preserve">
+    <value>segundos</value>
+  </data>
+  <data name="Starting" xml:space="preserve">
+    <value>comenzando el</value>
+  </data>
+  <data name="Sunday" xml:space="preserve">
+    <value>Domingo</value>
+  </data>
+  <data name="The_female" xml:space="preserve">
+    <value>la</value>
+  </data>
+  <data name="The_male" xml:space="preserve">
+    <value>el</value>
+  </data>
+  <data name="Third" xml:space="preserve">
+    <value>tercer</value>
+  </data>
+  <data name="Thursday" xml:space="preserve">
+    <value>Jueves</value>
+  </data>
+  <data name="Tuesday" xml:space="preserve">
+    <value>Martes</value>
+  </data>
+  <data name="Wednesday" xml:space="preserve">
+    <value>Miércoles</value>
+  </data>
+  <data name="Week" xml:space="preserve">
+    <value>semana</value>
+  </data>
+  <data name="Weekday" xml:space="preserve">
+    <value>día entre semana</value>
+  </data>
+  <data name="WeekendDay" xml:space="preserve">
+    <value>día fin de semana</value>
+  </data>
+  <data name="Weeks" xml:space="preserve">
+    <value>semanas</value>
   </data>
   <data name="Year" xml:space="preserve">
-    <value>year</value>
+    <value>año</value>
   </data>
   <data name="Years" xml:space="preserve">
-    <value>years</value>
+    <value>años</value>
   </data>
 </root>

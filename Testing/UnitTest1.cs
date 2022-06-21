@@ -1328,6 +1328,40 @@ namespace Testing
 
 
         }
+        [Fact]
+        public void Test_Spanish_Description_Last_Day_Every_Month_At_12()
+        {
+            //Arrange
+            Settings Data = new()
+            {
+                TimeDate = new DateTime(2023, 12, 1),
+                StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 12, 0, 0),
+                Format = Format.Monthy,
+                WeekPeriod = 89,
+                TimePeriod = 894,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.Spanish_Es
+            };
+            SetTheCultureFormat.SetCultureAndLanguage(Data);
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.DayNum = 27;
+            Data.MonthSettings.MonthDays = MonthDays.Day;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
+            Schedule schedule = new(Data);
+            schedule.NextDate(Data);
+            
+            String expectedValue2 = "Ocurre el último día de cada 1 mes una vez a las 12:00:00 comenzando el 31/12/2023";
+
+            String actualValue2 = DescriptionClass.Description(Data);
+
+            
+            actualValue2.Should().Be(expectedValue2);
+
+
+        }
+
 
 
     }
