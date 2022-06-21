@@ -1211,6 +1211,7 @@ namespace Testing
                 PeriodType = PeriodType.Seconds,
                 Language = Language.English_UK
             };
+            SetTheCultureFormat.SetCultureAndLanguage(Data);
             Data.MonthSettings.MonthNum = 4;
             Data.MonthSettings.DayNum = 27;
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
@@ -1277,6 +1278,7 @@ namespace Testing
                 PeriodType = PeriodType.Seconds,
                 Language = Language.English_UK
             };
+            SetTheCultureFormat.SetCultureAndLanguage(Data);
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.DayNum = 27;
             Data.MonthSettings.MonthDays = MonthDays.Day;
