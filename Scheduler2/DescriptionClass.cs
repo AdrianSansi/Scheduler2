@@ -302,7 +302,7 @@ namespace Scheduler2
                     else description.Append($"{Strings.Days} ");
                     break;
                 case DaysPeriodType.Weeks:
-                    if (everyTime) description.Append($"{Strings.Weeks} ");
+                    if (everyTime) description.Append($"{Strings.Week} ");
                     else description.Append($"{Strings.Weeks} ");
                     break;
                 case DaysPeriodType.Months:
