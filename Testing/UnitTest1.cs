@@ -1208,7 +1208,8 @@ namespace Testing
                 Format = Format.Monthy,
                 WeekPeriod = 89,
                 TimePeriod = 20,
-                PeriodType = PeriodType.Seconds
+                PeriodType = PeriodType.Seconds,
+                Language = Language.English_UK
             };
             Data.MonthSettings.MonthNum = 4;
             Data.MonthSettings.DayNum = 27;
@@ -1273,7 +1274,8 @@ namespace Testing
                 Format = Format.Monthy,
                 WeekPeriod = 89,
                 TimePeriod = 894,
-                PeriodType = PeriodType.Seconds
+                PeriodType = PeriodType.Seconds,
+                Language = Language.English_UK
             };
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.DayNum = 27;
