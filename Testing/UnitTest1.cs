@@ -1675,6 +1675,110 @@ namespace Testing
 
 
         }
+        [Fact]
+        public void Test_Daily_Descripion()
+        {
+            //Arrange
+
+            Settings Data = new()
+            {
+                TimeDate = new DateTime(2022, 12, 8),
+                StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 12, 0, 2),
+                EndDate = new DateTime(2026, 07, 09),
+                Format = Format.Daily,
+                WeekPeriod = 89,
+                TimePeriod = 1,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.Spanish_Es,
+                DaysPeriodType = DaysPeriodType.Weeks,
+                DayPeriod = 5
+            };
+
+
+            SetTheCultureFormat.SetCultureAndLanguage(Data);
+            
+            Data.MonthSettings.MonthNum = 2;
+            Data.MonthSettings.DayNum = 27;
+            Data.MonthSettings.MonthDays = MonthDays.Weekday;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.First;
+            Schedule schedule = new(Data);
+
+            DateTime[] actualValue = new DateTime[5];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2022, 12, 8, 12, 0, 0),
+                new DateTime(2022, 12, 8, 12, 0, 1),
+                new DateTime(2022, 12, 8, 12, 0, 2),
+                new DateTime(2023, 1, 12, 12, 0, 0),
+                new DateTime(2023, 1, 12, 12, 0, 1),
+            };
+            String expectedValue2 = "Ocurre cada 5 semanas cada 1 segundo entre 12:00:00 y 12:00:02 comenzando el 8/12/2022 y finalizando el día 9/7/2026";
+
+            int i = 0;
+            while (i < 5)
+            {
+                actualValue[i] = schedule.NextDate(Data);
+                i++;
+            }
+            String actualValue2 = DescriptionClass.Description(Data);
+
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+
+            actualValue2.Should().Be(expectedValue2);
+
+
+        }
+
+        [Fact]
+        public void Test_esES_Description_EveryDay_Of_Week()
+        {
+            //Arrange
+            Settings Data = new()
+            {
+                TimeDate = new DateTime(2023, 12, 1),
+                StartTime = new DateTime(1988, 8, 8, 19, 0, 0),
+                EndDate = new DateTime(2024, 11, 7),
+                EndTime = new DateTime(1950, 1, 1, 19, 0, 0),
+                Format = Format.Weekly,
+                WeekPeriod = 2,
+                TimePeriod = 894,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.Spanish_Es
+
+            };
+            SetTheCultureFormat.SetCultureAndLanguage(Data);
+            Data.WeekSettings.Sunday = true;
+            Data.WeekSettings.Thursday = true;
+            Data.WeekSettings.Wednesday = true;
+            Data.WeekSettings.Saturday = true;
+            Data.WeekSettings.Tuesday = true;
+            Data.WeekSettings.Friday = true;
+            Data.WeekSettings.Monday = true;
+            
+            Data.PeriodType = PeriodType.Seconds;
+            Data.TimePeriod = 5;
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.DayNum = 27;
+            Data.MonthSettings.MonthDays = MonthDays.Day;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
+            Schedule schedule = new(Data);
+            schedule.NextDate(Data);
+
+            String expectedValue2 = "Ocurre cada 2 semanas los Lunes, Martes, Miércoles, Jueves, Viernes, Sábado y Domingo una vez a las 19:00:00 comenzando el 1/12/2023 y finalizando el día 7/11/2024";
+
+
+            String actualValue2 = DescriptionClass.Description(Data);
+
+
+            actualValue2.Should().Be(expectedValue2);
+        }
 
     }
 
