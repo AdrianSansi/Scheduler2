@@ -46,7 +46,8 @@ namespace Scheduler2
             if (NumberOfDates == 0)
             {
                 NumberOfDates++;
-                settings.StartDate = ItsFirstDate(settings);
+                settings.StartDate = settings.TimeDate;
+                settings.TimeDate = ItsFirstDate(settings);
                 return ItsFirstDate(settings);
                 
                 

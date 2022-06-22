@@ -106,7 +106,7 @@ namespace Scheduler2 {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to finalizando el.
+        ///   Looks up a localized string similar to finalizando.
         /// </summary>
         internal static string Ending {
             get {
@@ -246,6 +246,24 @@ namespace Scheduler2 {
         internal static string Once {
             get {
                 return ResourceManager.GetString("Once", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to el día.
+        /// </summary>
+        internal static string OnDate {
+            get {
+                return ResourceManager.GetString("OnDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to los.
+        /// </summary>
+        internal static string OnWeekDays {
+            get {
+                return ResourceManager.GetString("OnWeekDays", resourceCulture);
             }
         }
         

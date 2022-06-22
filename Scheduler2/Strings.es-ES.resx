@@ -133,7 +133,7 @@
     <value>días</value>
   </data>
   <data name="Ending" xml:space="preserve">
-    <value>finalizando el</value>
+    <value>finalizando</value>
   </data>
   <data name="Every" xml:space="preserve">
     <value>cada</value>
@@ -230,5 +230,11 @@
   </data>
   <data name="Years" xml:space="preserve">
     <value>años</value>
+  </data>
+  <data name="OnDate" xml:space="preserve">
+    <value>el día</value>
+  </data>
+  <data name="OnWeekDays" xml:space="preserve">
+    <value>los</value>
   </data>
 </root>

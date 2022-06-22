@@ -172,7 +172,7 @@
     <value>starting on</value>
   </data>
   <data name="Ending" xml:space="preserve">
-    <value>ending on</value>
+    <value>ending</value>
   </data>
   <data name="Hour" xml:space="preserve">
     <value>hour</value>
@@ -230,5 +230,11 @@
   </data>
   <data name="Years" xml:space="preserve">
     <value>years</value>
+  </data>
+  <data name="OnDate" xml:space="preserve">
+    <value>on</value>
+  </data>
+  <data name="OnWeekDays" xml:space="preserve">
+    <value>on</value>
   </data>
 </root>

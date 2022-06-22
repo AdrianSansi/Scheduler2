@@ -1136,7 +1136,8 @@ namespace Testing
                 Format = Format.Monthy,
                 WeekPeriod = 89,
                 TimePeriod = 30,
-                PeriodType = PeriodType.Minutes
+                PeriodType = PeriodType.Minutes,
+                Language = Language.Spanish_Es
             };
             Data.MonthSettings.MonthNum = 1;
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
@@ -1169,12 +1170,17 @@ namespace Testing
                 new DateTime(2020, 3, 7, 5, 30, 0),
 
             };
+            SetTheCultureFormat.SetCultureAndLanguage(Data);
+
+            string expectedDescription = "Ocurre el segundo día fin de semana de cada 1 mes cada 30 minutos entre 03:00:00 y 06:00:00 comenzando el 1/1/2020";
+            
             int i = 0;
             while (i < 20)
             {
                 actualValue[i] = schedule.NextDate(Data);
                 i++;
             }
+            String actualDescription = DescriptionClass.Description(Data);
             actualValue[0].Should().Be(expectedValue[0]);
             actualValue[1].Should().Be(expectedValue[1]);
             actualValue[2].Should().Be(expectedValue[2]);
@@ -1195,6 +1201,7 @@ namespace Testing
             actualValue[17].Should().Be(expectedValue[17]);
             actualValue[18].Should().Be(expectedValue[18]);
             actualValue[19].Should().Be(expectedValue[19]);
+            actualDescription.Should().Be(expectedDescription);
         }
         [Fact]
         public void Test_27th_Day_Every_4_Months_From_3_30_To_3_31_Every_20_Seconds()
@@ -1235,7 +1242,7 @@ namespace Testing
                 new DateTime(2024, 8, 27, 3, 30, 40),
                 new DateTime(2024, 8, 27, 3, 31, 0),
             };
-            String expectedValue2 = "Occurs the day 27 of very 4 months every 20 seconds between 03:30:00 and 03:31:00 starting on 27/12/2023";
+            String expectedValue2 = "Occurs the day 27 of very 4 months every 20 seconds between 03:30:00 and 03:31:00 starting on 01/12/2023";
             
             
 
@@ -1302,7 +1309,7 @@ namespace Testing
                 new DateTime(2024, 10, 31, 12, 0, 0),
                 new DateTime(2024, 11, 30, 12, 0, 0),
             };
-            String expectedValue2 = "Occurs the last day of very 1 month once at 12:00:00 starting on 31/12/2023";
+            String expectedValue2 = "Occurs the last day of very 1 month once at 12:00:00 starting on 01/12/2023";
 
             int i = 0;
             while (i < 12)
@@ -1352,17 +1359,164 @@ namespace Testing
             Schedule schedule = new(Data);
             schedule.NextDate(Data);
             
-            String expectedValue2 = "Ocurre el último día de cada 1 mes una vez a las 12:00:00 comenzando el 31/12/2023";
+            String expectedValue2 = "Ocurre el último día de cada 1 mes una vez a las 12:00:00 comenzando el 1/12/2023";
 
             String actualValue2 = DescriptionClass.Description(Data);
 
             
             actualValue2.Should().Be(expectedValue2);
+        }
+        [Fact]
+        public void Test_US_Description_Last_Day_Every_Month_At_12()
+        {
+            //Arrange
+            Settings Data = new()
+            {
+                TimeDate = new DateTime(2023, 12, 1),
+                StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 12, 0, 0),
+                Format = Format.Weekly,
+                WeekPeriod = 89,
+                TimePeriod = 894,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.English_US
+                
+            };
+            SetTheCultureFormat.SetCultureAndLanguage(Data);
+            Data.WeekSettings.Monday = true;
+            Data.WeekSettings.Tuesday = true;
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.DayNum = 27;
+            Data.MonthSettings.MonthDays = MonthDays.Day;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
+            Schedule schedule = new(Data);
+            schedule.NextDate(Data);
+
+            String expectedValue2 = "Occurs every 89 weeks on Monday and Tuesday once at 12:00:00 starting on 12/1/2023";
+
+            String actualValue2 = DescriptionClass.Description(Data);
 
 
+            actualValue2.Should().Be(expectedValue2);
+        }
+
+        [Fact]
+        public void Test_US_Description_Once_At_12()
+        {
+            //Arrange
+            Settings Data = new()
+            {
+                TimeDate = new DateTime(2023, 12, 1),
+                StartDate = new DateTime(2023,12,1),
+                EndDate = new DateTime(2023,12, 1),
+                StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 12, 0, 0),
+                Format = Format.Daily,
+                WeekPeriod = 89,
+                TimePeriod = 894,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.English_US
+
+            };
+            SetTheCultureFormat.SetCultureAndLanguage(Data);
+            Data.WeekSettings.Monday = true;
+            Data.WeekSettings.Tuesday = true;
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.DayNum = 27;
+            Data.MonthSettings.MonthDays = MonthDays.Day;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
+            Schedule schedule = new(Data);
+            schedule.NextDate(Data);
+
+            String expectedValue2 = "Occurs once at 12:00:00 on 12/1/2023";
+
+            String actualValue2 = DescriptionClass.Description(Data);
+
+
+            actualValue2.Should().Be(expectedValue2);
         }
 
 
+        [Fact]
+        public void Test_Es_Description_Some_Days_Of_Week_Every_Seconds_With_End_Date()
+        {
+            //Arrange
+            Settings Data = new()
+            {
+                TimeDate = new DateTime(2023, 12, 1),
+                StartTime = new DateTime(1988, 8, 8, 19, 0, 0),
+                EndDate = new DateTime(2024, 11, 7),
+                EndTime = new DateTime(1950, 1, 1, 19, 1, 0),
+                Format = Format.Weekly,
+                WeekPeriod = 2,
+                TimePeriod = 894,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.Spanish_Es
+
+            };
+            SetTheCultureFormat.SetCultureAndLanguage(Data);
+            Data.WeekSettings.Sunday = true;
+            Data.WeekSettings.Thursday = true;
+            Data.WeekSettings.Wednesday = true;
+            Data.PeriodType = PeriodType.Seconds;
+            Data.TimePeriod = 5;
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.DayNum = 27;
+            Data.MonthSettings.MonthDays = MonthDays.Day;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
+            Schedule schedule = new(Data);
+            schedule.NextDate(Data);
+
+            String expectedValue2 = "Ocurre cada 2 semanas los Miércoles, Jueves y Domingo cada 5 segundos entre 19:00:00 y 19:01:00 comenzando el 1/12/2023 y finalizando el día 7/11/2024";
+
+            String actualValue2 = DescriptionClass.Description(Data);
+
+
+            actualValue2.Should().Be(expectedValue2);
+        }
+
+        [Fact]
+        public void Test_EnUS_Description_Some_Days_Of_Week_Every_Seconds_With_End_Date()
+        {
+            //Arrange
+            Settings Data = new()
+            {
+                TimeDate = new DateTime(2023, 12, 1),
+                StartTime = new DateTime(1988, 8, 8, 19, 0, 0),
+                EndDate = new DateTime(2024, 11, 7),
+                EndTime = new DateTime(1950, 1, 1, 19, 1, 0),
+                Format = Format.Weekly,
+                WeekPeriod = 2,
+                TimePeriod = 894,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.English_US
+
+            };
+            SetTheCultureFormat.SetCultureAndLanguage(Data);
+            Data.WeekSettings.Sunday = true;
+            Data.WeekSettings.Thursday = true;
+            Data.WeekSettings.Wednesday = true;
+            Data.PeriodType = PeriodType.Seconds;
+            Data.TimePeriod = 5;
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.DayNum = 27;
+            Data.MonthSettings.MonthDays = MonthDays.Day;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
+            Schedule schedule = new(Data);
+            schedule.NextDate(Data);
+
+            String expectedValue2 = "Occurs every 2 weeks on Wednesday, Thursday and Sunday every 5 seconds between 19:00:00 and 19:01:00 starting on 12/1/2023 and ending on 11/7/2024";
+            
+
+            String actualValue2 = DescriptionClass.Description(Data);
+
+
+            actualValue2.Should().Be(expectedValue2);
+        }
 
     }
 }

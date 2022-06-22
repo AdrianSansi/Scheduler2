@@ -10,22 +10,30 @@ namespace Scheduler2
         {
             var description = new StringBuilder();
             description.Append($"{Strings.Occurs} ");
+            if (CheckOnce(settings))
+            {
+                description.Append(OnceDescription(settings));
+                return description.ToString();
+            }
+            description.Append(FormatSelect(settings));
+            description.Append(EachDayDescription(settings));
+            description.Append(StartingTime(settings));
+            if(HasEnd(settings)) description.Append(EndTime(settings));
+            return description.ToString();
+
+        }
+
+        public static String FormatSelect(Settings settings)
+        {
             switch (settings.Format)
             {
                 case Format.Daily:
-                    description.Append(DailyDescription(settings));
-                    break;
+                    return DailyDescription(settings);
                 case Format.Monthy:
-                    description.Append(MonthDescription(settings));
-                    break;
+                    return MonthDescription(settings);
                 default:
-                    description.Append(WeekDescription(settings));
-                    break;
+                    return WeekDescription(settings);
             }
-            description.Append(EachDayDescription(settings));
-            description.Append(StartingTime(settings));
-            return description.ToString();
-
         }
 
         private static String WeekDescription(Settings settings)
@@ -39,34 +47,41 @@ namespace Scheduler2
         {
             var weekPeriod = new StringBuilder();
             int numSemanas = settings.WeekPeriod;
-            weekPeriod.Append($"{Strings.Every}  {numSemanas} ");
-            if (numSemanas == 1) weekPeriod.Append(Strings.Week);
-            else weekPeriod.Append($"{ Strings.Weeks }");
+            weekPeriod.Append($"{Strings.Every} {numSemanas} ");
+            if (numSemanas == 1) weekPeriod.Append($"{Strings.Week} ");
+            else weekPeriod.Append($"{Strings.Weeks} ");
             return weekPeriod.ToString();
         }
 
         private static String EnumerateWeekDays(Settings settings)
         {
+            var daysDescription = new StringBuilder();
+            daysDescription.Append($"{Strings.OnWeekDays} ");
             int i = settings.WeekSettings.WeekDays.Count;
             String[] weekDays = StringOfWeekDays(settings);
             if (i == 1)
             {
-                return weekDays[0];
+                daysDescription.Append($"{weekDays[0]} ");
+                return daysDescription.ToString();
             }
             else if (i > 1)
             {
-                var daysDescription = new StringBuilder();
+                
                 for (int j = 0; j < i; j++)
                 {
-                    daysDescription.Append(weekDays[j]);
+                    daysDescription.Append($"{weekDays[j]}");
 
                     if (j == i - 2)
                     {
-                        daysDescription.Append($"{Strings.And} ");
+                        daysDescription.Append($" {Strings.And} ");
                     }
-                    else
+                    else if(j < i - 2)
                     {
                         daysDescription.Append(", ");
+                    }
+                    else if(j == i - 1)
+                    {
+                        daysDescription.Append(" ");
                     }
                 }
                 return daysDescription.ToString();
@@ -86,37 +101,37 @@ namespace Scheduler2
 
             if (settings.WeekSettings.Monday)
             {
-                weekDays[i] = $"{Strings.Monday} ";
+                weekDays[i] = $"{Strings.Monday}";
                 i++;
             }
             if (settings.WeekSettings.Tuesday)
             {
-                weekDays[i] = $"{Strings.Tuesday} "; 
+                weekDays[i] = $"{Strings.Tuesday}"; 
                 i++;
             }
             if (settings.WeekSettings.Wednesday)
             {
-                weekDays[i] = $"{Strings.Wednesday} ";
+                weekDays[i] = $"{Strings.Wednesday}";
                 i++;
             }
             if (settings.WeekSettings.Thursday)
             {
-                weekDays[i] = $"{Strings.Thursday} "; 
+                weekDays[i] = $"{Strings.Thursday}"; 
                 i++;
             }
             if (settings.WeekSettings.Friday)
             {
-                weekDays[i] = $"{Strings.Friday} ";
+                weekDays[i] = $"{Strings.Friday}";
                 i++;
             }
             if (settings.WeekSettings.Saturday)
             {
-                weekDays[i] = $"{Strings.Saturday} ";
+                weekDays[i] = $"{Strings.Saturday}";
                 i++;
             }
             if (settings.WeekSettings.Sunday)
             {
-                weekDays[i] = $"{Strings.Sunday} ";
+                weekDays[i] = $"{Strings.Sunday}";
 
             }
 
@@ -315,6 +330,38 @@ namespace Scheduler2
                     break;
             }
             return description.ToString();
-        }        
+        }    
+        
+        private static bool CheckOnce(Settings settings)
+        {
+            if ((settings.StartDate.Date == settings.EndDate.Date) & (settings.StartTime.TimeOfDay == settings.EndTime.TimeOfDay)){
+                return true;
+            }
+            return false;
+        }
+        private static string OnceDescription(Settings settings)
+        {
+            var description = new StringBuilder();
+            description.Append($"{Strings.Once} ");
+            description.Append($"{Strings.At} ");
+            description.Append($"{settings.StartTime.TimeOfDay} ");
+            description.Append($"{Strings.OnDate} ");
+            description.Append(settings.StartDate.ToShortDateString());
+            return description.ToString();
+        }
+        private static bool HasEnd(Settings settings)
+        {
+            if (settings.EndDate == DateTime.MaxValue.AddDays(-1)) return false;
+            return true;
+        }
+        private static string EndTime(Settings settings)
+        {
+            var description = new StringBuilder();
+            description.Append($" {Strings.And} ");
+            description.Append($"{Strings.Ending} ");
+            description.Append($"{Strings.OnDate} ");
+            description.Append(settings.EndDate.ToShortDateString());
+            return description.ToString();
+        }
     }
 }
