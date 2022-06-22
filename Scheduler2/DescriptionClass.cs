@@ -81,7 +81,7 @@ namespace Scheduler2
                     }
                     else if(j == i - 1)
                     {
-                        daysDescription.Append(" ");
+                        daysDescription.Append(' ');
                     }
                 }
                 return daysDescription.ToString();
@@ -334,7 +334,7 @@ namespace Scheduler2
         
         private static bool CheckOnce(Settings settings)
         {
-            if ((settings.StartDate.Date == settings.EndDate.Date) & (settings.StartTime.TimeOfDay == settings.EndTime.TimeOfDay)){
+            if ((settings.StartDate.Date == settings.EndDate.Date) && (settings.StartTime.TimeOfDay == settings.EndTime.TimeOfDay)){
                 return true;
             }
             return false;
