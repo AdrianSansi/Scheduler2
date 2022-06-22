@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Xunit;
 using System;
+
 using Scheduler2;
 
 
@@ -1517,6 +1518,92 @@ namespace Testing
 
             actualValue2.Should().Be(expectedValue2);
         }
+        [Fact]
+        public void Test_Last_WeekendDay_Every_Month_From_12_To_1_Every_1Hour_From_02_08_2025_To_09_07_2026()
+        {
+            //Arrange
+
+            Settings Data = new()
+            {
+                TimeDate = new DateTime(2025, 08, 02),
+                StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 13, 0, 0),
+                EndDate = new DateTime(2026, 07, 09),
+                Format = Format.Monthy,
+                WeekPeriod = 89,
+                TimePeriod = 1,
+                PeriodType = PeriodType.Hours,
+                Language = Language.English_US
+            };
+            
+            
+            SetTheCultureFormat.SetCultureAndLanguage(Data);
+            
+            Data.MonthSettings.MonthNum = 1;
+            Data.MonthSettings.DayNum = 27;
+            Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
+            Schedule schedule = new(Data);
+
+            DateTime[] actualValue = new DateTime[24];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2025, 08, 31, 12, 0, 0),
+                new DateTime(2025, 08, 31, 13, 0, 0),
+                new DateTime(2025, 09, 28, 12, 0, 0),
+                new DateTime(2025, 09, 28, 13, 0, 0),
+                new DateTime(2025, 10, 26, 12, 0, 0),
+                new DateTime(2025, 10, 26, 13, 0, 0),
+                new DateTime(2025, 11, 30, 12, 0, 0),
+                new DateTime(2025, 11, 30, 13, 0, 0),
+                new DateTime(2025, 12, 28, 12, 0, 0),
+                new DateTime(2025, 12, 28, 13, 0, 0),
+                new DateTime(2026, 01, 31, 12, 0, 0),
+                new DateTime(2026, 01, 31, 13, 0, 0),
+                new DateTime(2026, 02, 28, 12, 0, 0),
+                new DateTime(2026, 02, 28, 13, 0, 0),
+                new DateTime(2026, 03, 29, 12, 0, 0),
+                new DateTime(2026, 03, 29, 13, 0, 0),
+                new DateTime(2026, 04, 26, 12, 0, 0),
+                new DateTime(2026, 04, 26, 13, 0, 0),
+                new DateTime(2026, 05, 31, 12, 0, 0),
+                new DateTime(2026, 05, 31, 13, 0, 0),
+                new DateTime(2026, 06, 28, 12, 0, 0),
+                new DateTime(2026, 06, 28, 13, 0, 0),
+                new DateTime(2026, 06, 28, 13, 0, 0),
+                new DateTime(2026, 06, 28, 13, 0, 0)
+
+
+            };
+            String expectedValue2 = $"Occurs the last weekend day of very 1 month every 1 hour between 12:00:00 and 13:00:00 starting on 8/2/2025 and ending on 7/9/2026";
+
+            int i = 0;
+            while (i < 24)
+            {
+                actualValue[i] = schedule.NextDate(Data);
+                i++;
+            }
+            String actualValue2 = DescriptionClass.Description(Data);
+
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+            actualValue[5].Should().Be(expectedValue[5]);
+            actualValue[6].Should().Be(expectedValue[6]);
+            actualValue[7].Should().Be(expectedValue[7]);
+            actualValue[8].Should().Be(expectedValue[8]);
+            actualValue[9].Should().Be(expectedValue[9]);
+            actualValue[10].Should().Be(expectedValue[10]);
+            actualValue[11].Should().Be(expectedValue[11]);
+            actualValue2.Should().Be(expectedValue2);
+
+
+        }
 
     }
+
+    
 }

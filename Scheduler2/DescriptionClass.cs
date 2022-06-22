@@ -360,7 +360,8 @@ namespace Scheduler2
             description.Append($" {Strings.And} ");
             description.Append($"{Strings.Ending} ");
             description.Append($"{Strings.OnDate} ");
-            description.Append(settings.EndDate.ToShortDateString());
+            string date = settings.EndDate.ToShortDateString();
+            description.Append($"{date}");
             return description.ToString();
         }
     }
