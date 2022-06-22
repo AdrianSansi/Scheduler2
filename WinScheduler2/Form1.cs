@@ -145,6 +145,10 @@ namespace WinScheduler2
             try
             {
                 Data.TimeDate = DateTime.Parse(OnceTextBox.Text);
+                Data.StartDate = Data.TimeDate;
+                Data.EndDate = Data.TimeDate;
+                Data.StartTime = Data.TimeDate;
+                Data.EndTime = Data.TimeDate;
                 NextButton.Enabled = true;
             }
             catch (Exception)
@@ -156,7 +160,7 @@ namespace WinScheduler2
 
         private void NextButton_Click(object sender, EventArgs e)
         {
-            Description.Text = DescriptionClass.Description(Data);
+            
             if (DailyOnce.Checked || DailyEvery.Checked)
             {
                 Schedule.NextDate(Data);
@@ -164,9 +168,9 @@ namespace WinScheduler2
             }            
             else
             {
-                Description.Text = "Occurs the " + Data.TimeDate.ToShortDateString() + " at " + Data.TimeDate.TimeOfDay.ToString();
                 OutputBox.Text = Data.TimeDate.ToString();
             }
+            Description.Text = DescriptionClass.Description(Data);
         }
 
         private void WeeksUpDown_ValueChanged(object sender, EventArgs e)
