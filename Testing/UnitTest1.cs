@@ -1,7 +1,8 @@
 using FluentAssertions;
 using Xunit;
 using System;
-
+using System.Threading;
+using System.Globalization;
 using Scheduler2;
 
 
@@ -1522,13 +1523,15 @@ namespace Testing
         public void Test_Last_WeekendDay_Every_Month_From_12_To_1_Every_1Hour_From_02_08_2025_To_09_07_2026()
         {
             //Arrange
+            
 
             Settings Data = new()
             {
-                TimeDate = new DateTime(2025, 08, 02),
+                
+                TimeDate = new DateTime(2025, 8, 2),
                 StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
                 EndTime = new DateTime(1950, 1, 1, 13, 0, 0),
-                EndDate = new DateTime(2026, 07, 09),
+                EndDate = new DateTime(2026, 7, 9),
                 Format = Format.Monthy,
                 WeekPeriod = 89,
                 TimePeriod = 1,
@@ -1597,7 +1600,77 @@ namespace Testing
             actualValue[8].Should().Be(expectedValue[8]);
             actualValue[9].Should().Be(expectedValue[9]);
             actualValue[10].Should().Be(expectedValue[10]);
-            actualValue[11].Should().Be(expectedValue[11]);
+            actualValue[11].Should().Be(expectedValue[11]); 
+            actualValue[12].Should().Be(expectedValue[12]);
+            actualValue[13].Should().Be(expectedValue[13]);
+            actualValue[14].Should().Be(expectedValue[14]);
+            actualValue[15].Should().Be(expectedValue[15]);
+            actualValue[16].Should().Be(expectedValue[16]);
+            actualValue[17].Should().Be(expectedValue[17]);
+            actualValue[18].Should().Be(expectedValue[18]);
+            actualValue[19].Should().Be(expectedValue[19]);
+            actualValue[20].Should().Be(expectedValue[20]);
+            actualValue[21].Should().Be(expectedValue[21]);
+            actualValue[22].Should().Be(expectedValue[22]);
+            actualValue[23].Should().Be(expectedValue[23]);
+            actualValue2.Should().Be(expectedValue2);
+
+
+        }
+
+        [Fact]
+        public void Test_First_Day_Is_Sunday_And_I_Want_A_WeekDay()
+        {
+            //Arrange
+
+            Settings Data = new()
+            {
+                TimeDate = new DateTime(2022, 12, 8),
+                StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 12, 0, 2),
+                EndDate = new DateTime(2026, 07, 09),
+                Format = Format.Monthy,
+                WeekPeriod = 89,
+                TimePeriod = 1,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.Spanish_Es
+            };
+
+
+            SetTheCultureFormat.SetCultureAndLanguage(Data);
+
+            Data.MonthSettings.MonthNum = 2;
+            Data.MonthSettings.DayNum = 27;
+            Data.MonthSettings.MonthDays = MonthDays.Weekday;
+            Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
+            Data.MonthSettings.MonthyFrequency = MonthyFrequency.First;
+            Schedule schedule = new(Data);
+
+            DateTime[] actualValue = new DateTime[5];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2023, 01, 2, 12, 0, 0),
+                new DateTime(2023, 01, 2, 12, 0, 1),
+                new DateTime(2023, 01, 2, 12, 0, 2),
+                new DateTime(2023, 03, 1, 12, 0, 0),
+                new DateTime(2023, 03, 1, 12, 0, 1),
+            };
+            String expectedValue2 = $"Ocurre el primer día entre semana de cada 2 meses cada 1 segundo entre 12:00:00 y 12:00:02 comenzando el 8/12/2022 y finalizando el día 9/7/2026";
+
+            int i = 0;
+            while (i < 5)
+            {
+                actualValue[i] = schedule.NextDate(Data);
+                i++;
+            }
+            String actualValue2 = DescriptionClass.Description(Data);
+
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+            
             actualValue2.Should().Be(expectedValue2);
 
 
