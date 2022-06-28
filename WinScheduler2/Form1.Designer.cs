@@ -92,6 +92,7 @@
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.LanguageDomain = new System.Windows.Forms.DomainUpDown();
             this.label18 = new System.Windows.Forms.Label();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -111,6 +112,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.SaveButton);
             this.groupBox1.Controls.Add(this.NextButton);
             this.groupBox1.Controls.Add(this.InputBox);
             this.groupBox1.Controls.Add(this.label1);
@@ -134,7 +136,7 @@
             // 
             // InputBox
             // 
-            this.InputBox.Location = new System.Drawing.Point(148, 31);
+            this.InputBox.Location = new System.Drawing.Point(137, 31);
             this.InputBox.Name = "InputBox";
             this.InputBox.Size = new System.Drawing.Size(269, 23);
             this.InputBox.TabIndex = 1;
@@ -895,11 +897,20 @@
             this.label18.TabIndex = 0;
             this.label18.Text = "Language";
             // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(532, 55);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(190, 25);
+            this.SaveButton.TabIndex = 3;
+            this.SaveButton.Text = "Save Settings";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 751);
+            this.ClientSize = new System.Drawing.Size(803, 751);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
@@ -1005,5 +1016,6 @@
         private GroupBox groupBox9;
         private DomainUpDown LanguageDomain;
         private Label label18;
+        private Button SaveButton;
     }
 }

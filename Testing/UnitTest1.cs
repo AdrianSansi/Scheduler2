@@ -1980,8 +1980,7 @@ namespace Testing
         public void Test_Daily_Descripion_Days_Db()
         {
             using var scheduleDataBase = new SchedulerDb();
-            scheduleDataBase.Database.Delete();
-            scheduleDataBase.SaveChanges();
+            
             
             var data1 = new Settings
             {
@@ -2113,10 +2112,9 @@ namespace Testing
                 .OrderBy(b => b.Id)
                 .First();
 
-            Settings data2 = data;
-            data2.WeekPeriod = 5;
-
-            DBManager.UpdateSettings(data, data2);
+            data.WeekPeriod = 5;
+     
+            DBManager.UpdateSettings();
 
             int expectedNumElements = 1;
             int actualNumElements = DBManager.OutDateSchedules().Count();
@@ -2126,7 +2124,7 @@ namespace Testing
                 .OrderBy(b => b.Id)
                 .First();
             int expectedWeekPeriod = 5;
-            int actualWeekPeriod = data2.WeekPeriod;
+            int actualWeekPeriod = data.WeekPeriod;
 
             actualWeekPeriod.Should().Be(expectedWeekPeriod);
 
@@ -2220,6 +2218,13 @@ namespace Testing
             DBManager.DeleteSettings(data4.Id);
 
         }
+
+        [Fact]
+        public void Test_monthlyNullable()
+        {
+
+        }
+
         
     }    
 }

@@ -29,19 +29,43 @@ namespace Scheduler2
             {
                 case Format.Daily:
                     return DailyDescription(settings);
+                                       
                 case Format.Monthy:
-                    return MonthDescription(settings);
+                    if (settings.MonthSettings == null)
+                    {
+                        throw new ArgumentException("Format monthy settings is null");
+                    }
+                    else
+                    {
+                        return MonthDescription(settings);
+                    }
                 default:
-                    return WeekDescription(settings);
+                    if (settings.WeekSettings == null)
+                    {
+                        throw new ArgumentNullException("Format weekly settings is null");
+                    }
+                    else
+                    {
+                        return WeekDescription(settings);
+                    }
             }
         }
 
         private static String WeekDescription(Settings settings)
         {
-            var description = new StringBuilder();
-            description.Append(WeekPeriod(settings));
-            description.Append(EnumerateWeekDays(settings));
-            return description.ToString();
+            if (!DaySelected(settings)) throw new ArgumentException("There is no day of week selected");
+            else
+            {
+                var description = new StringBuilder();
+                description.Append(WeekPeriod(settings));
+                description.Append(EnumerateWeekDays(settings));
+                return description.ToString();
+            }            
+        }
+
+        private static bool DaySelected(Settings settings)
+        {
+            return settings.WeekSettings.Monday || settings.WeekSettings.Tuesday || settings.WeekSettings.Wednesday || settings.WeekSettings.Thursday || settings.WeekSettings.Friday || settings.WeekSettings.Saturday || settings.WeekSettings.Sunday;
         }
         private static String WeekPeriod(Settings settings)
         {

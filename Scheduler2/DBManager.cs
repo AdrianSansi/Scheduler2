@@ -25,10 +25,9 @@ namespace Scheduler2
             scheduleDataBase.SaveChanges();      
         }
 
-        public static void UpdateSettings(Settings oldSettings, Settings newSettings)
+        public static void UpdateSettings()
         {
             using var scheduleDataBase = new SchedulerDb();
-            oldSettings = newSettings;
             scheduleDataBase.SaveChanges();
         }
 
