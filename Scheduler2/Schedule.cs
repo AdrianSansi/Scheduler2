@@ -34,6 +34,7 @@ namespace Scheduler2
 
         public static DateTime NextDate(Settings settings)
         {
+
             if (settings.Format == Format.Weekly) CreateListOfDays(settings);
             if (settings.NumberOfDates == 0)
             {

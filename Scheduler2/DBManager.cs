@@ -21,7 +21,6 @@ namespace Scheduler2
             Settings element;
             element = scheduleDataBase.Settings.Where(d => d.Id == key).First();
             scheduleDataBase.Settings.Remove(element);
-
             scheduleDataBase.SaveChanges();      
         }
 

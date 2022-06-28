@@ -1980,8 +1980,9 @@ namespace Testing
         public void Test_Daily_Descripion_Days_Db()
         {
             using var scheduleDataBase = new SchedulerDb();
-            
-            
+            scheduleDataBase.Database.Delete();
+            scheduleDataBase.SaveChanges();
+
             var data1 = new Settings
             {
                 TimeDate = new DateTime(2022, 12, 8,0,0,0),
@@ -2039,7 +2040,7 @@ namespace Testing
 
             actualValue2.Should().Be(expectedValue2);
             DBManager.DeleteSettings(data.Id);
-            
+
             
         }
 
@@ -2047,9 +2048,10 @@ namespace Testing
         [Fact]
         public void Test_OutDateSchedules()
         {
-
             
             using var scheduleDataBase = new SchedulerDb();
+
+
 
             var data1 = new Settings
             {
@@ -2069,8 +2071,7 @@ namespace Testing
             };
 
             DBManager.StoreSettings(data1);
-            scheduleDataBase.SaveChanges();
-
+            
             int expectedValue = 1;
             int actualValue = DBManager.OutDateSchedules().Count();
             actualValue.Should().Be(expectedValue);
@@ -2113,14 +2114,14 @@ namespace Testing
                 .First();
 
             data.WeekPeriod = 5;
-     
+            
             DBManager.UpdateSettings();
 
             int expectedNumElements = 1;
             int actualNumElements = DBManager.OutDateSchedules().Count();
             actualNumElements.Should().Be(expectedNumElements);
 
-            Settings data3 = scheduleDataBase.Settings
+            data = scheduleDataBase.Settings
                 .OrderBy(b => b.Id)
                 .First();
             int expectedWeekPeriod = 5;
@@ -2129,12 +2130,17 @@ namespace Testing
             actualWeekPeriod.Should().Be(expectedWeekPeriod);
 
             DBManager.DeleteSettings(data.Id);
+            
         }
 
         [Fact]
         public void Test_Some_outDateSchedules()
         {
+
+
             using var scheduleDataBase = new SchedulerDb();
+
+
             var data1 = new Settings
             {
                 TimeDate = new DateTime(2022, 12, 8, 0, 0, 0),
@@ -2149,7 +2155,7 @@ namespace Testing
                 Language = Language.English_UK,
                 DaysPeriodType = DaysPeriodType.Days,
                 DayPeriod = 5,
-                Id = 5
+                Id = 1
             };
 
             var data2 = new Settings
@@ -2166,7 +2172,7 @@ namespace Testing
                 Language = Language.English_UK,
                 DaysPeriodType = DaysPeriodType.Days,
                 DayPeriod = 5,
-                Id = 5
+                Id = 2
             };
 
             var data3 = new Settings
@@ -2183,7 +2189,7 @@ namespace Testing
                 Language = Language.English_UK,
                 DaysPeriodType = DaysPeriodType.Days,
                 DayPeriod = 5,
-                Id = 5
+                Id = 3
             };
 
             var data4 = new Settings
@@ -2200,13 +2206,17 @@ namespace Testing
                 Language = Language.English_UK,
                 DaysPeriodType = DaysPeriodType.Days,
                 DayPeriod = 5,
-                Id = 5
+                Id = 4
             };
 
             DBManager.StoreSettings(data1);
+            
             DBManager.StoreSettings(data2);
+           
             DBManager.StoreSettings(data3);
+            
             DBManager.StoreSettings(data4);
+            
 
             int expectedNumElements = 2;
             int actualNumElements = DBManager.OutDateSchedules().Count();
@@ -2217,13 +2227,14 @@ namespace Testing
             DBManager.DeleteSettings(data3.Id);
             DBManager.DeleteSettings(data4.Id);
 
+            int expectedValue = 0;
+            int actualValue = DBManager.OutDateSchedules().Count();
+            expectedValue.Should().Be(actualValue);
+            scheduleDataBase.Database.Delete();
+            scheduleDataBase.SaveChanges();
         }
 
-        [Fact]
-        public void Test_monthlyNullable()
-        {
-
-        }
+       
 
         
     }    

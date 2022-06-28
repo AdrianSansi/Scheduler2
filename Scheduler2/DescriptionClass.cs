@@ -25,29 +25,18 @@ namespace Scheduler2
 
         public static String FormatSelect(Settings settings)
         {
+            
             switch (settings.Format)
             {
                 case Format.Daily:
                     return DailyDescription(settings);
                                        
                 case Format.Monthy:
-                    if (settings.MonthSettings == null)
-                    {
-                        throw new ArgumentException("Format monthy settings is null");
-                    }
-                    else
-                    {
-                        return MonthDescription(settings);
-                    }
+                    return MonthDescription(settings);
+                    
                 default:
-                    if (settings.WeekSettings == null)
-                    {
-                        throw new ArgumentNullException("Format weekly settings is null");
-                    }
-                    else
-                    {
-                        return WeekDescription(settings);
-                    }
+                    return WeekDescription(settings);
+                    
             }
         }
 

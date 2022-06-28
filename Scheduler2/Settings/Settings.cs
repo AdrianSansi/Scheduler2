@@ -22,7 +22,7 @@ namespace Scheduler2
 
         public DateTime EndTime { get; set; } = new DateTime(1900, 1, 1, 0, 0, 0);
         public DateTime StartTime { get; set; } = new DateTime(1900, 1, 1, 0, 0, 0);
-        public virtual WeekSettings? WeekSettings { get; set; } = new WeekSettings();
+        public virtual WeekSettings WeekSettings { get; set; } = new WeekSettings();
         public int WeekPeriod { get; set; } = 1;
         public int TimePeriod { get; set; } = 1;
         public PeriodType PeriodType { get; set; } = PeriodType.Hours;
@@ -31,7 +31,7 @@ namespace Scheduler2
         public int DayPeriod { get; set; } = 1;
         public DaysPeriodType DaysPeriodType{get; set; } = DaysPeriodType.Days;
        
-        public virtual MonthSettings? MonthSettings { get; set; } = new MonthSettings();
+        public virtual MonthSettings MonthSettings { get; set; } = new MonthSettings();
 
         public int NumberOfDates = 0;
 
