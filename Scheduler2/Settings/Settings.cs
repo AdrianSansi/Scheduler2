@@ -16,7 +16,7 @@ namespace Scheduler2
         public Language Language { get; set; } = Language.Spanish_Es;
         public DateTime CurrentDate { get; set; } = DateTime.Today;
 
-        public DateTime TimeDate { get; set; } = DateTime.Today;
+        public DateTime TimeDate { get; set; } = DateTime.Now;
         public DateTime EndDate { get; set; } = DateTime.MaxValue.AddDays(-10);
         public DateTime StartDate { get; set; } = DateTime.Today;
 

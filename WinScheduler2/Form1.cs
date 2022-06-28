@@ -161,15 +161,8 @@ namespace WinScheduler2
         private void NextButton_Click(object sender, EventArgs e)
         {
             
-            if (DailyOnce.Checked || DailyEvery.Checked)
-            {
-                Schedule.NextDate(Data);
-                OutputBox.Text = Data.TimeDate.ToString();
-            }            
-            else
-            {
-                OutputBox.Text = Data.TimeDate.ToString();
-            }
+            Schedule.NextDate(Data);
+            OutputBox.Text = Data.TimeDate.ToString();
             Description.Text = DescriptionClass.Description(Data);
         }
 
@@ -579,9 +572,11 @@ namespace WinScheduler2
             try
             {
                 if (scheduleDataBase.Settings != null) Data = scheduleDataBase.Settings.Where(d => d.Id == key).First();
-                if (Data.NumberOfDates == 0) Schedule.NextDate(Data);
+                if (Data.NumberOfDates == 0) Schedule.NextDate(Data); 
+                //OutputBox.Text = Data.TimeDate.ToString();
                 OutputBox.Text = Data.TimeDate.ToString();
                 Description.Text = DescriptionClass.Description(Data);
+                
             }
             catch (System.InvalidOperationException)
             {
