@@ -90,8 +90,8 @@
             this.TheMonthy = new System.Windows.Forms.CheckBox();
             this.DayMonthy = new System.Windows.Forms.CheckBox();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.label18 = new System.Windows.Forms.Label();
             this.LanguageDomain = new System.Windows.Forms.DomainUpDown();
+            this.label18 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -116,7 +116,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(21, 56);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(767, 67);
+            this.groupBox1.Size = new System.Drawing.Size(767, 86);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Input";
@@ -124,7 +124,7 @@
             // NextButton
             // 
             this.NextButton.Enabled = false;
-            this.NextButton.Location = new System.Drawing.Point(532, 26);
+            this.NextButton.Location = new System.Drawing.Point(532, 19);
             this.NextButton.Name = "NextButton";
             this.NextButton.Size = new System.Drawing.Size(190, 25);
             this.NextButton.TabIndex = 2;
@@ -134,7 +134,7 @@
             // 
             // InputBox
             // 
-            this.InputBox.Location = new System.Drawing.Point(164, 26);
+            this.InputBox.Location = new System.Drawing.Point(148, 31);
             this.InputBox.Name = "InputBox";
             this.InputBox.Size = new System.Drawing.Size(269, 23);
             this.InputBox.TabIndex = 1;
@@ -143,7 +143,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(45, 29);
+            this.label1.Location = new System.Drawing.Point(31, 34);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 15);
             this.label1.TabIndex = 0;
@@ -169,9 +169,9 @@
             this.groupBox2.Controls.Add(this.OnceTextBox);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(21, 129);
+            this.groupBox2.Location = new System.Drawing.Point(21, 148);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(767, 99);
+            this.groupBox2.Size = new System.Drawing.Size(767, 90);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Configuration";
@@ -695,7 +695,7 @@
             this.groupBox8.Controls.Add(this.EveryMonthy);
             this.groupBox8.Controls.Add(this.TheMonthy);
             this.groupBox8.Controls.Add(this.DayMonthy);
-            this.groupBox8.Location = new System.Drawing.Point(21, 234);
+            this.groupBox8.Location = new System.Drawing.Point(21, 244);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.Size = new System.Drawing.Size(767, 81);
             this.groupBox8.TabIndex = 8;
@@ -874,15 +874,6 @@
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Language Format";
             // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(92, 19);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(59, 15);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "Language";
-            // 
             // LanguageDomain
             // 
             this.LanguageDomain.Items.Add("Spanish ES");
@@ -894,6 +885,15 @@
             this.LanguageDomain.TabIndex = 1;
             this.LanguageDomain.Text = "Spanish ES";
             this.LanguageDomain.SelectedItemChanged += new System.EventHandler(this.LanguageDomain_SelectedItemChanged);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(92, 19);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(59, 15);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "Language";
             // 
             // Form1
             // 

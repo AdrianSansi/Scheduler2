@@ -4,7 +4,8 @@ using System;
 using System.Threading;
 using System.Globalization;
 using Scheduler2;
-
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Testing
 {
@@ -24,14 +25,14 @@ namespace Testing
                 EndTime = new DateTime(1900, 1, 1, 10, 01, 0),
                 WeekPeriod = 1
             };
-            Schedule schedule = new(Data);
+            
 
 
             DateTime expectedValue = new(2022, 5, 31, 10, 00, 57);
             int i = 0;
             while (i < 4)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 i++;
             }
             DateTime actualValue = Data.TimeDate;
@@ -52,7 +53,7 @@ namespace Testing
             Data.WeekSettings.Monday = true;
             Data.WeekSettings.Wednesday = true;
             Data.WeekSettings.Sunday = true;
-            Schedule schedule = new(Data);
+            
 
             DateTime[] actualValue = new DateTime[5];
             DateTime[] expectedValue = new DateTime[]
@@ -66,7 +67,7 @@ namespace Testing
             int i = 0;
             while (i < 5)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
                 i++;
             }
@@ -93,7 +94,7 @@ namespace Testing
             Data.WeekSettings.Sunday = true;
             Data.WeekPeriod = 2;
             Data.TimePeriod = 1;
-            Schedule schedule = new(Data);
+            
             DateTime[] expectedValue = new DateTime[11];
             DateTime[] actualValue = new DateTime[11];
             expectedValue[0] = new DateTime(2022, 6, 7, 10, 1, 1);
@@ -111,7 +112,7 @@ namespace Testing
             int i = 0;
             while (i < 11)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
                 actualValue[i].Should().Be(expectedValue[i]);
                 i++;
@@ -131,7 +132,7 @@ namespace Testing
                 PeriodType = PeriodType.Minutes,
                 TimePeriod = 30
             };
-            Schedule schedule = new(Data);
+            
             DateTime[] expectedValue = new DateTime[11];
             DateTime[] actualValue = new DateTime[11];
             expectedValue[0] = new DateTime(2022, 6, 12, 10, 1, 1);
@@ -144,7 +145,7 @@ namespace Testing
             int i = 0;
             while (i < 6)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
                 actualValue[i].Should().Be(expectedValue[i]);
                 i++;
@@ -163,7 +164,7 @@ namespace Testing
                 PeriodType = PeriodType.Minutes,
                 TimePeriod = 30
             };
-            Schedule schedule = new(Data);
+            
             DateTime[] expectedValue = new DateTime[11];
             DateTime[] actualValue = new DateTime[11];
             Data.WeekSettings.Thursday = true;
@@ -183,7 +184,7 @@ namespace Testing
             int i = 0;
             while (i < 6)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
                 actualValue[i].Should().Be(expectedValue[i]);
                 i++;
@@ -205,7 +206,7 @@ namespace Testing
             };
             Data.WeekSettings.Sunday = true;
 
-            Schedule schedule = new(Data);
+            
             DateTime[] expectedValue = new DateTime[11];
             DateTime[] actualValue = new DateTime[11];
 
@@ -224,7 +225,7 @@ namespace Testing
             int i = 0;
             while (i < 8)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
                 actualValue[i].Should().Be(expectedValue[i]);
                 i++;
@@ -246,7 +247,7 @@ namespace Testing
             Data.DaysPeriodType = DaysPeriodType.Months;
             Data.DayPeriod = 1;
 
-            Schedule schedule = new(Data);
+            
             DateTime[] expectedValue = new DateTime[11];
             DateTime[] actualValue = new DateTime[11];
 
@@ -265,7 +266,7 @@ namespace Testing
             int i = 0;
             while (i < 8)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
                 actualValue[i].Should().Be(expectedValue[i]);
                 i++;
@@ -287,7 +288,7 @@ namespace Testing
             Data.DaysPeriodType = DaysPeriodType.Years;
             Data.DayPeriod = 1;
 
-            Schedule schedule = new(Data);
+            
             DateTime[] expectedValue = new DateTime[11];
             DateTime[] actualValue = new DateTime[11];
 
@@ -307,7 +308,7 @@ namespace Testing
             int i = 0;
             while (i < 9)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
                 actualValue[i].Should().Be(expectedValue[i]);
                 i++;
@@ -325,7 +326,7 @@ namespace Testing
             Data.DaysPeriodType = DaysPeriodType.Weeks;
             Data.DayPeriod = 1;
 
-            Schedule schedule = new(Data);
+            
             DateTime[] expectedValue = new DateTime[11];
             DateTime[] actualValue = new DateTime[11];
 
@@ -343,7 +344,7 @@ namespace Testing
             int i = 0;
             while (i < 9)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
                 actualValue[i].Should().Be(expectedValue[i]);
                 i++;
@@ -361,7 +362,7 @@ namespace Testing
             Data.DaysPeriodType = DaysPeriodType.Days;
             Data.DayPeriod = 8;
 
-            Schedule schedule = new(Data);
+            
             DateTime[] expectedValue = new DateTime[11];
             DateTime[] actualValue = new DateTime[11];
 
@@ -375,7 +376,7 @@ namespace Testing
             int i = 0;
             while (i < 6)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
                 actualValue[i].Should().Be(expectedValue[i]);
                 i++;
@@ -394,7 +395,7 @@ namespace Testing
             Data.DaysPeriodType = DaysPeriodType.Days;
             Data.DayPeriod = 1;
 
-            Schedule schedule = new(Data);
+            
             DateTime[] expectedValue = new DateTime[11];
             DateTime[] actualValue = new DateTime[11];
 
@@ -409,7 +410,7 @@ namespace Testing
             int i = 0;
             while (i < 7)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
                 actualValue[i].Should().Be(expectedValue[i]);
                 i++;
@@ -431,7 +432,7 @@ namespace Testing
             Data.DaysPeriodType = DaysPeriodType.Months;
             Data.DayPeriod = 1;
 
-            Schedule schedule = new(Data);
+            
             DateTime[] expectedValue = new DateTime[11];
             DateTime[] actualValue = new DateTime[11];
 
@@ -448,7 +449,7 @@ namespace Testing
             int i = 0;
             while (i < 7)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
                 actualValue[i].Should().Be(expectedValue[i]);
                 i++;
@@ -468,7 +469,7 @@ namespace Testing
             Data.TimePeriod = 30;
             Data.WeekSettings.Wednesday = true;
 
-            Schedule schedule = new(Data);
+            
             DateTime[] expectedValue = new DateTime[11];
             DateTime[] actualValue = new DateTime[11];
 
@@ -478,7 +479,7 @@ namespace Testing
             int i = 0;
             while (i < 2)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
                 actualValue[i].Should().Be(expectedValue[i]);
                 i++;
@@ -496,7 +497,7 @@ namespace Testing
             Data.PeriodType = PeriodType.Seconds;
             Data.TimePeriod = 30;
 
-            Schedule schedule = new(Data);
+            
             DateTime[] expectedValue = new DateTime[11];
             DateTime[] actualValue = new DateTime[11];
 
@@ -512,7 +513,7 @@ namespace Testing
             int i = 0;
             while (i < 3)
             {
-                schedule.NextDate(Data);
+                Schedule.NextDate(Data);
                 actualValue[i] = Data.TimeDate;
                 actualValue[i].Should().Be(expectedValue[i]);
                 i++;
@@ -1095,8 +1096,7 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.Thursday;
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.First;
-            Schedule schedule = new(Data);
-
+            
             DateTime[] actualValue = new DateTime[9];
             DateTime[] expectedValue = new DateTime[]
             {
@@ -1113,7 +1113,7 @@ namespace Testing
             int i = 0;
             while (i < 9)
             {
-                actualValue[i] = schedule.NextDate(Data);
+                actualValue[i] = Schedule.NextDate(Data);
                 i++;
             }
             actualValue[0].Should().Be(expectedValue[0]);
@@ -1145,7 +1145,7 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.Second;
-            Schedule schedule = new(Data);
+           
 
             DateTime[] actualValue = new DateTime[20];
             DateTime[] expectedValue = new DateTime[]
@@ -1179,7 +1179,7 @@ namespace Testing
             int i = 0;
             while (i < 20)
             {
-                actualValue[i] = schedule.NextDate(Data);
+                actualValue[i] = Schedule.NextDate(Data);
                 i++;
             }
             String actualDescription = DescriptionClass.Description(Data);
@@ -1226,7 +1226,7 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
             Data.MonthSettings.MonthyFormat = MonthyFormat.FixedDay;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.Second;
-            Schedule schedule = new(Data);
+            
 
             DateTime[] actualValue = new DateTime[12];
             DateTime[] expectedValue = new DateTime[]
@@ -1251,7 +1251,7 @@ namespace Testing
             int i = 0;
             while (i < 12)
             {
-                actualValue[i] = schedule.NextDate(Data);
+                actualValue[i] = Schedule.NextDate(Data);
                 i++;
             }
             String actualValue2 = DescriptionClass.Description(Data);
@@ -1293,7 +1293,7 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.Day;
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
-            Schedule schedule = new(Data);
+            
 
             DateTime[] actualValue = new DateTime[12];
             DateTime[] expectedValue = new DateTime[]
@@ -1316,7 +1316,7 @@ namespace Testing
             int i = 0;
             while (i < 12)
             {
-                actualValue[i] = schedule.NextDate(Data);
+                actualValue[i] = Schedule.NextDate(Data);
                 i++;
             }
             String actualValue2 = DescriptionClass.Description(Data);
@@ -1358,8 +1358,8 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.Day;
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
-            Schedule schedule = new(Data);
-            schedule.NextDate(Data);
+            
+            Schedule.NextDate(Data);
 
             String expectedValue2 = "Ocurre el último día de cada 1 mes una vez a las 12:00:00 comenzando el 1/12/2023";
 
@@ -1392,8 +1392,8 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.Day;
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
-            Schedule schedule = new(Data);
-            schedule.NextDate(Data);
+
+            Schedule.NextDate(Data);
 
             String expectedValue2 = "Occurs every 89 weeks on Monday and Tuesday once at 12:00:00 starting on 12/1/2023";
 
@@ -1429,8 +1429,7 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.Day;
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
-            Schedule schedule = new(Data);
-            schedule.NextDate(Data);
+            Schedule.NextDate(Data);
 
             String expectedValue2 = "Occurs once at 12:00:00 on 12/1/2023";
 
@@ -1469,8 +1468,7 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.Day;
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
-            Schedule schedule = new(Data);
-            schedule.NextDate(Data);
+            Schedule.NextDate(Data);
 
             String expectedValue2 = "Ocurre cada 2 semanas los Miércoles, Jueves y Domingo cada 5 segundos entre 19:00:00 y 19:01:00 comenzando el 1/12/2023 y finalizando el día 7/11/2024";
 
@@ -1508,8 +1506,7 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.Day;
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
-            Schedule schedule = new(Data);
-            schedule.NextDate(Data);
+            Schedule.NextDate(Data);
 
             String expectedValue2 = "Occurs every 2 weeks on Wednesday, Thursday and Sunday every 5 seconds between 19:00:00 and 19:01:00 starting on 12/1/2023 and ending on 11/7/2024";
 
@@ -1547,7 +1544,7 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.WeekendDay;
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
-            Schedule schedule = new(Data);
+            
 
             DateTime[] actualValue = new DateTime[24];
             DateTime[] expectedValue = new DateTime[]
@@ -1584,7 +1581,7 @@ namespace Testing
             int i = 0;
             while (i < 24)
             {
-                actualValue[i] = schedule.NextDate(Data);
+                actualValue[i] = Schedule.NextDate(Data);
                 i++;
             }
             String actualValue2 = DescriptionClass.Description(Data);
@@ -1644,7 +1641,7 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.Weekday;
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.First;
-            Schedule schedule = new(Data);
+            
 
             DateTime[] actualValue = new DateTime[5];
             DateTime[] expectedValue = new DateTime[]
@@ -1660,7 +1657,7 @@ namespace Testing
             int i = 0;
             while (i < 5)
             {
-                actualValue[i] = schedule.NextDate(Data);
+                actualValue[i] = Schedule.NextDate(Data);
                 i++;
             }
             String actualValue2 = DescriptionClass.Description(Data);
@@ -1703,7 +1700,7 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.Weekday;
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.First;
-            Schedule schedule = new(Data);
+            
 
             DateTime[] actualValue = new DateTime[5];
             DateTime[] expectedValue = new DateTime[]
@@ -1719,7 +1716,7 @@ namespace Testing
             int i = 0;
             while (i < 5)
             {
-                actualValue[i] = schedule.NextDate(Data);
+                actualValue[i] = Schedule.NextDate(Data);
                 i++;
             }
             String actualValue2 = DescriptionClass.Description(Data);
@@ -1768,8 +1765,8 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.Day;
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
-            Schedule schedule = new(Data);
-            schedule.NextDate(Data);
+            
+            Schedule.NextDate(Data);
 
             String expectedValue2 = "Ocurre cada 2 semanas los Lunes, Martes, Miércoles, Jueves, Viernes, Sábado y Domingo una vez a las 19:00:00 comenzando el 1/12/2023 y finalizando el día 7/11/2024";
 
@@ -1807,14 +1804,14 @@ namespace Testing
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.Third;
             Data.MonthSettings.MonthDays = MonthDays.Monday;
-            Schedule schedule = new(Data);
+            
             
 
             DateTime expectedValue = new DateTime(2022, 12, 19, 19, 0, 0);
 
             String expectedValue2 = "Ocurre el tercer Lunes de cada 1 mes una vez a las 19:00:00 comenzando el 1/12/2022 y finalizando el día 7/11/2024";
 
-            DateTime actualValue = schedule.NextDate(Data);
+            DateTime actualValue = Schedule.NextDate(Data);
             String actualValue2 = DescriptionClass.Description(Data);
 
             actualValue.Should().Be(expectedValue);
@@ -1824,7 +1821,7 @@ namespace Testing
             expectedValue = new DateTime(2023, 1, 17,19,0,0);
             expectedValue2 = "Ocurre el tercer Martes de cada 1 mes una vez a las 19:00:00 comenzando el 1/12/2022 y finalizando el día 7/11/2024";
             
-            actualValue = schedule.NextDate(Data);
+            actualValue = Schedule.NextDate(Data);
             actualValue2 = DescriptionClass.Description(Data);
 
             actualValue.Should().Be(expectedValue);
@@ -1834,7 +1831,7 @@ namespace Testing
             expectedValue = new DateTime(2023, 2, 15, 19, 0, 0);
             expectedValue2 = "Ocurre el tercer Miércoles de cada 1 mes una vez a las 19:00:00 comenzando el 1/12/2022 y finalizando el día 7/11/2024";
 
-            actualValue = schedule.NextDate(Data);
+            actualValue = Schedule.NextDate(Data);
             actualValue2 = DescriptionClass.Description(Data);
 
             actualValue.Should().Be(expectedValue);
@@ -1844,7 +1841,7 @@ namespace Testing
             expectedValue = new DateTime(2023, 3, 16, 19, 0, 0);
             expectedValue2 = "Ocurre el tercer Jueves de cada 1 mes una vez a las 19:00:00 comenzando el 1/12/2022 y finalizando el día 7/11/2024";
 
-            actualValue = schedule.NextDate(Data);
+            actualValue = Schedule.NextDate(Data);
             actualValue2 = DescriptionClass.Description(Data);
 
             actualValue.Should().Be(expectedValue);
@@ -1854,7 +1851,7 @@ namespace Testing
             expectedValue = new DateTime(2023, 4, 21, 19, 0, 0);
             expectedValue2 = "Ocurre el tercer Viernes de cada 1 mes una vez a las 19:00:00 comenzando el 1/12/2022 y finalizando el día 7/11/2024";
 
-            actualValue = schedule.NextDate(Data);
+            actualValue = Schedule.NextDate(Data);
             actualValue2 = DescriptionClass.Description(Data);
 
             actualValue.Should().Be(expectedValue);
@@ -1864,7 +1861,7 @@ namespace Testing
             expectedValue = new DateTime(2023, 5, 20, 19, 0, 0);
             expectedValue2 = "Ocurre el tercer Sábado de cada 1 mes una vez a las 19:00:00 comenzando el 1/12/2022 y finalizando el día 7/11/2024";
 
-            actualValue = schedule.NextDate(Data);
+            actualValue = Schedule.NextDate(Data);
             actualValue2 = DescriptionClass.Description(Data);
 
             actualValue.Should().Be(expectedValue);
@@ -1874,7 +1871,7 @@ namespace Testing
             expectedValue = new DateTime(2023, 6, 18, 19, 0, 0);
             expectedValue2 = "Ocurre el tercer Domingo de cada 1 mes una vez a las 19:00:00 comenzando el 1/12/2022 y finalizando el día 7/11/2024";
 
-            actualValue = schedule.NextDate(Data);
+            actualValue = Schedule.NextDate(Data);
             actualValue2 = DescriptionClass.Description(Data);
 
             actualValue.Should().Be(expectedValue);
@@ -1908,16 +1905,16 @@ namespace Testing
             Data.MonthSettings.MonthDays = MonthDays.Weekday;
             Data.MonthSettings.MonthyFormat = MonthyFormat.DayOfWeek;
             Data.MonthSettings.MonthyFrequency = MonthyFrequency.Last;
-            Schedule schedule = new(Data);
+            
 
             DateTime expectedValue = new DateTime(2022, 12, 30,19,00,00);
             DateTime expectedValue2 = new DateTime(2023, 1, 31,19,00,00);
            
             
-            schedule.NextDate(Data);
-            DateTime actualValue = schedule.Settings.TimeDate;
-            schedule.NextDate(Data);
-            DateTime actualValue2 = schedule.Settings.TimeDate;
+            Schedule.NextDate(Data);
+            DateTime actualValue = Data.TimeDate;
+            Schedule.NextDate(Data);
+            DateTime actualValue2 = Data.TimeDate;
 
 
             actualValue.Should().Be(expectedValue);
@@ -1947,7 +1944,7 @@ namespace Testing
 
             SetTheCultureFormat.SetCultureAndLanguage(Data);
 
-            Schedule schedule = new(Data);
+            
 
             DateTime[] actualValue = new DateTime[5];
             DateTime[] expectedValue = new DateTime[]
@@ -1964,7 +1961,7 @@ namespace Testing
             int i = 0;
             while (i < 5)
             {
-                actualValue[i] = schedule.NextDate(Data);
+                actualValue[i] = Schedule.NextDate(Data);
                 i++;
             }
             String actualValue2 = DescriptionClass.Description(Data);
@@ -1978,5 +1975,251 @@ namespace Testing
             actualValue2.Should().Be(expectedValue2);
 
         }
+
+        [Fact]
+        public void Test_Daily_Descripion_Days_Db()
+        {
+            using var scheduleDataBase = new SchedulerDb();
+            scheduleDataBase.Database.Delete();
+            scheduleDataBase.SaveChanges();
+            
+            var data1 = new Settings
+            {
+                TimeDate = new DateTime(2022, 12, 8,0,0,0),
+                StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 12, 0, 2),
+                EndDate = new DateTime(2026, 07, 09,0,0,0),
+                CurrentDate = new DateTime(2028,1,1),
+                Format = Format.Daily,
+                WeekPeriod = 89,
+                TimePeriod = 1,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.English_UK,
+                DaysPeriodType = DaysPeriodType.Days,
+                DayPeriod = 5
+            };
+
+            DBManager.StoreSettings(data1);
+
+            Settings data = scheduleDataBase.Settings
+                .OrderBy(b => b.Id)
+                .First();
+
+
+            
+            SetTheCultureFormat.SetCultureAndLanguage(data);
+
+            
+
+            DateTime[] actualValue = new DateTime[5];
+            DateTime[] expectedValue = new DateTime[]
+            {
+                new DateTime(2022, 12, 8, 12, 0, 0),
+                new DateTime(2022, 12, 8, 12, 0, 1),
+                new DateTime(2022, 12, 8, 12, 0, 2),
+                new DateTime(2022, 12, 13, 12, 0, 0),
+                new DateTime(2022, 12, 13, 12, 0, 1),
+                
+            };
+
+            String expectedValue2 = "Occurs every 5 days every 1 second between 12:00:00 and 12:00:02 starting on 08/12/2022 and ending on 09/07/2026";
+
+            int i = 0;
+            while (i < 5)
+            {
+                actualValue[i] = Schedule.NextDate(data);
+                i++;
+            }
+            String actualValue2 = DescriptionClass.Description(data);
+
+            actualValue[0].Should().Be(expectedValue[0]);
+            actualValue[1].Should().Be(expectedValue[1]);
+            actualValue[2].Should().Be(expectedValue[2]);
+            actualValue[3].Should().Be(expectedValue[3]);
+            actualValue[4].Should().Be(expectedValue[4]);
+
+            actualValue2.Should().Be(expectedValue2);
+            DBManager.DeleteSettings(data.Id);
+            
+            
+        }
+
+
+        [Fact]
+        public void Test_OutDateSchedules()
+        {
+
+            
+            using var scheduleDataBase = new SchedulerDb();
+
+            var data1 = new Settings
+            {
+                TimeDate = new DateTime(2022, 12, 8, 0, 0, 0),
+                StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 12, 0, 2),
+                EndDate = new DateTime(2026, 07, 09, 0, 0, 0),
+                CurrentDate = new DateTime(2028, 1, 1),
+                Format = Format.Daily,
+                WeekPeriod = 89,
+                TimePeriod = 1,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.English_UK,
+                DaysPeriodType = DaysPeriodType.Days,
+                DayPeriod = 5,
+                Id = 5
+            };
+
+            DBManager.StoreSettings(data1);
+            scheduleDataBase.SaveChanges();
+
+            int expectedValue = 1;
+            int actualValue = DBManager.OutDateSchedules().Count();
+            actualValue.Should().Be(expectedValue);
+
+            Settings data = scheduleDataBase.Settings
+                .OrderBy(b => b.Id)
+                .First();
+            DBManager.DeleteSettings(data.Id);
+            
+        }
+
+        [Fact]
+        public void Test_update_DB()
+        {
+            using var scheduleDataBase = new SchedulerDb();
+
+            var data1 = new Settings
+            {
+                TimeDate = new DateTime(2022, 12, 8, 0, 0, 0),
+                StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 12, 0, 2),
+                EndDate = new DateTime(2026, 07, 09, 0, 0, 0),
+                CurrentDate = new DateTime(2028, 1, 1),
+                Format = Format.Daily,
+                WeekPeriod = 89,
+                TimePeriod = 1,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.English_UK,
+                DaysPeriodType = DaysPeriodType.Days,
+                DayPeriod = 5,
+                Id = 5
+            };
+
+            DBManager.StoreSettings(data1);
+            scheduleDataBase.SaveChanges();
+
+            Settings data;
+            data = scheduleDataBase.Settings
+                .OrderBy(b => b.Id)
+                .First();
+
+            Settings data2 = data;
+            data2.WeekPeriod = 5;
+
+            DBManager.UpdateSettings(data, data2);
+
+            int expectedNumElements = 1;
+            int actualNumElements = DBManager.OutDateSchedules().Count();
+            actualNumElements.Should().Be(expectedNumElements);
+
+            Settings data3 = scheduleDataBase.Settings
+                .OrderBy(b => b.Id)
+                .First();
+            int expectedWeekPeriod = 5;
+            int actualWeekPeriod = data2.WeekPeriod;
+
+            actualWeekPeriod.Should().Be(expectedWeekPeriod);
+
+            DBManager.DeleteSettings(data.Id);
+        }
+
+        [Fact]
+        public void Test_Some_outDateSchedules()
+        {
+            using var scheduleDataBase = new SchedulerDb();
+            var data1 = new Settings
+            {
+                TimeDate = new DateTime(2022, 12, 8, 0, 0, 0),
+                StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 12, 0, 2),
+                EndDate = new DateTime(2026, 07, 09, 0, 0, 0),
+                CurrentDate = new DateTime(2020, 1, 1),
+                Format = Format.Daily,
+                WeekPeriod = 89,
+                TimePeriod = 1,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.English_UK,
+                DaysPeriodType = DaysPeriodType.Days,
+                DayPeriod = 5,
+                Id = 5
+            };
+
+            var data2 = new Settings
+            {
+                TimeDate = new DateTime(2022, 12, 8, 0, 0, 0),
+                StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 12, 0, 2),
+                EndDate = new DateTime(2026, 07, 09, 0, 0, 0),
+                CurrentDate = new DateTime(2028, 1, 1),
+                Format = Format.Daily,
+                WeekPeriod = 89,
+                TimePeriod = 1,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.English_UK,
+                DaysPeriodType = DaysPeriodType.Days,
+                DayPeriod = 5,
+                Id = 5
+            };
+
+            var data3 = new Settings
+            {
+                TimeDate = new DateTime(2022, 12, 8, 0, 0, 0),
+                StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 12, 0, 2),
+                EndDate = new DateTime(2026, 07, 09, 0, 0, 0),
+                CurrentDate = new DateTime(2021, 1, 1),
+                Format = Format.Daily,
+                WeekPeriod = 89,
+                TimePeriod = 1,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.English_UK,
+                DaysPeriodType = DaysPeriodType.Days,
+                DayPeriod = 5,
+                Id = 5
+            };
+
+            var data4 = new Settings
+            {
+                TimeDate = new DateTime(2022, 12, 8, 0, 0, 0),
+                StartTime = new DateTime(1988, 8, 8, 12, 0, 0),
+                EndTime = new DateTime(1950, 1, 1, 12, 0, 2),
+                EndDate = new DateTime(2026, 07, 09, 0, 0, 0),
+                CurrentDate = new DateTime(2028, 1, 1),
+                Format = Format.Daily,
+                WeekPeriod = 89,
+                TimePeriod = 1,
+                PeriodType = PeriodType.Seconds,
+                Language = Language.English_UK,
+                DaysPeriodType = DaysPeriodType.Days,
+                DayPeriod = 5,
+                Id = 5
+            };
+
+            DBManager.StoreSettings(data1);
+            DBManager.StoreSettings(data2);
+            DBManager.StoreSettings(data3);
+            DBManager.StoreSettings(data4);
+
+            int expectedNumElements = 2;
+            int actualNumElements = DBManager.OutDateSchedules().Count();
+            actualNumElements.Should().Be(expectedNumElements);
+
+            DBManager.DeleteSettings(data1.Id);
+            DBManager.DeleteSettings(data2.Id);
+            DBManager.DeleteSettings(data3.Id);
+            DBManager.DeleteSettings(data4.Id);
+
+        }
+        
     }    
 }

@@ -2,6 +2,7 @@
 {
     public class MonthSettings
     {
+        
         public MonthyFormat MonthyFormat { get; set; } = MonthyFormat.FixedDay;
         // The
         public MonthDays MonthDays { get; set; } = MonthDays.Day;
@@ -22,11 +23,5 @@
             set { monthNum = value; }
         }
 
-
-
-        public MonthSettings()
-        {
-
-        }
     }
 }

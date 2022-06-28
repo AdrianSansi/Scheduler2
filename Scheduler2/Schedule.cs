@@ -8,14 +8,6 @@ namespace Scheduler2
 {
     public class Schedule
     {    
-        public int NumberOfDates { get; set; } = 0;
-        public Settings Settings { get; }
-
-        public Schedule(Settings settings)
-        {
-            Settings = settings;
-        }
-  
         public static void CreateListOfDays(Settings settings)
         {
             settings.WeekSettings.WeekDays.Clear();
@@ -40,12 +32,12 @@ namespace Scheduler2
             else return true;
         }
 
-        public DateTime NextDate(Settings settings)
+        public static DateTime NextDate(Settings settings)
         {
             if (settings.Format == Format.Weekly) CreateListOfDays(settings);
-            if (NumberOfDates == 0)
+            if (settings.NumberOfDates == 0)
             {
-                NumberOfDates++;
+                settings.NumberOfDates++;
                 settings.StartDate = settings.TimeDate;
                 settings.TimeDate = ItsFirstDate(settings);
                 return ItsFirstDate(settings);               

@@ -12,7 +12,7 @@ namespace WinScheduler2
         {
             InitializeComponent();
             Data = new Settings();
-            Schedule = new Schedule(Data);
+            Schedule = new Schedule();
 
         }
 
