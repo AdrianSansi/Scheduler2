@@ -573,7 +573,7 @@ namespace WinScheduler2
             {
                 if (scheduleDataBase.Settings != null) Data = scheduleDataBase.Settings.Where(d => d.Id == key).First();
                 if (Data.NumberOfDates == 0) Schedule.NextDate(Data); 
-                //OutputBox.Text = Data.TimeDate.ToString();
+                
                 OutputBox.Text = Data.TimeDate.ToString();
                 Description.Text = DescriptionClass.Description(Data);
                 
