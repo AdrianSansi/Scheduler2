@@ -555,10 +555,13 @@ namespace WinScheduler2
         {
             using var scheduleDataBase = new SchedulerDb();
             DBManager.StoreSettings(Data);
-            Settings data2 = scheduleDataBase.Settings
+            if (scheduleDataBase.Settings != null)
+            {
+                Settings data2 = scheduleDataBase.Settings
                 .OrderByDescending(b => b.Id)
                 .First();
-            Description.Text = "Settings saved with ID: " + data2.Id;
+                Description.Text = "Settings saved with ID: " + data2.Id;
+            }
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
@@ -575,7 +578,7 @@ namespace WinScheduler2
             using var scheduleDataBase = new SchedulerDb();
             try
             {
-                Data = scheduleDataBase.Settings.Where(d => d.Id == key).First();
+                if (scheduleDataBase.Settings != null) Data = scheduleDataBase.Settings.Where(d => d.Id == key).First();
                 if (Data.NumberOfDates == 0) Schedule.NextDate(Data);
                 OutputBox.Text = Data.TimeDate.ToString();
                 Description.Text = DescriptionClass.Description(Data);

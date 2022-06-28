@@ -8,10 +8,14 @@ namespace Scheduler2
 {
     public static class DBManager
     {
+        private static bool IsDataBaseNull(SchedulerDb scheduleDb)
+        {
+            return scheduleDb.Settings == null;
+        }
         public static void StoreSettings(Settings settings)
         {
             using var scheduleDataBase = new SchedulerDb();
-            scheduleDataBase.Settings.Add(settings);
+            if (!IsDataBaseNull(scheduleDataBase)) scheduleDataBase.Settings.Add(settings);
             scheduleDataBase.SaveChanges();
         }
 
@@ -19,8 +23,11 @@ namespace Scheduler2
         {
             using var scheduleDataBase = new SchedulerDb();
             Settings element;
-            element = scheduleDataBase.Settings.Where(d => d.Id == key).First();
-            scheduleDataBase.Settings.Remove(element);
+            if (!IsDataBaseNull(scheduleDataBase))
+            {
+                element = scheduleDataBase.Settings.Where(d => d.Id == key).First();
+                scheduleDataBase.Settings.Remove(element);
+            }
             scheduleDataBase.SaveChanges();      
         }
 
