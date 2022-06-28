@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Scheduler2
 {
-    public class Schedule
+    public static class Schedule
     {    
         public static void CreateListOfDays(Settings settings)
         {

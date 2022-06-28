@@ -32,6 +32,7 @@
             this.NextButton = new System.Windows.Forms.Button();
             this.InputBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.OutputBox = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.MonthyRadioButton = new System.Windows.Forms.RadioButton();
@@ -92,7 +93,10 @@
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.LanguageDomain = new System.Windows.Forms.DomainUpDown();
             this.label18 = new System.Windows.Forms.Label();
-            this.SaveButton = new System.Windows.Forms.Button();
+            this.DeleteButton = new System.Windows.Forms.Button();
+            this.getbutton = new System.Windows.Forms.Button();
+            this.IdNumeric = new System.Windows.Forms.NumericUpDown();
+            this.label19 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -108,17 +112,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.EveryMonthMonthy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EveryMonthy)).BeginInit();
             this.groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IdNumeric)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.SaveButton);
             this.groupBox1.Controls.Add(this.NextButton);
             this.groupBox1.Controls.Add(this.InputBox);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(21, 56);
+            this.groupBox1.Location = new System.Drawing.Point(21, 89);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(767, 86);
+            this.groupBox1.Size = new System.Drawing.Size(767, 57);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Input";
@@ -126,7 +130,7 @@
             // NextButton
             // 
             this.NextButton.Enabled = false;
-            this.NextButton.Location = new System.Drawing.Point(532, 19);
+            this.NextButton.Location = new System.Drawing.Point(532, 20);
             this.NextButton.Name = "NextButton";
             this.NextButton.Size = new System.Drawing.Size(190, 25);
             this.NextButton.TabIndex = 2;
@@ -136,7 +140,7 @@
             // 
             // InputBox
             // 
-            this.InputBox.Location = new System.Drawing.Point(137, 31);
+            this.InputBox.Location = new System.Drawing.Point(137, 22);
             this.InputBox.Name = "InputBox";
             this.InputBox.Size = new System.Drawing.Size(269, 23);
             this.InputBox.TabIndex = 1;
@@ -145,11 +149,21 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(31, 34);
+            this.label1.Location = new System.Drawing.Point(31, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(73, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Current date";
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(52, 8);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(120, 25);
+            this.SaveButton.TabIndex = 3;
+            this.SaveButton.Text = "Save Settings";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // OutputBox
             // 
@@ -869,7 +883,7 @@
             // 
             this.groupBox9.Controls.Add(this.LanguageDomain);
             this.groupBox9.Controls.Add(this.label18);
-            this.groupBox9.Location = new System.Drawing.Point(21, 1);
+            this.groupBox9.Location = new System.Drawing.Point(21, 39);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.Size = new System.Drawing.Size(767, 49);
             this.groupBox9.TabIndex = 9;
@@ -897,20 +911,52 @@
             this.label18.TabIndex = 0;
             this.label18.Text = "Language";
             // 
-            // SaveButton
+            // DeleteButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(532, 55);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(190, 25);
-            this.SaveButton.TabIndex = 3;
-            this.SaveButton.Text = "Save Settings";
-            this.SaveButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Location = new System.Drawing.Point(213, 9);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(120, 25);
+            this.DeleteButton.TabIndex = 10;
+            this.DeleteButton.Text = "Delete DataBase";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // getbutton
+            // 
+            this.getbutton.Location = new System.Drawing.Point(660, 12);
+            this.getbutton.Name = "getbutton";
+            this.getbutton.Size = new System.Drawing.Size(129, 25);
+            this.getbutton.TabIndex = 11;
+            this.getbutton.Text = "Get by Id";
+            this.getbutton.UseVisualStyleBackColor = true;
+            this.getbutton.Click += new System.EventHandler(this.getbutton_Click);
+            // 
+            // IdNumeric
+            // 
+            this.IdNumeric.Location = new System.Drawing.Point(567, 13);
+            this.IdNumeric.Name = "IdNumeric";
+            this.IdNumeric.Size = new System.Drawing.Size(74, 23);
+            this.IdNumeric.TabIndex = 12;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(451, 15);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(110, 15);
+            this.label19.TabIndex = 13;
+            this.label19.Text = "Id of Settings to get";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(803, 751);
+            this.Controls.Add(this.label19);
+            this.Controls.Add(this.IdNumeric);
+            this.Controls.Add(this.getbutton);
+            this.Controls.Add(this.DeleteButton);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.groupBox9);
             this.Controls.Add(this.groupBox8);
             this.Controls.Add(this.groupBox7);
@@ -946,7 +992,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.EveryMonthy)).EndInit();
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.IdNumeric)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1017,5 +1065,9 @@
         private DomainUpDown LanguageDomain;
         private Label label18;
         private Button SaveButton;
+        private Button DeleteButton;
+        private Button getbutton;
+        private NumericUpDown IdNumeric;
+        private Label label19;
     }
 }

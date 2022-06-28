@@ -364,7 +364,7 @@ namespace Scheduler2
         }
         private static bool HasEnd(Settings settings)
         {
-            if (settings.EndDate == DateTime.MaxValue.AddDays(-1)) return false;
+            if (settings.EndDate > DateTime.MaxValue.AddDays(-100)) return false;
             return true;
         }
         private static string EndTime(Settings settings)

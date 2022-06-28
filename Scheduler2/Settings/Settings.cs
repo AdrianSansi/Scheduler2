@@ -17,7 +17,7 @@ namespace Scheduler2
         public DateTime CurrentDate { get; set; } = DateTime.Today;
 
         public DateTime TimeDate { get; set; } = DateTime.Today;
-        public DateTime EndDate { get; set; } = DateTime.MaxValue.AddDays(-1);
+        public DateTime EndDate { get; set; } = DateTime.MaxValue.AddDays(-10);
         public DateTime StartDate { get; set; } = DateTime.Today;
 
         public DateTime EndTime { get; set; } = new DateTime(1900, 1, 1, 0, 0, 0);

@@ -3,8 +3,8 @@ namespace WinScheduler2
 {
     public partial class Form1 : Form
     {
-        readonly Settings Data;
-        readonly Schedule Schedule;
+        private Settings Data;
+        
         
 
 
@@ -549,6 +549,43 @@ namespace WinScheduler2
                     break;
             }
             SetTheCultureFormat.SetCultureAndLanguage(Data);
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            using var scheduleDataBase = new SchedulerDb();
+            DBManager.StoreSettings(Data);
+            Settings data2 = scheduleDataBase.Settings
+                .OrderByDescending(b => b.Id)
+                .First();
+            Description.Text = "Settings saved with ID: " + data2.Id;
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            using var scheduleDataBase = new SchedulerDb();
+            scheduleDataBase.Database.Delete();
+            scheduleDataBase.SaveChanges();
+            Description.Text = "Database removed";
+        }
+
+        private void getbutton_Click(object sender, EventArgs e)
+        {
+            int key = (int)IdNumeric.Value;
+            using var scheduleDataBase = new SchedulerDb();
+            try
+            {
+                Data = scheduleDataBase.Settings.Where(d => d.Id == key).First();
+                if (Data.NumberOfDates == 0) Schedule.NextDate(Data);
+                OutputBox.Text = Data.TimeDate.ToString();
+                Description.Text = DescriptionClass.Description(Data);
+            }
+            catch (System.InvalidOperationException)
+            {
+                Description.Text = "There is no schedule with that Id";
+                OutputBox.Text = "There is no schedule with that Id";
+            }           
+            
         }
     }
 }

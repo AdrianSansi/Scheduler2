@@ -6,7 +6,7 @@ namespace Scheduler2
 {
     public class SchedulerDb : DbContext
     {
-        public virtual DbSet<Settings> Settings { get; set; }
+        public virtual DbSet<Settings>? Settings { get; set; }
               
        
     }
